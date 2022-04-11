@@ -1,0 +1,5 @@
+
+WIDTH = 600
+HEIGHT = 400
+
+B_COLOR = (0, 0, 0)
