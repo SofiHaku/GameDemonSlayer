@@ -12,13 +12,14 @@ class Draw():
         if not shop_game.draw_back_bool:
             hero_game.draw()
             stat_game.draw()
-            shop_game.draw_now()
+            shop_game.func[1].draw()
         else:
-            shop_game.draw_back()
+            shop_game.func[0].draw()
+            shop_game.func[2].draw()
+
             for i in range(MAX_HERO):
                 shop_game.herous[i].draw()
             for i in range(MAX_SKILLS):
                 shop_game.skills[i].draw()
-            shop_game.draw_exc()
 
         pygame.display.flip()
