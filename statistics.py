@@ -7,7 +7,7 @@ class Stat():
         self.screen = screen
         self.screen_rect = screen.get_rect()
 
-        with open('points.txt', 'r') as f:
+        with open('Save_data/points.txt', 'r') as f:
             self.point_now = int(f.read())
 
         self.text_color = TEXT_COLOR

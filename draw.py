@@ -19,6 +19,9 @@ class Draw():
 
             for i in range(MAX_HERO):
                 shop_game.herous[i].draw()
+                shop_game.draw_cost_hero(shop_game.herous[i].rect.right, shop_game.herous[i].rect.bottom, i)
             for i in range(MAX_SKILLS):
                 shop_game.skills[i].draw()
+                shop_game.image_count(shop_game.skills[i].count)
+                shop_game.draw_count(shop_game.max_skills_coord[i][0], shop_game.max_skills_coord[i][1], i)
         pygame.display.flip()

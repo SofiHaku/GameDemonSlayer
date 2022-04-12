@@ -14,8 +14,8 @@ class Event():
                 sys.exit()
             elif event.type == pygame.KEYDOWN and not shop_game.draw_back_bool:
                 if event.key == pygame.K_SPACE:
-                    stat_game.point_now += 1
-                    with open('points.txt', 'w') as f:
+                    stat_game.point_now += shop_game.points_in_click()
+                    with open('Save_data/points.txt', 'w') as f:
                         f.write(str(stat_game.point_now))
                     stat_game.image_score()
             elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -44,12 +44,12 @@ class Event():
                             shop_game.herous[i].image = pygame.image.load('Img/Shop/Hero/Hero_buy' + str(i) + '.png')
                             stat_game.point_now -= cost
                             stat_game.image_score()
-                            with open('buy_herous.txt', 'r') as file_1:
+                            with open('Save_data/buy_herous.txt', 'r') as file_1:
                                 new_buy_herous = list(file_1.read())
                                 new_buy_herous[i] = '1'
-                                with open('buy_herous.txt', 'w') as file_2:
+                                with open('Save_data/buy_herous.txt', 'w') as file_2:
                                     file_2.write("".join(new_buy_herous))
-                            with open('points.txt', 'w') as file:
+                            with open('Save_data/points.txt', 'w') as file:
                                 file.write(str(stat_game.point_now))
                         break
 
@@ -58,17 +58,21 @@ class Event():
                     y = shop_game.skills[i].rect.y
                     cost = shop_game.skills[i].cost
                     if Mouse_x >= x and Mouse_x <= x + SHOP_SKILL_W and Mouse_y >= y and Mouse_y <= y + SHOP_SKILL_H:
-                        if stat_game.point_now >= cost and not shop_game.skills[i].buy:
-                            shop_game.skills[i].buy = True
+                        if stat_game.point_now >= cost and shop_game.skills[i].count < 5:
                             shop_game.skills[i].image = pygame.image.load('Img/Shop/Skills/skill_buy' + str(i) + '.png')
                             stat_game.point_now -= cost
                             stat_game.image_score()
-                            with open('buy_skills.txt', 'r') as file_1:
-                                new_buy_skills = list(file_1.read())
-                                new_buy_skills[i] = '1'
-                                with open('buy_skills.txt', 'w') as file_2:
-                                    file_2.write("".join(new_buy_skills))
-                            with open('points.txt', 'w') as file:
+                            shop_game.skills[i].count += 1
+
+                            with open('Save_data/count_skills.txt', 'r') as file:
+                                new_count = list(file.read())
+                                new_count[i] = str(shop_game.skills[i].count)
+                                with open('Save_data/buy_skills.txt', 'w') as file_1:
+                                    file_1.write("".join(new_count))
+                                with open('Save_data/count_skills.txt', 'w') as file_2:
+                                    file_2.write("".join(new_count))
+
+                            with open('Save_data/points.txt', 'w') as file:
                                 file.write(str(stat_game.point_now))
                         break
 
