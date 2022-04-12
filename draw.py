@@ -21,5 +21,4 @@ class Draw():
                 shop_game.herous[i].draw()
             for i in range(MAX_SKILLS):
                 shop_game.skills[i].draw()
-
         pygame.display.flip()

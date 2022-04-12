@@ -7,6 +7,7 @@ class Improve():
         self.screen_rect = screen.get_rect()
         self.image = None
         self.rect = None
+        self.cost = None
 
     def draw(self):
         self.screen.blit(self.image, self.rect)
@@ -29,7 +30,7 @@ class Shop():
         self.screen = screen
         self.screen_rect = screen.get_rect()
 
-        self.name_funcion = {'Background_Shop': [0, 0], 'Shop': [20, 200], 'Exc': [500, 20]}
+        self.name_funcion = {'Background_Shop': [0, 0], 'Shop': SHOP, 'Exc': EXC}
         self.func = []
 
         for key in self.name_funcion.keys():
@@ -42,6 +43,8 @@ class Shop():
 
         self.draw_back_bool = False
 
+        cost_hero = [200, 500, 1000]
+        cost_skills = [100, 150, 200, 250, 300, 350, 450, 500]
         self.herous = []
         self.skills = []
 
@@ -56,16 +59,23 @@ class Shop():
             hero_shop_game.rect = hero_shop_game.image.get_rect()
             hero_shop_game.rect.x = ((WIDTH - SHOP_HERO_W * MAX_HERO)//(MAX_HERO+1)) * (num_hero + 1) + (num_hero) * SHOP_HERO_W
             hero_shop_game.rect.y = (HEIGHT - SHOP_HERO_H - 2 * SHOP_SKILL_H)//3 + 25
+            hero_shop_game.cost = cost_hero[num_hero]
             self.herous.append(hero_shop_game)
 
 
         for num_skill in range(MAX_SKILLS):
             skill_game = Improve(screen)
-            skill_game.image = pygame.image.load('Img/Shop/Skills/skill' + str(num_skill) + '.png')
+            with open('buy_skills.txt', 'r') as f:
+                skill_game.buy = int((f.read())[num_skill])
+            if not skill_game.buy:
+                skill_game.image = pygame.image.load('Img/Shop/Skills/skill' + str(num_skill) + '.png')
+            else:
+                skill_game.image = pygame.image.load('Img/Shop/Skills/skill_buy' + str(num_skill) + '.png')
             skill_game.rect = skill_game.image.get_rect()
             skill_game.rect.x = ((WIDTH - SHOP_SKILL_W * MAX_SKILLS_SET)//(MAX_SKILLS_SET+1)) * (num_skill % MAX_SKILLS_SET + 1) + (num_skill % MAX_SKILLS_SET) * SHOP_SKILL_W
             # 25 и 15 соответсвенно расстояния между (героями и скилами) и (скилами между собой)
             skill_game.rect.y = self.herous[0].rect.bottom + (SHOP_SKILL_H + 15) * (num_skill // MAX_SKILLS_SET) + 25
+            skill_game.cost = cost_skills[num_skill]
             self.skills.append(skill_game)
 
 
