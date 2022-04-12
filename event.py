@@ -35,7 +35,7 @@ class Event():
                 if Mouse_x >= 20 and Mouse_x < 300 and Mouse_y >= 20 and Mouse_y <= 300:
                     if stat_game.point_now >= 200 and not shop_game.herous[0].buy:
                         shop_game.herous[0].buy = True
-                        shop_game.herous[0].image = pygame.image.load('Img/Shop/Hero/Hero_buy' + str(1) + '.png')
+                        shop_game.herous[0].image = pygame.image.load('Img/Shop/Hero/Hero_buy' + str(0) + '.png')
                         stat_game.point_now -= 200
                         stat_game.image_score()
                         with open('buy_herous.txt', 'w') as f:

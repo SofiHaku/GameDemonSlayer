@@ -15,9 +15,9 @@ class Draw():
             shop_game.draw_now()
         else:
             shop_game.draw_back()
-            for i in range(3):
+            for i in range(MAX_HERO):
                 shop_game.herous[i].draw()
-            for i in range(6):
+            for i in range(MAX_SKILLS):
                 shop_game.skills[i].draw()
             shop_game.draw_exc()
 
