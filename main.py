@@ -19,7 +19,11 @@ def run():
 
     while True:
         draw_game.all(shop_game, hero_game, stat_game)
-        control_game.control(screen, stat_game, shop_game)
+        if not shop_game.draw_back_bool:
+            control_game.control(stat_game, shop_game)
+        else:
+            control_game.in_shop(shop_game, stat_game)
+
 
 
 run()
