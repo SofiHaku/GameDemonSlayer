@@ -8,22 +8,35 @@ class Event():
     def __init__(self):
         pass
 
-    def control(self, stat_game, shop_game):
+    def control(self, stat_game, shop_game, hero_game, demon_game):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
-            elif event.type == pygame.KEYDOWN and not shop_game.draw_back_bool:
+            elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     stat_game.point_now += shop_game.points_in_click()
                     with open('Save_data/points.txt', 'w') as f:
                         f.write(str(stat_game.point_now))
                     stat_game.image_score()
+                    damage = shop_game.points_in_click()
+                    demon_game.update_count_life(damage)
+                elif event.key == pygame.K_UP:
+                    hero_game.move_to_up = True
+                elif event.key == pygame.K_DOWN:
+                    hero_game.move_to_down = True
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_UP:
+                    hero_game.move_to_up = False
+                elif event.key == pygame.K_DOWN:
+                    hero_game.move_to_down = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     Mouse_x, Mouse_y = pygame.mouse.get_pos()
                     if Mouse_x >= SHOP[0] and Mouse_x <= SHOP[0] + SHOP_WH \
                             and Mouse_y >= SHOP[1] and Mouse_y <= SHOP[1] + SHOP_WH:
                         shop_game.draw_back_bool = True
+
+
 
     def in_shop(self, shop_game, stat_game):
         for event in pygame.event.get():
@@ -59,7 +72,6 @@ class Event():
                     cost = shop_game.skills[i].cost
                     if Mouse_x >= x and Mouse_x <= x + SHOP_SKILL_W and Mouse_y >= y and Mouse_y <= y + SHOP_SKILL_H:
                         if stat_game.point_now >= cost and shop_game.skills[i].count < 5:
-                            shop_game.skills[i].image = pygame.image.load('Img/Shop/Skills/skill_buy' + str(i) + '.png')
                             stat_game.point_now -= cost
                             stat_game.image_score()
                             shop_game.skills[i].count += 1

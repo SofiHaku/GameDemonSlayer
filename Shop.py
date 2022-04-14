@@ -72,10 +72,7 @@ class Shop():
             skill_game = Improve(screen)
             with open('Save_data/buy_skills.txt', 'r') as f:
                 skill_game.buy = int((f.read())[num_skill])
-            if not skill_game.buy:
-                skill_game.image = pygame.image.load('Img/Shop/Skills/skill' + str(num_skill) + '.png')
-            else:
-                skill_game.image = pygame.image.load('Img/Shop/Skills/skill_buy' + str(num_skill) + '.png')
+            skill_game.image = pygame.image.load('Img/Shop/Skills/skill' + str(num_skill) + '.png')
             skill_game.rect = skill_game.image.get_rect()
             skill_game.rect.x = ((WIDTH - SHOP_SKILL_W * MAX_SKILLS_SET)//(MAX_SKILLS_SET+1)) * (num_skill % MAX_SKILLS_SET + 1) + (num_skill % MAX_SKILLS_SET) * SHOP_SKILL_W
             # 25 и 15 соответсвенно расстояния между (героями и скилами) и (скилами между собой)
