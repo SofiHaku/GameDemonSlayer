@@ -23,23 +23,6 @@ class Event():
                     stat_game.image_score(COUNT[0], COUNT[1])
                     damage = shop_game.points_in_click()
                     demon_game.update_count_life(damage)
-                elif event.key == pygame.K_UP:
-                    hero_game.move_to_up = True
-                elif event.key == pygame.K_DOWN:
-                    hero_game.move_to_down = True
-                elif event.key == pygame.K_RIGHT:
-                    hero_game.move_to_right = True
-                elif event.key == pygame.K_LEFT:
-                    hero_game.move_to_left = True
-            elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_UP:
-                    hero_game.move_to_up = False
-                elif event.key == pygame.K_DOWN:
-                    hero_game.move_to_down = False
-                elif event.key == pygame.K_RIGHT:
-                    hero_game.move_to_right = False
-                elif event.key == pygame.K_LEFT:
-                    hero_game.move_to_left = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     Mouse_x, Mouse_y = pygame.mouse.get_pos()
@@ -100,6 +83,31 @@ class Event():
                             with open('Save_data/points.txt', 'w') as file:
                                 file.write(str(stat_game.point_now))
                         break
+
+    def demon_6_moon(self, in_lab_game, hero_game, wall):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP:
+                    hero_game.move_to_up = True
+                elif event.key == pygame.K_DOWN:
+                    hero_game.move_to_down = True
+                elif event.key == pygame.K_RIGHT:
+                    hero_game.move_to_right = True
+                elif event.key == pygame.K_LEFT:
+                    hero_game.move_to_left = True
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_UP:
+                    hero_game.move_to_up = False
+                elif event.key == pygame.K_DOWN:
+                    hero_game.move_to_down = False
+                elif event.key == pygame.K_RIGHT:
+                    hero_game.move_to_right = False
+                elif event.key == pygame.K_LEFT:
+                    hero_game.move_to_left = False
+
+        in_lab_game.corner_hero(hero_game, wall)
 
 
 

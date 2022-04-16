@@ -8,6 +8,7 @@ from draw import Draw
 from Demon import Demon_ordinary
 from lab import lab
 from locations import now_locations
+from in_lab import in_lab
 
 def run():
 
@@ -23,11 +24,15 @@ def run():
     demon_classic = Demon_ordinary(screen)
     lab_game = lab(screen)
     locations_game = now_locations()
+    in_lab_game = in_lab()d
+    wall = lab_game.return_wall()
 
     while True:
         control_game.control_achiv(stat_game, shop_game, locations_game)
         if locations_game.shop:
             control_game.in_shop(shop_game, stat_game, locations_game)
+        if locations_game.demon_6_moon:
+            control_game.demon_6_moon(in_lab_game, hero_game, wall)
         else:
             control_game.control(stat_game, shop_game, hero_game, demon_classic, locations_game)
         hero_game.update()

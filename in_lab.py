@@ -10,13 +10,13 @@ class in_lab():
         name.can_move_to_up = True
         name.can_move_to_down = True
 
-        if wall[(name.rect.left - 180) // 20 + 1][name.rect.centery // 19] == 1:
+        if wall[(name.rect_m.left - 180) // 20 + 1][name.rect_m.centery // 19] == 1:
             name.can_move_to_right = False
-        if wall[(name.rect.right - 180) // 20 - 1][name.rect.centery // 19] == 1:
+        if wall[(name.rect_m.right - 180) // 20 - 1][name.rect_m.centery // 19] == 1:
             name.can_move_to_left = False
-        if wall[(name.rect.centerx - 180) // 20][name.rect.top // 19 + 1] == 1:
+        if wall[(name.rect_m.centerx - 180) // 20][name.rect_m.top // 19 + 1] == 1:
             name.can_move_to_down = False
-        if wall[(name.rect.centerx - 180) // 20][name.rect.bottom // 19 - 1] == 1:
+        if wall[(name.rect_m.centerx - 180) // 20][name.rect_m.bottom // 19 - 1] == 1:
             name.can_move_to_up = False
 
     def corner_demon(self, name, wall):
