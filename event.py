@@ -84,30 +84,30 @@ class Event():
                                 file.write(str(stat_game.point_now))
                         break
 
-    def demon_6_moon(self, in_lab_game, hero_game, wall, lab_game, demon_6_moon):
+    def demon_6_moon(self, in_lab_game, hero_mini, wall, lab_game, demon_6_moon):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
-                    hero_game.move_to_up = True
+                    hero_mini.move_to_up = True
                 elif event.key == pygame.K_DOWN:
-                    hero_game.move_to_down = True
+                    hero_mini.move_to_down = True
                 elif event.key == pygame.K_RIGHT:
-                    hero_game.move_to_right = True
+                    hero_mini.move_to_right = True
                 elif event.key == pygame.K_LEFT:
-                    hero_game.move_to_left = True
+                    hero_mini.move_to_left = True
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_UP:
-                    hero_game.move_to_up = False
+                    hero_mini.move_to_up = False
                 elif event.key == pygame.K_DOWN:
-                    hero_game.move_to_down = False
+                    hero_mini.move_to_down = False
                 elif event.key == pygame.K_RIGHT:
-                    hero_game.move_to_right = False
+                    hero_mini.move_to_right = False
                 elif event.key == pygame.K_LEFT:
-                    hero_game.move_to_left = False
+                    hero_mini.move_to_left = False
 
-        in_lab_game.corner_hero(hero_game, wall, lab_game)
+        in_lab_game.corner_hero(hero_mini, wall)
         demon_6_moon.movement()
         demon_6_moon.update()
 

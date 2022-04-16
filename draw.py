@@ -21,8 +21,12 @@ class Draw():
         self.font = pygame.font.SysFont("Verdana", 20)
         self.state_name = None
         self.state_name_rect = None
+        self.tan = pygame.image.load('Img/Demon_6_moon/Tangiro.png')
+        self.tan_rect = self.tan.get_rect()
+        self.tan_rect.x = 0
+        self.tan_rect.y = 0
 
-    def all(self, shop_game, hero_game, stat_game, demon_classic, lab_game, locations_game, demon_6_moon):
+    def all(self, shop_game, hero_game, stat_game, demon_classic, lab_game, locations_game, demon_6_moon, points, hero_mini ):
 
         self.screen.fill((255, 255, 255))
         if locations_game.first_list:
@@ -39,14 +43,6 @@ class Draw():
         pygame.draw.rect(self.screen, (255, 255, 255), (self.screen_rect.x, self.screen_rect.bottom - 10, WIDTH, 10))
         pygame.draw.rect(self.screen, (255, 255, 255), (self.screen_rect.right - 10, self.screen_rect.y, 10, HEIGHT))
 
-
-        self.screen.blit(self.state, self.state_rect)
-        self.state_name = self.font.render("Вы хлебушек!", True, (0, 0, 0), (255, 255, 255))
-        self.state_name_rect = self.state_name.get_rect()
-        self.state_name_rect.top = self.state_rect.bottom
-        self.state_name_rect.centerx = self.state_rect.centerx
-        self.screen.blit(self.state_name, self.state_name_rect)
-
         if locations_game.shop:
 
             shop_game.func[0].draw()
@@ -61,16 +57,25 @@ class Draw():
                 shop_game.draw_count(shop_game.max_skills_coord[i][0], shop_game.max_skills_coord[i][1], i)
 
         elif locations_game.demon_6_moon:
-            stat_game.draw()
-            shop_game.func[1].draw()
+            self.screen.blit(self.tan, self.tan_rect)
             lab_game.walls_draw()
-            hero_game.draw_mini()
+            for point in points:
+                point.draw()
+            hero_mini.draw()
             demon_6_moon.draw()
 
         else:
             hero_game.draw()
             stat_game.draw()
             shop_game.func[1].draw()
+
+            self.screen.blit(self.state, self.state_rect)
+            self.state_name = self.font.render("Вы хлебушек!", True, (0, 0, 0), (255, 255, 255))
+            self.state_name_rect = self.state_name.get_rect()
+            self.state_name_rect.top = self.state_rect.bottom
+            self.state_name_rect.centerx = self.state_rect.centerx
+            self.screen.blit(self.state_name, self.state_name_rect)
+
             if not demon_classic.die():
                 demon_classic.draw()
                 demon_classic.draw_streak_of_life()

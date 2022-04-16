@@ -74,7 +74,7 @@ class Demon_6_moon(Demon):
         super().__init__(screen)
 
         self.screen = screen
-        self.image = pygame.image.load('Img/Demon_6_moon/Mini_t.png')
+        self.image = pygame.image.load('Img/Demon_6_moon/demon.png')
         self.rect = self.image.get_rect()
         self.rect.x = 200
         self.rect.y = 19

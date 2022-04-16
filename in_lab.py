@@ -4,7 +4,7 @@ class in_lab():
     def __init__(self):
         pass
 
-    def corner_hero(self, name, wall, lab_game):
+    def corner_hero(self, name, wall):
         """Определяет положенеи игрока: возможность двигаться в различные стороны"""
         name.can_move_to_left = True
         name.can_move_to_right = True
@@ -36,13 +36,13 @@ class in_lab():
             wall_right_b = True
 
         print(wall_up_b)'''
-        if wall[(name.rect_m.left - 180) // 20 + 1][name.rect_m.centery // 19] == 1:
+        if wall[(name.rect.left - 180) // 20 + 1][name.rect.centery // 19] == 1:
             name.can_move_to_right = False
-        if wall[(name.rect_m.right - 180) // 20 - 1][name.rect_m.centery // 19] == 1:
+        if wall[(name.rect.right - 180) // 20 - 1][name.rect.centery // 19] == 1:
             name.can_move_to_left = False
-        if wall[(name.rect_m.centerx - 180) // 20][name.rect_m.top // 19 + 1] == 1:
+        if wall[(name.rect.centerx - 180) // 20][name.rect.top // 19 + 1] == 1:
             name.can_move_to_down = False
-        if wall[(name.rect_m.centerx - 180) // 20][name.rect_m.bottom // 19 - 1] == 1:
+        if wall[(name.rect.centerx - 180) // 20][name.rect.bottom // 19 - 1] == 1:
             name.can_move_to_up = False
 
     def corner_demon(self, name, wall):
