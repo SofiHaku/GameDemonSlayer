@@ -11,13 +11,13 @@ class Hero():
         self.rect.y = 185
         self.rect.right = 550
 
-        self.image_m = pygame.image.load("Img/Hero/Mini_t.png")
+        self.image_m = pygame.image.load("Img/Demon_6_moon/Mini_t.png")
         self.rect_m = self.image_m.get_rect()
-        self.rect_m.x = 180 + 21 * 18 + 1
-        self.rect_m.y = 21 * 17 + 1
+        self.rect_m.x = 180 + 21 * 18 + 2
+        self.rect_m.y = 21 * 17 + 4
 
 
-        self.speed = 1
+        self.speed = 2
 
         self.can_move_to_left = True
         self.can_move_to_right = True

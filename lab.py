@@ -6,6 +6,9 @@ class lab():
     def __init__(self, screen):
         self.bool = False
         self.screen = screen
+        self.all_lab = []
+        self.image_drum = pygame.image.load("Img/Demon_6_moon/drum.png")
+        self.rect_drum = self.image_drum.get_rect()
         #Основной массив
         #Элемент массива '1' - стены
         #Остались последствия старой реализации (будет убрано). Описано ниже
@@ -32,6 +35,12 @@ class lab():
                (1, 3, 0, 4, 0, 3, 1, 1, 1, 2, 1, 1, 1, 3, 0, 0, 1, 3, 0, 3, 1),
                (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1))
 
+        for i in range(len(self.wall)):
+            for j in range(len(self.wall[i])):
+                if self.wall[i][j] == 1:
+                    one_path_of_lab = pygame.Rect((180 + i * 20, j * 19, 20, 19))
+                    self.all_lab.append(one_path_of_lab)
+
     def return_wall(self):
         """Передаем массив для использования в других функциях"""
         return self.wall
@@ -41,4 +50,12 @@ class lab():
         for i in range(len(self.wall)):
             for j in range(len(self.wall[i])):
                 if self.wall[i][j] == 1:
-                    pygame.draw.rect(self.screen, (0, 121, 107) , (180 + i * 20, j * 19, 20, 19))
+                    one_path_of_lab = pygame.Rect((180 + i * 20, j * 19, 20, 19))
+                    pygame.draw.rect(self.screen, (0, 121, 107) , one_path_of_lab)
+
+                elif (i == 5 or i == 15) and (j == 3 or j == 13) or (i == 7 or i == 13) and (j == 7 or j == 11):
+                    self.rect_drum.x = 180 + i * 20
+                    self.rect_drum.y = j * 19
+                    self.screen.blit(self.image_drum, self.rect_drum)
+
+

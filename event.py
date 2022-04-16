@@ -84,7 +84,7 @@ class Event():
                                 file.write(str(stat_game.point_now))
                         break
 
-    def demon_6_moon(self, in_lab_game, hero_game, wall):
+    def demon_6_moon(self, in_lab_game, hero_game, wall, lab_game, demon_6_moon):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -107,7 +107,9 @@ class Event():
                 elif event.key == pygame.K_LEFT:
                     hero_game.move_to_left = False
 
-        in_lab_game.corner_hero(hero_game, wall)
+        in_lab_game.corner_hero(hero_game, wall, lab_game)
+        demon_6_moon.movement()
+        demon_6_moon.update()
 
 
 

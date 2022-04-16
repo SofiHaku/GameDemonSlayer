@@ -22,7 +22,7 @@ class Draw():
         self.state_name = None
         self.state_name_rect = None
 
-    def all(self, shop_game, hero_game, stat_game, demon_classic, lab_game, locations_game):
+    def all(self, shop_game, hero_game, stat_game, demon_classic, lab_game, locations_game, demon_6_moon):
 
         self.screen.fill((255, 255, 255))
         if locations_game.first_list:
@@ -65,6 +65,7 @@ class Draw():
             shop_game.func[1].draw()
             lab_game.walls_draw()
             hero_game.draw_mini()
+            demon_6_moon.draw()
 
         else:
             hero_game.draw()
