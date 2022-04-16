@@ -1,5 +1,6 @@
 import pygame
 import pygame.font
+from illumination import illumination
 from settings import *
 from threading import Timer
 
@@ -26,7 +27,7 @@ class Draw():
         self.tan_rect.x = 0
         self.tan_rect.y = 0
 
-    def all(self, shop_game, hero_game, stat_game, demon_classic, lab_game, locations_game, demon_6_moon, points, hero_mini ):
+    def all(self, shop_game, hero_game, stat_game, demon_classic, lab_game, locations_game, demon_6_moon, points, hero_mini, ill_butt):
 
         self.screen.fill((255, 255, 255))
         if locations_game.first_list:
@@ -48,13 +49,21 @@ class Draw():
             shop_game.func[0].draw()
             shop_game.func[2].draw()
 
+            if ill_butt.exc:
+                ill_butt.button(EXC[0], EXC[1], EXC_WH, EXC_WH)
+
             for i in range(MAX_HERO):
                 shop_game.herous[i].draw()
                 shop_game.draw_cost_hero(shop_game.herous[i].rect.right, shop_game.herous[i].rect.bottom, i)
+                if ill_butt.hero[i]:
+                    ill_butt.button(shop_game.herous[i].rect.x, shop_game.herous[i].rect.y, 125, 125)
             for i in range(MAX_SKILLS):
                 shop_game.skills[i].draw()
                 shop_game.image_count(shop_game.skills[i].count)
                 shop_game.draw_count(shop_game.max_skills_coord[i][0], shop_game.max_skills_coord[i][1], i)
+                if ill_butt.skills[i]:
+                    ill_butt.button(shop_game.skills[i].rect.x, shop_game.skills[i].rect.y, 85, 75)
+
 
         elif locations_game.demon_6_moon:
             self.screen.blit(self.tan, self.tan_rect)
@@ -68,6 +77,10 @@ class Draw():
             hero_game.draw()
             stat_game.draw()
             shop_game.func[1].draw()
+
+            if ill_butt.to_shop:
+                ill_butt.button(SHOP[0], SHOP[1], SHOP_WH, SHOP_WH)
+
 
             self.screen.blit(self.state, self.state_rect)
             self.state_name = self.font.render("Вы хлебушек!", True, (0, 0, 0), (255, 255, 255))

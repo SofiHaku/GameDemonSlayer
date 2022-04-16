@@ -12,6 +12,7 @@ from locations import now_locations
 from in_lab import in_lab
 from meetings import meeting
 from make_many_point import make_many
+from illumination import illumination
 
 def run():
 
@@ -37,6 +38,7 @@ def run():
     demon_6_moon = Demon_6_moon(screen)
     meeting_game = meeting()
     make_many_game = make_many(screen)
+    ill_butt = illumination(screen)
 
     points = Group()
     make_many_game.point(wall, points)
@@ -44,18 +46,21 @@ def run():
     while True:
         control_game.control_achiv(stat_game, shop_game, locations_game)
         if locations_game.shop:
-            control_game.in_shop(shop_game, stat_game, locations_game)
+            control_game.in_shop(shop_game, stat_game, locations_game, ill_butt)
         if locations_game.demon_6_moon:
             control_game.demon_6_moon(in_lab_game, hero_mini, wall, lab_game, demon_6_moon)
             hero_mini.update()
             in_lab_game.corner_demon(demon_6_moon, wall)
+            meeting_game.eat_points(hero_mini, points)
+            #meeting_game.with_demon(demon_6_moon, points, hero_game, screen, wall, make_many_game)
             demon_6_moon.update()
         else:
-            control_game.control(stat_game, shop_game, hero_game, demon_classic, locations_game)
+            control_game.control(stat_game, shop_game, hero_game, demon_classic, locations_game, ill_butt)
+
+        draw_game.all(shop_game, hero_game, stat_game, demon_classic, lab_game, locations_game, demon_6_moon, points,
+                      hero_mini, ill_butt)
         hero_game.update()
-        draw_game.all(shop_game, hero_game, stat_game, demon_classic, lab_game, locations_game, demon_6_moon, points, hero_mini)
         demon_classic.move()
-        meeting_game.eat_points(hero_mini , points)
         clock.tick(60)
 run()
 

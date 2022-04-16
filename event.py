@@ -3,6 +3,7 @@ import sys
 
 from settings import *
 
+
 class Event():
 
     def __init__(self):
@@ -11,7 +12,7 @@ class Event():
     def control_achiv(self, statistics_game, shop_game, locations_game):
         statistics_game.achievements(shop_game, locations_game)
 
-    def control(self, stat_game, shop_game, hero_game, demon_game, locations_game):
+    def control(self, stat_game, shop_game, hero_game, demon_game, locations_game, ill_butt):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -23,7 +24,15 @@ class Event():
                     stat_game.image_score(COUNT[0], COUNT[1])
                     damage = shop_game.points_in_click()
                     demon_game.update_count_life(damage)
-            elif event.type == pygame.MOUSEBUTTONDOWN:
+
+            Mouse_x, Mouse_y = pygame.mouse.get_pos()
+            if Mouse_x >= SHOP[0] and Mouse_x <= SHOP[0] + SHOP_WH \
+                    and Mouse_y >= SHOP[1] and Mouse_y <= SHOP[1] + SHOP_WH:
+                ill_butt.to_shop = 1
+            else:
+                ill_butt.to_shop = 0
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     Mouse_x, Mouse_y = pygame.mouse.get_pos()
                     if Mouse_x >= SHOP[0] and Mouse_x <= SHOP[0] + SHOP_WH \
@@ -31,15 +40,33 @@ class Event():
                         locations_game.shop = True
                         locations_game.first_list = False
 
-
-
-    def in_shop(self, shop_game, stat_game, locations_game):
+    def in_shop(self, shop_game, stat_game, locations_game, ill_butt):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
-            elif event.type == pygame.MOUSEBUTTONDOWN:
+
+            Mouse_x, Mouse_y = pygame.mouse.get_pos()
+            for i in range(MAX_HERO):
+                x = shop_game.herous[i].rect.x
+                y = shop_game.herous[i].rect.y
+                if Mouse_x >= x and Mouse_x <= x + SHOP_HERO_W and Mouse_y >= y and Mouse_y <= y + SHOP_HERO_H:
+                    ill_butt.hero = ill_butt.hero_standart[i]
+
+            for i in range(MAX_SKILLS):
+                x = shop_game.skills[i].rect.x
+                y = shop_game.skills[i].rect.y
+                if Mouse_x >= x and Mouse_x <= x + SHOP_SKILL_W and Mouse_y >= y and Mouse_y <= y + SHOP_SKILL_H:
+                    ill_butt.skills = ill_butt.skills_standart[i]
+
+            if Mouse_x >= EXC[0] and Mouse_x <= EXC[0] + EXC_WH \
+                    and Mouse_y >= EXC[1] and Mouse_y <= EXC[1] + EXC_WH:
+                ill_butt.exc = 1
+            else:
+                ill_butt.exc = 0
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
                 Mouse_x, Mouse_y = pygame.mouse.get_pos()
-                if Mouse_x >= EXC[0]  and Mouse_x <= EXC[0] + EXC_WH \
+                if Mouse_x >= EXC[0] and Mouse_x <= EXC[0] + EXC_WH \
                         and Mouse_y >= EXC[1] and Mouse_y <= EXC[1] + EXC_WH:
                     locations_game.shop = False
                     locations_game.first_list = True
@@ -110,7 +137,3 @@ class Event():
         in_lab_game.corner_hero(hero_mini, wall)
         demon_6_moon.movement()
         demon_6_moon.update()
-
-
-
-

@@ -208,13 +208,3 @@ class Demon_6_moon(Demon):
                 self.move = self.mass_r.copy()
             else:
                 self.move = self.mass_l.copy()
-
-
-
-
-
-
-
-
-
-
