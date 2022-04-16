@@ -43,8 +43,6 @@ class Shop():
             func_game.image_rect.y = (self.name_funcion[key])[1]
             self.func.append(func_game)
 
-        self.draw_back_bool = False
-
         cost_hero = [200, 500, 1000]
         cost_skills = [100, 150, 200, 250, 300, 350, 450, 500]
         plus_points_d = [1, 2, 4, 8, 16, 32, 64, 128]

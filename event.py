@@ -8,7 +8,10 @@ class Event():
     def __init__(self):
         pass
 
-    def control(self, stat_game, shop_game, hero_game, demon_game):
+    def control_achiv(self, statistics_game, shop_game, locations_game):
+        statistics_game.achievements(shop_game, locations_game)
+
+    def control(self, stat_game, shop_game, hero_game, demon_game, locations_game):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -17,28 +20,37 @@ class Event():
                     stat_game.point_now += shop_game.points_in_click()
                     with open('Save_data/points.txt', 'w') as f:
                         f.write(str(stat_game.point_now))
-                    stat_game.image_score()
+                    stat_game.image_score(COUNT[0], COUNT[1])
                     damage = shop_game.points_in_click()
                     demon_game.update_count_life(damage)
                 elif event.key == pygame.K_UP:
                     hero_game.move_to_up = True
                 elif event.key == pygame.K_DOWN:
                     hero_game.move_to_down = True
+                elif event.key == pygame.K_RIGHT:
+                    hero_game.move_to_right = True
+                elif event.key == pygame.K_LEFT:
+                    hero_game.move_to_left = True
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_UP:
                     hero_game.move_to_up = False
                 elif event.key == pygame.K_DOWN:
                     hero_game.move_to_down = False
+                elif event.key == pygame.K_RIGHT:
+                    hero_game.move_to_right = False
+                elif event.key == pygame.K_LEFT:
+                    hero_game.move_to_left = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     Mouse_x, Mouse_y = pygame.mouse.get_pos()
                     if Mouse_x >= SHOP[0] and Mouse_x <= SHOP[0] + SHOP_WH \
                             and Mouse_y >= SHOP[1] and Mouse_y <= SHOP[1] + SHOP_WH:
-                        shop_game.draw_back_bool = True
+                        locations_game.shop = True
+                        locations_game.first_list = False
 
 
 
-    def in_shop(self, shop_game, stat_game):
+    def in_shop(self, shop_game, stat_game, locations_game):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -46,7 +58,8 @@ class Event():
                 Mouse_x, Mouse_y = pygame.mouse.get_pos()
                 if Mouse_x >= EXC[0]  and Mouse_x <= EXC[0] + EXC_WH \
                         and Mouse_y >= EXC[1] and Mouse_y <= EXC[1] + EXC_WH:
-                    shop_game.draw_back_bool = False
+                    locations_game.shop = False
+                    locations_game.first_list = True
                 for i in range(MAX_HERO):
                     x = shop_game.herous[i].rect.x
                     y = shop_game.herous[i].rect.y
@@ -56,7 +69,7 @@ class Event():
                             shop_game.herous[i].buy = True
                             shop_game.herous[i].image = pygame.image.load('Img/Shop/Hero/Hero_buy' + str(i) + '.png')
                             stat_game.point_now -= cost
-                            stat_game.image_score()
+                            stat_game.image_score(COUNT[0], COUNT[1])
                             with open('Save_data/buy_herous.txt', 'r') as file_1:
                                 new_buy_herous = list(file_1.read())
                                 new_buy_herous[i] = '1'
@@ -73,7 +86,7 @@ class Event():
                     if Mouse_x >= x and Mouse_x <= x + SHOP_SKILL_W and Mouse_y >= y and Mouse_y <= y + SHOP_SKILL_H:
                         if stat_game.point_now >= cost and shop_game.skills[i].count < 5:
                             stat_game.point_now -= cost
-                            stat_game.image_score()
+                            stat_game.image_score(COUNT[0], COUNT[1])
                             shop_game.skills[i].count += 1
 
                             with open('Save_data/count_skills.txt', 'r') as file:
