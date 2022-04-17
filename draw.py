@@ -74,6 +74,22 @@ class Draw():
             hero_mini.draw()
             demon_6_moon.draw()
 
+        elif locations_game.achiv:
+            achiv.func[1].draw()
+            achiv.func[2].draw()
+
+            if ill_butt.exc:
+                ill_butt.button(EXC[0], EXC[1], EXC_WH, EXC_WH)
+
+            for i in range(MAX_MOON_DEMON):
+                achiv.demons_moon[i].draw()
+
+            for i in range(MAX_COUNT_DEMON):
+                achiv.count_demon[i].draw()
+
+            for i in range(MAX_FORSE):
+                achiv.forses[i].draw()
+
         else:
             hero_game.draw()
             stat_game.draw()

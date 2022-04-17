@@ -45,6 +45,10 @@ class Event():
                             and Mouse_y >= SHOP[1] and Mouse_y <= SHOP[1] + SHOP_WH:
                         locations_game.shop = True
                         locations_game.first_list = False
+                    elif Mouse_x >= CUP[0] and Mouse_x <= CUP[0] + CUP_WH[0] \
+                    and Mouse_y >= CUP[1] and Mouse_y <= CUP[1] + CUP_WH[1]:
+                        locations_game.achiv = True
+                        locations_game.first_list = False
 
     def in_shop(self, shop_game, stat_game, locations_game, ill_butt):
         for event in pygame.event.get():
@@ -145,3 +149,23 @@ class Event():
         in_lab_game.corner_hero(hero_mini, wall)
         demon_6_moon.movement()
         demon_6_moon.update()
+
+    def in_achiv(self, achiv, stat_game, locations_game, ill_butt):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+
+            Mouse_x, Mouse_y = pygame.mouse.get_pos()
+
+            if Mouse_x >= EXC[0] and Mouse_x <= EXC[0] + EXC_WH \
+                    and Mouse_y >= EXC[1] and Mouse_y <= EXC[1] + EXC_WH:
+                ill_butt.exc = 1
+            else:
+                ill_butt.exc = 0
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if Mouse_x >= EXC[0] and Mouse_x <= EXC[0] + EXC_WH \
+                        and Mouse_y >= EXC[1] and Mouse_y <= EXC[1] + EXC_WH:
+                    locations_game.achiv = False
+                    locations_game.first_list = True
+

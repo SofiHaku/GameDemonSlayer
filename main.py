@@ -49,13 +49,15 @@ def run():
         control_game.control_achiv(stat_game, shop_game, locations_game)
         if locations_game.shop:
             control_game.in_shop(shop_game, stat_game, locations_game, ill_butt)
-        if locations_game.demon_6_moon:
+        elif locations_game.demon_6_moon:
             control_game.demon_6_moon(in_lab_game, hero_mini, wall, lab_game, demon_6_moon)
             hero_mini.update()
             in_lab_game.corner_demon(demon_6_moon, wall)
             meeting_game.eat_points(hero_mini, points)
             #meeting_game.with_demon(demon_6_moon, points, hero_game, screen, wall, make_many_game)
             demon_6_moon.update()
+        elif locations_game.achiv:
+            control_game.in_achiv(achiv, stat_game, locations_game, ill_butt)
         else:
             control_game.control(stat_game, shop_game, hero_game, demon_classic, locations_game, ill_butt)
 
