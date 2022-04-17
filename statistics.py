@@ -17,8 +17,8 @@ class Stat():
         """Преобразование текста счета в графическое изображение"""
         self.score_img = self.font.render(str(self.point_now), True, TEXT_COLOR, (255, 255, 255))
         self.score_rect = self.score_img.get_rect()
-        self.score_rect.centerx = COUNT[0]
-        self.score_rect.top = COUNT[1]
+        self.score_rect.x = 100
+        self.score_rect.y = 160
 
     def draw(self):
         """Вывод счета на экран"""

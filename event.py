@@ -32,6 +32,12 @@ class Event():
             else:
                 ill_butt.to_shop = 0
 
+            if Mouse_x >= CUP[0] and Mouse_x <= CUP[0] + CUP_WH[0] \
+                    and Mouse_y >= CUP[1] and Mouse_y <= CUP[1] + CUP_WH[1]:
+                ill_butt.to_achiv = 1
+            else:
+                ill_butt.to_achiv = 0
+
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     Mouse_x, Mouse_y = pygame.mouse.get_pos()
@@ -46,12 +52,14 @@ class Event():
                 sys.exit()
 
             Mouse_x, Mouse_y = pygame.mouse.get_pos()
+            ill_butt.hero = ill_butt.hero_standart[-1]
             for i in range(MAX_HERO):
                 x = shop_game.herous[i].rect.x
                 y = shop_game.herous[i].rect.y
                 if Mouse_x >= x and Mouse_x <= x + SHOP_HERO_W and Mouse_y >= y and Mouse_y <= y + SHOP_HERO_H:
                     ill_butt.hero = ill_butt.hero_standart[i]
 
+            ill_butt.skills = ill_butt.skills_standart[-1]
             for i in range(MAX_SKILLS):
                 x = shop_game.skills[i].rect.x
                 y = shop_game.skills[i].rect.y

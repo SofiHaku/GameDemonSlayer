@@ -27,7 +27,8 @@ class Draw():
         self.tan_rect.x = 0
         self.tan_rect.y = 0
 
-    def all(self, shop_game, hero_game, stat_game, demon_classic, lab_game, locations_game, demon_6_moon, points, hero_mini, ill_butt):
+    def all(self, shop_game, hero_game, stat_game, demon_classic, lab_game,
+            locations_game, demon_6_moon, points, hero_mini, ill_butt, achiv):
 
         self.screen.fill((255, 255, 255))
         if locations_game.first_list:
@@ -77,9 +78,13 @@ class Draw():
             hero_game.draw()
             stat_game.draw()
             shop_game.func[1].draw()
+            achiv.draw()
 
             if ill_butt.to_shop:
                 ill_butt.button(SHOP[0], SHOP[1], SHOP_WH, SHOP_WH)
+
+            elif ill_butt.to_achiv:
+                ill_butt.button(CUP[0], CUP[1], CUP_WH[0], CUP_WH[1])
 
 
             self.screen.blit(self.state, self.state_rect)
