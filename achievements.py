@@ -9,6 +9,7 @@ class One_achiv():
         self.rect = None
         self.cost = None
         self.achieved = False
+        self.info = None
 
     def draw(self):
         self.screen.blit(self.image, self.rect)
@@ -45,6 +46,10 @@ class achievements():
         self.count_demon = []
         self.forses = []
 
+        self.demons_moon_info = ["1", "2", "3", "4", "5"]
+        self.count_demon_info = ["1", "2", "3", "4", "5"]
+        self.forses_info = ["1", "2", "3", "4", "5"]
+
         for num_moon in range(MAX_MOON_DEMON):
             one_achiv_game = One_achiv(screen)
             with open('Save_data/moon_demon', 'r') as f:
@@ -57,6 +62,7 @@ class achievements():
             one_achiv_game.rect.x = ((WIDTH - SHOP_HERO_W * MAX_HERO) // (MAX_HERO + 1)) * (num_moon + 1) + (
                 num_moon) * SHOP_HERO_W
             one_achiv_game.rect.y = (HEIGHT - SHOP_HERO_H - 2 * SHOP_SKILL_H) // 3 + 25
+            one_achiv_game.info = self.demons_moon_info[num_moon]
             self.demons_moon.append(one_achiv_game)
 
         for num_ach_count_demon in range(MAX_COUNT_DEMON):
@@ -70,6 +76,7 @@ class achievements():
                         num_ach_count_demon + 1) + (
                                          num_ach_count_demon) * 75
             ach_count_demon.rect.y = self.demons_moon[0].rect.bottom + 10
+            ach_count_demon.info = self.count_demon_info[num_ach_count_demon]
             self.count_demon.append(ach_count_demon)
 
         for num_forse in range(MAX_FORSE):
@@ -81,6 +88,7 @@ class achievements():
             count_forse.rect.x = ((WIDTH - 75 * MAX_FORSE) // (MAX_FORSE + 1)) * (num_forse + 1) + (
                 num_forse) * 75
             count_forse.rect.y = self.count_demon[0].rect.bottom + 10
+            count_forse.info = self.forses_info[num_forse]
             self.forses.append(count_forse)
 
 

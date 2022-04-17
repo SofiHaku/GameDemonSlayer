@@ -32,7 +32,7 @@ class Shop():
         self.screen = screen
         self.screen_rect = screen.get_rect()
 
-        self.name_funcion = {'Background_Shop': [0, 0], 'Shop': SHOP, 'Exc': EXC}
+        self.name_funcion = {'Background_Shop': [0, 0], 'Shop': SHOP, 'Exc': EXC, 'lamp': LAMP, 'Exc_info': EXC_INFO}
         self.func = []
 
         for key in self.name_funcion.keys():

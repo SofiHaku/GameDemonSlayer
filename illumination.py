@@ -9,9 +9,20 @@ class illumination():
                      [0, 0, 0, 1, 0, 0, 0, 0], [0, 0, 0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 1, 0, 0],
                      [0, 0, 0, 0, 0, 0, 1, 0], [0, 0, 0, 0, 0, 0, 0, 1], [0, 0, 0, 0, 0, 0, 0, 0]]
         self.exc = 0
+        self.lamp = 0
         self.to_shop = 0
         self.to_achiv = 0
         self.screen = screen
+
+        self.demon = [0, 0, 0]
+        self.demon_standart = [[1, 0, 0], [0, 1, 0], [0, 0, 1], [0, 0, 0]]
+        self.count_demon = [0, 0, 0, 0, 0]
+        self.count_demon_standart = [[1, 0, 0, 0, 0], [0, 1, 0, 0, 0], [0, 0, 1, 0, 0],
+                                     [0, 0, 0, 1, 0], [0, 0, 0, 0, 1], [0, 0, 0, 0, 0]]
+
+        self.forse = [0, 0, 0, 0, 0]
+        self.forse_standart = [[1, 0, 0, 0, 0], [0, 1, 0, 0, 0], [0, 0, 1, 0, 0],
+                                     [0, 0, 0, 1, 0], [0, 0, 0, 0, 1], [0, 0, 0, 0, 0]]
 
     def button(self, x, y, wight, height):
         surf = pygame.Surface((wight, height))

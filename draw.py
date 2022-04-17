@@ -3,6 +3,7 @@ import pygame.font
 from illumination import illumination
 from settings import *
 from threading import Timer
+from text_message import text_message
 
 class Draw():
 
@@ -47,24 +48,47 @@ class Draw():
 
         if locations_game.shop:
 
-            shop_game.func[0].draw()
-            shop_game.func[2].draw()
+            text_g = text_message(self.screen)
+            if locations_game.shop_lamp:
+                text_g.draw_many_lines(20, 0, text_g.shop_mess_lamp, 40)
+                shop_game.func[4].draw()
+            elif locations_game.shop_hero:
+                for i in range(len(locations_game.shop_info_hero)):
+                    if locations_game.shop_info_hero[i]:
+                        text_g.draw_many_lines(20, 0, text_g.shop_mess_hero[i], 40)
+                shop_game.func[4].draw()
+            elif locations_game.shop_skills:
+                for i in range(len(locations_game.shop_info_skills)):
+                    if locations_game.shop_info_skills[i]:
+                        text_g.draw_many_lines(20, 0, text_g.shop_mess_skills[i], 40)
+                shop_game.func[4].draw()
+            else:
+                shop_game.func[0].draw()
+                pygame.draw.rect(self.screen, (255, 255, 255),
+                                 (self.screen_rect.right // 3, self.screen_rect.y, self.screen_rect.right // 3, 70))
+                shop_game.func[2].draw()
+                shop_game.func[3].draw()
 
-            if ill_butt.exc:
-                ill_butt.button(EXC[0], EXC[1], EXC_WH, EXC_WH)
+                if ill_butt.exc:
+                    ill_butt.button(EXC[0], EXC[1], EXC_WH, EXC_WH)
+                if ill_butt.lamp:
+                    ill_butt.button(LAMP[0], LAMP[1], LAMP_WH, LAMP_WH)
 
-            for i in range(MAX_HERO):
-                shop_game.herous[i].draw()
-                shop_game.draw_cost_hero(shop_game.herous[i].rect.right, shop_game.herous[i].rect.bottom, i)
-                if ill_butt.hero[i]:
-                    ill_butt.button(shop_game.herous[i].rect.x, shop_game.herous[i].rect.y, 125, 125)
-            for i in range(MAX_SKILLS):
-                shop_game.skills[i].draw()
-                shop_game.image_count(shop_game.skills[i].count)
-                shop_game.draw_count(shop_game.max_skills_coord[i][0], shop_game.max_skills_coord[i][1], i)
-                if ill_butt.skills[i]:
-                    ill_butt.button(shop_game.skills[i].rect.x, shop_game.skills[i].rect.y, 85, 75)
+                for i in range(MAX_HERO):
+                    shop_game.herous[i].draw()
+                    shop_game.draw_cost_hero(shop_game.herous[i].rect.right, shop_game.herous[i].rect.bottom, i)
+                    if ill_butt.hero[i]:
+                        ill_butt.button(shop_game.herous[i].rect.x, shop_game.herous[i].rect.y, 125, 125)
+                for i in range(MAX_SKILLS):
+                    shop_game.skills[i].draw()
+                    shop_game.image_count(shop_game.skills[i].count)
+                    shop_game.draw_count(shop_game.max_skills_coord[i][0], shop_game.max_skills_coord[i][1], i)
+                    if ill_butt.skills[i]:
+                        ill_butt.button(shop_game.skills[i].rect.x, shop_game.skills[i].rect.y, 85, 75)
 
+                stat_game.score_rect.y = 25
+                stat_game.score_rect.centerx = self.screen_rect.centerx
+                stat_game.draw()
 
         elif locations_game.demon_6_moon:
             self.screen.blit(self.tan, self.tan_rect)
@@ -75,23 +99,39 @@ class Draw():
             demon_6_moon.draw()
 
         elif locations_game.achiv:
-            achiv.func[1].draw()
-            achiv.func[2].draw()
 
-            if ill_butt.exc:
-                ill_butt.button(EXC[0], EXC[1], EXC_WH, EXC_WH)
+            if locations_game.achiv_demons:
+                pass
+            elif locations_game.achiv_count_demons:
+                pass
+            elif locations_game.achiv_forse:
+                pass
+            else:
+                achiv.func[1].draw()
+                achiv.func[2].draw()
 
-            for i in range(MAX_MOON_DEMON):
-                achiv.demons_moon[i].draw()
+                if ill_butt.exc:
+                    ill_butt.button(EXC[0], EXC[1], EXC_WH, EXC_WH)
 
-            for i in range(MAX_COUNT_DEMON):
-                achiv.count_demon[i].draw()
+                for i in range(MAX_MOON_DEMON):
+                    achiv.demons_moon[i].draw()
+                    if ill_butt.demon[i]:
+                        ill_butt.button(achiv.demons_moon[i].rect.x, achiv.demons_moon[i].rect.y, 125, 125)
 
-            for i in range(MAX_FORSE):
-                achiv.forses[i].draw()
+                for i in range(MAX_COUNT_DEMON):
+                    achiv.count_demon[i].draw()
+                    if ill_butt.count_demon[i]:
+                        ill_butt.button(achiv.count_demon[i].rect.x, achiv.count_demon[i].rect.y, 85, 75)
+
+                for i in range(MAX_FORSE):
+                    achiv.forses[i].draw()
+                    if ill_butt.forse[i]:
+                        ill_butt.button(achiv.forses[i].rect.x, achiv.forses[i].rect.y, 85, 75)
 
         else:
             hero_game.draw()
+            stat_game.score_rect.x = 100
+            stat_game.score_rect.y = 160
             stat_game.draw()
             shop_game.func[1].draw()
             achiv.draw()
@@ -101,6 +141,7 @@ class Draw():
 
             elif ill_butt.to_achiv:
                 ill_butt.button(CUP[0], CUP[1], CUP_WH[0], CUP_WH[1])
+
 
 
             self.screen.blit(self.state, self.state_rect)
