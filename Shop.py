@@ -32,7 +32,7 @@ class Shop():
         self.screen = screen
         self.screen_rect = screen.get_rect()
 
-        self.name_funcion = {'Background_Shop': [0, 0], 'Shop': SHOP, 'Exc': EXC, 'lamp': LAMP, 'Exc_info': EXC_INFO}
+        self.name_funcion = {'Background_Shop': [0, 0], 'Shop': SHOP, 'Exc': EXC, 'lamp': LAMP, 'Exc_info': EXC_INFO, 'lamp_info': [15, 80]}
         self.func = []
 
         for key in self.name_funcion.keys():
@@ -47,7 +47,9 @@ class Shop():
         cost_skills = [100, 150, 200, 250, 300, 350, 450, 500]
         plus_points_d = [1, 2, 4, 8, 16, 32, 64, 128]
         self.herous = []
+        self.herous_info = []
         self.skills = []
+        self.skills_info = []
         self.max_skills_coord = []
         self.count_skills_to_draw = []
 
@@ -65,6 +67,14 @@ class Shop():
             hero_shop_game.cost = cost_hero[num_hero]
             self.herous.append(hero_shop_game)
 
+        for num_hero in range(MAX_HERO):
+            hero_info_game = Improve(screen)
+            hero_info_game.image = pygame.image.load('Img/Shop/Hero_info/Hero' + str(num_hero) + '.png')
+            hero_info_game.rect = hero_info_game.image.get_rect()
+            hero_info_game.rect.x = 25
+            hero_info_game.rect.y = 75
+            self.herous_info.append(hero_info_game)
+
 
         for num_skill in range(MAX_SKILLS):
             skill_game = Improve(screen)
@@ -72,7 +82,7 @@ class Shop():
                 skill_game.buy = int((f.read())[num_skill])
             skill_game.image = pygame.image.load('Img/Shop/Skills/skill' + str(num_skill) + '.png')
             skill_game.rect = skill_game.image.get_rect()
-            skill_game.rect.x = ((WIDTH - SHOP_SKILL_W * MAX_SKILLS_SET)//(MAX_SKILLS_SET+1)) * (num_skill % MAX_SKILLS_SET + 1) + (num_skill % MAX_SKILLS_SET) * SHOP_SKILL_W
+            skill_game.rect.x = ((WIDTH - SHOP_SKILL_W * MAX_SKILLS_SET)//(MAX_SKILLS_SET+1)) * (num_skill % MAX_SKILLS_SET + 1) + (num_skill % MAX_SKILLS_SET) * SHOP_SKILL_W + (SHOP_SKILL_W + 52) * (num_skill // MAX_SKILLS_SET)
             # 25 и 15 соответсвенно расстояния между (героями и скилами) и (скилами между собой)
             skill_game.rect.y = self.herous[0].rect.bottom + (SHOP_SKILL_H + 15) * (num_skill // MAX_SKILLS_SET) + 25
             skill_game.cost = cost_skills[num_skill]
@@ -83,6 +93,14 @@ class Shop():
             skill_game.plus_points = plus_points_d[num_skill]
             self.skills.append(skill_game)
             self.max_skills_coord.append([skill_game.rect.right, skill_game.rect.bottom])
+
+        for num_hero in range(6):
+            skills_info_game = Improve(screen)
+            skills_info_game.image = pygame.image.load('Img/Shop/Skills_info/skill' + str(num_hero) + '.png')
+            skills_info_game.rect = skills_info_game.image.get_rect()
+            skills_info_game.rect.x = 25
+            skills_info_game.rect.y = 95
+            self.skills_info.append(skills_info_game)
 
         self.font = pygame.font.SysFont("Verdana", 15)
         self.max_skills_img = self.font.render('/5', True, (0, 0, 0), (255, 255, 255))

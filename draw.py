@@ -50,22 +50,28 @@ class Draw():
 
             text_g = text_message(self.screen)
             if locations_game.shop_lamp:
-                text_g.draw_many_lines(20, 0, text_g.shop_mess_lamp, 40)
+                text_g.draw_many_lines(290, 75, text_g.shop_mess_lamp, 20)
                 shop_game.func[4].draw()
+                shop_game.func[5].draw()
             elif locations_game.shop_hero:
                 for i in range(len(locations_game.shop_info_hero)):
                     if locations_game.shop_info_hero[i]:
-                        text_g.draw_many_lines(20, 0, text_g.shop_mess_hero[i], 40)
+                        text_g.draw_many_lines(290, 75, text_g.shop_mess_hero[i], 20)
+                        shop_game.herous_info[i].draw()
+                        break
                 shop_game.func[4].draw()
+
             elif locations_game.shop_skills:
                 for i in range(len(locations_game.shop_info_skills)):
                     if locations_game.shop_info_skills[i]:
-                        text_g.draw_many_lines(20, 0, text_g.shop_mess_skills[i], 40)
+                        text_g.draw_many_lines(300, 95, text_g.shop_mess_skills[i], 20)
+                        shop_game.skills_info[i].draw()
+                        break
                 shop_game.func[4].draw()
             else:
                 shop_game.func[0].draw()
-                pygame.draw.rect(self.screen, (255, 255, 255),
-                                 (self.screen_rect.right // 3, self.screen_rect.y, self.screen_rect.right // 3, 70))
+                #pygame.draw.rect(self.screen, (255, 255, 255),
+                                 #(self.screen_rect.right // 3, self.screen_rect.y, self.screen_rect.right // 3, 70))
                 shop_game.func[2].draw()
                 shop_game.func[3].draw()
 
@@ -100,12 +106,22 @@ class Draw():
 
         elif locations_game.achiv:
 
+            text_g = text_message(self.screen)
             if locations_game.achiv_demons:
-                pass
+                for i in range(len(locations_game.achiv_info_demons)):
+                    if locations_game.achiv_info_demons[i]:
+                        text_g.draw_many_lines(20, 0, text_g.mess_demon[i], 40)
+                shop_game.func[4].draw()
             elif locations_game.achiv_count_demons:
-                pass
+                for i in range(len(locations_game.achiv_info_count_demons)):
+                    if locations_game.achiv_info_count_demons[i]:
+                        text_g.draw_many_lines(20, 0, text_g.mess_count_demons[i], 40)
+                shop_game.func[4].draw()
             elif locations_game.achiv_forse:
-                pass
+                for i in range(len(locations_game.achiv_info_forse)):
+                    if locations_game.achiv_info_forse[i]:
+                        text_g.draw_many_lines(20, 0, text_g.mess_forse[i], 40)
+                shop_game.func[4].draw()
             else:
                 achiv.func[1].draw()
                 achiv.func[2].draw()
@@ -121,12 +137,12 @@ class Draw():
                 for i in range(MAX_COUNT_DEMON):
                     achiv.count_demon[i].draw()
                     if ill_butt.count_demon[i]:
-                        ill_butt.button(achiv.count_demon[i].rect.x, achiv.count_demon[i].rect.y, 85, 75)
+                        ill_butt.button(achiv.count_demon[i].rect.x, achiv.count_demon[i].rect.y, 75, 75)
 
                 for i in range(MAX_FORSE):
                     achiv.forses[i].draw()
                     if ill_butt.forse[i]:
-                        ill_butt.button(achiv.forses[i].rect.x, achiv.forses[i].rect.y, 85, 75)
+                        ill_butt.button(achiv.forses[i].rect.x, achiv.forses[i].rect.y, 75, 75)
 
         else:
             hero_game.draw()

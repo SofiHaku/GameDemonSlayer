@@ -70,12 +70,12 @@ class achievements():
             with open('Save_data/ach_count_demon.txt', 'r') as f:
                 ach_count_demon.achieved = int((f.read())[num_ach_count_demon])
             ach_count_demon.image = pygame.image.load(
-                'Img/Achievements/Count_demon/count_demon' + str(num_ach_count_demon) + '.png')
+                'Img/Achievements/Count_demon/count_demon_b' + str(num_ach_count_demon) + '.png')
             ach_count_demon.rect = ach_count_demon.image.get_rect()
             ach_count_demon.rect.x = ((WIDTH - 75 * MAX_COUNT_DEMON) // (MAX_COUNT_DEMON + 1)) * (
                         num_ach_count_demon + 1) + (
                                          num_ach_count_demon) * 75
-            ach_count_demon.rect.y = self.demons_moon[0].rect.bottom + 10
+            ach_count_demon.rect.y = self.demons_moon[0].rect.bottom + 75 + 20
             ach_count_demon.info = self.count_demon_info[num_ach_count_demon]
             self.count_demon.append(ach_count_demon)
 
@@ -83,14 +83,19 @@ class achievements():
             count_forse = One_achiv(screen)
             with open('Save_data/forse.txt', 'r') as f:
                 count_forse.achieved = int((f.read())[num_forse])
-            count_forse.image = pygame.image.load('Img/Achievements/Forse/count_demon' + str(num_forse) + '.png')
+            count_forse.image = pygame.image.load('Img/Achievements/Forse/forse' + str(num_forse) + '.png')
             count_forse.rect = count_forse.image.get_rect()
             count_forse.rect.x = ((WIDTH - 75 * MAX_FORSE) // (MAX_FORSE + 1)) * (num_forse + 1) + (
                 num_forse) * 75
-            count_forse.rect.y = self.count_demon[0].rect.bottom + 10
+            count_forse.rect.y = self.demons_moon[0].rect.bottom + 10
             count_forse.info = self.forses_info[num_forse]
             self.forses.append(count_forse)
 
 
     def draw(self):
         self.func[0].draw()
+
+    def control(self, shop_game, locations_game):
+        if shop_game.points_in_click() >= 10:
+            locations_game.demon_6_moon = True
+            locations_game.first_list = False

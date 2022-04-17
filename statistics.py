@@ -24,9 +24,5 @@ class Stat():
         """Вывод счета на экран"""
         self.screen.blit(self.score_img, self.score_rect)
 
-    def achievements(self, shop_game, locations_game):
-        if shop_game.points_in_click() >= 10:
-            locations_game.demon_6_moon = True
-            locations_game.first_list = False
 
 

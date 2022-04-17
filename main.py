@@ -46,7 +46,7 @@ def run():
     make_many_game.point(wall, points)
 
     while True:
-        control_game.control_achiv(stat_game, shop_game, locations_game)
+        control_game.control_achiv(achiv, shop_game, locations_game)
         if locations_game.shop:
             control_game.in_shop(shop_game, stat_game, locations_game, ill_butt)
         elif locations_game.demon_6_moon:

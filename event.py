@@ -9,8 +9,8 @@ class Event():
     def __init__(self):
         pass
 
-    def control_achiv(self, statistics_game, shop_game, locations_game):
-        statistics_game.achievements(shop_game, locations_game)
+    def control_achiv(self, achiv, shop_game, locations_game):
+        achiv.control(shop_game, locations_game)
 
     def control(self, stat_game, shop_game, hero_game, demon_game, locations_game, ill_butt):
         for event in pygame.event.get():
@@ -219,10 +219,10 @@ class Event():
                 if Mouse_x >= x and Mouse_x <= x + SHOP_HERO_W and Mouse_y >= y and Mouse_y <= y + SHOP_HERO_H:
                     ill_butt.demon = ill_butt.demon_standart[i]
 
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    locations_game.achiv_demons = 1
-                    locations_game.achiv_info_demons = [0, 0, 0].copy()
-                    locations_game.achiv_info_demons[i] = 1
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        locations_game.achiv_demons = 1
+                        locations_game.achiv_info_demons = [0, 0, 0].copy()
+                        locations_game.achiv_info_demons[i] = 1
 
 
             ill_butt.count_demon = ill_butt.count_demon_standart[-1]
@@ -232,10 +232,10 @@ class Event():
                 if Mouse_x >= x and Mouse_x <= x + SHOP_SKILL_W and Mouse_y >= y and Mouse_y <= y + SHOP_SKILL_H:
                     ill_butt.count_demon = ill_butt.count_demon_standart[i]
 
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    locations_game.achiv_count_demons = 1
-                    locations_game.achiv_info_count_demons = [0, 0, 0, 0, 0].copy()
-                    locations_game.achiv_info_count_demons[i] = 1
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        locations_game.achiv_count_demons = 1
+                        locations_game.achiv_info_count_demons = [0, 0, 0, 0, 0].copy()
+                        locations_game.achiv_info_count_demons[i] = 1
 
             ill_butt.forse = ill_butt.forse_standart[-1]
             for i in range(MAX_FORSE):
@@ -244,14 +244,22 @@ class Event():
                 if Mouse_x >= x and Mouse_x <= x + SHOP_SKILL_W and Mouse_y >= y and Mouse_y <= y + SHOP_SKILL_H:
                     ill_butt.forse = ill_butt.forse_standart[i]
 
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    locations_game.achiv_forse = 1
-                    locations_game.achiv_info_forse = [0, 0, 0, 0, 0].copy()
-                    locations_game.achiv_info_forse[i] = 1
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        locations_game.achiv_forse = 1
+                        locations_game.achiv_info_forse = [0, 0, 0, 0, 0].copy()
+                        locations_game.achiv_info_forse[i] = 1
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if Mouse_x >= EXC[0] and Mouse_x <= EXC[0] + EXC_WH \
-                        and Mouse_y >= EXC[1] and Mouse_y <= EXC[1] + EXC_WH:
+                        and Mouse_y >= EXC[1] and Mouse_y <= EXC[1] + EXC_WH and \
+                        not locations_game.achiv_demons and not locations_game.achiv_count_demons and not locations_game.achiv_forse:
                     locations_game.achiv = False
                     locations_game.first_list = True
+
+                if Mouse_x >= EXC_INFO[0] and Mouse_x <= EXC_INFO[0] + EXC_INFO_WH \
+                        and Mouse_y >= EXC_INFO[1] and Mouse_y <= EXC_INFO[1] + EXC_INFO_WH \
+                        and (locations_game.achiv_demons or locations_game.achiv_count_demons or locations_game.achiv_forse):
+                    locations_game.achiv_demons = 0
+                    locations_game.achiv_count_demons = 0
+                    locations_game.achiv_forse = 0
 
