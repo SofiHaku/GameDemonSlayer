@@ -1,8 +1,6 @@
 import pygame
 import pygame.font
-from illumination import illumination
 from settings import *
-from threading import Timer
 from text_message import text_message
 
 class Draw():
@@ -10,23 +8,16 @@ class Draw():
     def __init__(self, screen):
         self.screen = screen
         self.screen_rect = self.screen.get_rect()
+
         '''self.back = pygame.image.load('Img/Background.png')
         self.back_rect = self.back.get_rect()
         self.back_rect.centery = self.screen_rect.centery
         self.back_rect.left = SETTING'''
 
-        self.state = pygame.image.load('Img/state1.png')
+        self.state = pygame.image.load('Img/Achievements/State/state1.png')
         self.state_rect = self.state.get_rect()
         self.state_rect.y = self.screen_rect.y + 10 + 20
         self.state_rect.centerx = 100
-
-        self.font = pygame.font.SysFont("Verdana", 20)
-        self.state_name = None
-        self.state_name_rect = None
-        self.tan = pygame.image.load('Img/Demon_6_moon/Tangiro.png')
-        self.tan_rect = self.tan.get_rect()
-        self.tan_rect.x = 0
-        self.tan_rect.y = 0
 
     def all(self, shop_game, hero_game, stat_game, demon_classic, lab_game,
             locations_game, demon_6_moon, points, hero_mini, ill_butt, achiv, menu_game):
@@ -166,14 +157,7 @@ class Draw():
             elif ill_butt.to_achiv:
                 ill_butt.button(CUP[0], CUP[1], CUP_WH[0], CUP_WH[1])
 
-
-
-            self.screen.blit(self.state, self.state_rect)
-            self.state_name = self.font.render("Вы хлебушек!", True, (0, 0, 0), (255, 255, 255))
-            self.state_name_rect = self.state_name.get_rect()
-            self.state_name_rect.top = self.state_rect.bottom
-            self.state_name_rect.centerx = self.state_rect.centerx
-            self.screen.blit(self.state_name, self.state_name_rect)
+            achiv.draw_general_state()
 
             if not demon_classic.die():
                 demon_classic.draw()

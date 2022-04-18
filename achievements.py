@@ -26,12 +26,39 @@ class Functional():
     def draw(self):
         self.screen.blit(self.image, self.image_rect)
 
+class General_state():
+    def __init__(self, screen, image, info):
+        self.screen = screen
+        self.screen_rect = screen.get_rect()
+        self.image = pygame.image.load(image)
+        self.rect = self.image.get_rect()
+
+        self.rect.y = self.screen_rect.y + 10 + 20
+        self.rect.centerx = 100
+        self.achieved = False
+        self.info = info
+        self.font = pygame.font.SysFont("Verdana", 20)
+        self.info_img = self.font.render(self.info, True, (0, 0, 0), (255, 255, 255))
+        self.info_img_rect = self.info_img.get_rect()
+        self.info_img_rect.top = self.rect.bottom
+        self.info_img_rect.centerx = self.rect.centerx
+
+    def draw(self):
+        self.screen.blit(self.image, self.rect)
+        self.screen.blit(self.info_img, self.info_img_rect)
+
+
 class achievements():
     def __init__(self, screen):
         self.screen = screen
         self.screen_rect = screen.get_rect()
 
         self.name_funcion = {'cup': CUP, 'Background_Shop': [0, 0], 'Exc': EXC}
+        self.general_states_data = {0: 'Вы хлебушек!',
+                                    1: 'Начинающий!',
+                                    2: 'Опытный!',
+                                    3: 'Столп воды!',
+                                    4: 'Величайший!'}
         self.func = []
 
         for key in self.name_funcion.keys():
@@ -45,6 +72,7 @@ class achievements():
         self.demons_moon = []
         self.count_demon = []
         self.forses = []
+        self.general_states = []
 
         for num_moon in range(MAX_MOON_DEMON):
             one_achiv_game = One_achiv(screen)
@@ -90,6 +118,15 @@ class achievements():
             count_forse.rect.y = self.demons_moon[0].rect.bottom + 10
             self.forses.append(count_forse)
 
+        with open('Save_data/count_achiv_demon.txt', 'r') as f:
+            self.count_achiv_demon = int(f.read())
+
+        for num_state in range(MAX_STATE):
+            one_state = General_state(screen, "Img/Achievements/State/state" + str(num_state + 1) + ".png", self.general_states_data[num_state])
+            with open('Save_data/forse.txt', 'r') as f:
+                one_state.achieved = int((f.read())[num_state])
+            self.general_states.append(one_state)
+
 
     def draw(self):
         self.func[0].draw()
@@ -121,4 +158,32 @@ class achievements():
             #locations_game.first_list = False
 
         # Контроль количества убитых демонов
+        if self.count_achiv_demon >= 50 and not self.count_demon[4].achieved:
+            self.count_demon[4].achieved = True
+            self.count_demon[4].image = pygame.image.load(
+                'Img/Achievements/Count_demon/count_demon' + str(4) + '.png')
+        elif self.count_achiv_demon >= 25 and not self.count_demon[3].achieved:
+            self.count_demon[3].achieved = True
+            self.count_demon[3].image = pygame.image.load(
+                'Img/Achievements/Count_demon/count_demon' + str(3) + '.png')
+        elif self.count_achiv_demon >= 10 and not self.count_demon[2].achieved:
+            self.count_demon[2].achieved = True
+            self.count_demon[2].image = pygame.image.load(
+                'Img/Achievements/Count_demon/count_demon' + str(2) + '.png')
+        elif self.count_achiv_demon >= 5 and not self.count_demon[1].achieved:
+            self.count_demon[1].achieved = True
+            self.count_demon[1].image = pygame.image.load(
+                'Img/Achievements/Count_demon/count_demon' + str(1) + '.png')
+        elif self.count_achiv_demon >= 1 and not self.count_demon[0].achieved:
+            self.count_demon[0].achieved = True
+            self.count_demon[0].image = pygame.image.load(
+                'Img/Achievements/Count_demon/count_demon' + str(0) + '.png')
+
+    def draw_general_state(self):
+        for i in range(len(self.general_states) - 1, -1, -1):
+            if self.general_states[i].achieved:
+                self.general_states[i].draw()
+                break
+            if i == 0:
+                self.general_states[0].draw()
 
