@@ -263,3 +263,7 @@ class Event():
                     locations_game.achiv_count_demons = 0
                     locations_game.achiv_forse = 0
 
+    def in_menu(self, locations_game, menu_game):
+        menu_game.control()
+
+

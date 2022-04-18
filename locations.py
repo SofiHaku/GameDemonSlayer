@@ -3,6 +3,7 @@ class now_locations():
         self.first_list = True
         self.shop = False
         self.achiv = False
+        self.menu = True
 
         self.shop_lamp = 0
         self.shop_hero = False

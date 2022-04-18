@@ -14,6 +14,7 @@ from meetings import meeting
 from make_many_point import make_many
 from illumination import illumination
 from achievements import achievements
+from menu import menu
 
 def run():
 
@@ -41,6 +42,7 @@ def run():
     make_many_game = make_many(screen)
     ill_butt = illumination(screen)
     achiv = achievements(screen)
+    menu_game = menu(screen)
 
     points = Group()
     make_many_game.point(wall, points)
@@ -58,11 +60,13 @@ def run():
             demon_6_moon.update()
         elif locations_game.achiv:
             control_game.in_achiv(achiv, stat_game, locations_game, ill_butt)
+        elif locations_game.menu:
+            control_game.in_menu(locations_game, menu_game)
         else:
             control_game.control(stat_game, shop_game, hero_game, demon_classic, locations_game, ill_butt)
 
         draw_game.all(shop_game, hero_game, stat_game, demon_classic, lab_game, locations_game, demon_6_moon, points,
-                      hero_mini, ill_butt, achiv)
+                      hero_mini, ill_butt, achiv, menu_game)
         hero_game.update()
         demon_classic.move()
         clock.tick(60)

@@ -29,7 +29,7 @@ class Draw():
         self.tan_rect.y = 0
 
     def all(self, shop_game, hero_game, stat_game, demon_classic, lab_game,
-            locations_game, demon_6_moon, points, hero_mini, ill_butt, achiv):
+            locations_game, demon_6_moon, points, hero_mini, ill_butt, achiv, menu_game):
 
         self.screen.fill((255, 255, 255))
         if locations_game.first_list:
@@ -110,7 +110,8 @@ class Draw():
             if locations_game.achiv_demons:
                 for i in range(len(locations_game.achiv_info_demons)):
                     if locations_game.achiv_info_demons[i]:
-                        text_g.draw_many_lines(20, 0, text_g.mess_demon[i], 40)
+                        text_g.draw_many_lines(20, 0, text_g.mess_demon[i][0], 40)
+                        #achiv.count_demon.
                 shop_game.func[4].draw()
             elif locations_game.achiv_count_demons:
                 for i in range(len(locations_game.achiv_info_count_demons)):
@@ -143,7 +144,8 @@ class Draw():
                     achiv.forses[i].draw()
                     if ill_butt.forse[i]:
                         ill_butt.button(achiv.forses[i].rect.x, achiv.forses[i].rect.y, 75, 75)
-
+        elif locations_game.menu:
+            menu_game.anim()
         else:
             hero_game.draw()
             stat_game.score_rect.x = 100
