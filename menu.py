@@ -9,8 +9,19 @@ class mini_surface():
         self.img = None
         self.img_rect = None
         self.any_surface = None
+
 class menu():
     def __init__(self, screen):
+        self.hero = pygame.image.load("Img/menu/hero.png")
+        self.hero_rect = self.hero.get_rect()
+        self.hero_rect.y = 90
+        self.hero_rect.x = 50
+
+        self.tap_to_play = pygame.image.load("Img/menu/tap_to_play.png")
+        self.tap_to_play_rect = self.tap_to_play.get_rect()
+        self.tap_to_play_rect.y = 180
+        self.tap_to_play_rect.x = 270
+
         self.screen = screen
         self.screen_rect = self.screen.get_rect()
         self.mini_surf = []
@@ -21,6 +32,7 @@ class menu():
             mini_surf_one.x = 0
             mini_surf_one.y = 0 + j*29
             mini_surf_one.any_surface = []
+            mini_surf_one.type.set_alpha(120)
             for i in range(24):
                 any_surf_one = mini_surface()
                 any_surf_one.type = pygame.Surface((25, 25))
@@ -34,6 +46,7 @@ class menu():
                     any_surf_one.img = pygame.image.load("Img/menu/earring.png")
                 else:
                     any_surf_one.img = pygame.image.load("Img/menu/mask.png")
+                any_surf_one.type.set_alpha(120)
                 any_surf_one.img_rect = any_surf_one.img.get_rect()
                 mini_surf_one.any_surface.append(any_surf_one)
             self.mini_surf.append(mini_surf_one)
@@ -53,15 +66,16 @@ class menu():
             else:
                 self.mini_surf[i].y = -29
 
-            #print("mini_surf i = " + str(i) + " j = " + str(self.mini_surf[i].y))
             self.screen.blit(self.mini_surf[i].type, (self.mini_surf[i].x, self.mini_surf[i].y))
+
+        self.screen.blit(self.hero, self.hero_rect)
+        self.screen.blit(self.tap_to_play, self.tap_to_play_rect)
 
         pygame.display.update()
 
-    def draw_start(self):
-        self.screen.blit(self.mini_surf[i].type, (self.mini_surf[i].x, self.mini_surf[i].y))
-
-    def control(self):
+    def control(self, locations_game):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                locations_game.menu = False

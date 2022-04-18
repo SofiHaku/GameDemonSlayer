@@ -264,6 +264,6 @@ class Event():
                     locations_game.achiv_forse = 0
 
     def in_menu(self, locations_game, menu_game):
-        menu_game.control()
+        menu_game.control(locations_game)
 
 

@@ -96,6 +96,9 @@ class Draw():
                 stat_game.score_rect.centerx = self.screen_rect.centerx
                 stat_game.draw()
 
+        elif locations_game.menu:
+            menu_game.anim()
+
         elif locations_game.demon_6_moon:
             self.screen.blit(self.tan, self.tan_rect)
             lab_game.walls_draw()
@@ -144,8 +147,6 @@ class Draw():
                     achiv.forses[i].draw()
                     if ill_butt.forse[i]:
                         ill_butt.button(achiv.forses[i].rect.x, achiv.forses[i].rect.y, 75, 75)
-        elif locations_game.menu:
-            menu_game.anim()
         else:
             hero_game.draw()
             stat_game.score_rect.x = 100

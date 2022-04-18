@@ -48,8 +48,11 @@ def run():
     make_many_game.point(wall, points)
 
     while True:
+        clock.tick(60)
         control_game.control_achiv(achiv, shop_game, locations_game)
-        if locations_game.shop:
+        if locations_game.menu:
+            control_game.in_menu(locations_game, menu_game)
+        elif locations_game.shop:
             control_game.in_shop(shop_game, stat_game, locations_game, ill_butt)
         elif locations_game.demon_6_moon:
             control_game.demon_6_moon(in_lab_game, hero_mini, wall, lab_game, demon_6_moon)
@@ -60,8 +63,6 @@ def run():
             demon_6_moon.update()
         elif locations_game.achiv:
             control_game.in_achiv(achiv, stat_game, locations_game, ill_butt)
-        elif locations_game.menu:
-            control_game.in_menu(locations_game, menu_game)
         else:
             control_game.control(stat_game, shop_game, hero_game, demon_classic, locations_game, ill_butt)
 
@@ -69,6 +70,5 @@ def run():
                       hero_mini, ill_butt, achiv, menu_game)
         hero_game.update()
         demon_classic.move()
-        clock.tick(60)
 run()
 
