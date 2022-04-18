@@ -57,10 +57,7 @@ class Shop():
             hero_shop_game = Improve(screen)
             with open('Save_data/buy_herous.txt', 'r') as f:
                 hero_shop_game.buy = int((f.read())[num_hero])
-            if not hero_shop_game.buy:
-                hero_shop_game.image = pygame.image.load('Img/Shop/Hero/Hero' + str(num_hero) + '.png')
-            else:
-                hero_shop_game.image = pygame.image.load('Img/Shop/Hero/Hero_buy' + str(num_hero) + '.png')
+            hero_shop_game.image = pygame.image.load('Img/Shop/Hero/Hero' + str(num_hero) + '.png')
             hero_shop_game.rect = hero_shop_game.image.get_rect()
             hero_shop_game.rect.x = ((WIDTH - SHOP_HERO_W * MAX_HERO)//(MAX_HERO+1)) * (num_hero + 1) + (num_hero) * SHOP_HERO_W
             hero_shop_game.rect.y = (HEIGHT - SHOP_HERO_H - 2 * SHOP_SKILL_H)//3 + 25
@@ -117,6 +114,8 @@ class Shop():
             cost_img = self.font.render(str(cost), True, (0, 0, 0), (255, 255, 255))
             self.herous_cost_img.append([cost_img, cost_img.get_rect()])
 
+        self.you_dont_have_many = False
+
     def points_in_click(self):
         points = 1
         for i in range(MAX_SKILLS):
@@ -144,6 +143,56 @@ class Shop():
         self.herous_cost_img[number_hero][1].bottom = y
         self.herous_cost_img[number_hero][1].right = x
         self.screen.blit(self.herous_cost_img[number_hero][0], self.herous_cost_img[number_hero][1])
+
+    def you_have_many(self, stat_game, cost, shop_game, index, name):
+        if name == "hero":
+            if stat_game.point_now >= cost and not shop_game.herous[index].buy:
+                return True
+            if not shop_game.herous[index].buy:
+                self.you_dont_have_many = True
+            return False
+        elif name == "skills":
+            if stat_game.point_now >= cost and shop_game.skills[index].count < 5:
+                return True
+            if shop_game.skills[index].count < 5:
+                self.you_dont_have_many = True
+            return False
+
+    def control_you_dont_have_many(self, Mouse_x, Mouse_y):
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if Mouse_x >= 500 and Mouse_x <= 530 and Mouse_y >= 70 and Mouse_y <= 110:
+                    self.you_dont_have_many = False
+
+    def draw_you_dont_have_many(self, Mouse_x, Mouse_y, text_g):
+        if self.you_dont_have_many:
+            serf = pygame.Surface((500, 300))
+            serf.fill((255, 255, 255))
+            x = 50
+            y = 50
+            img = pygame.image.load("Img/Shop/zenic.png")
+            img_rect = img.get_rect()
+            img_rect.x = 20
+            img_rect.y = 30
+
+            exc_x = 450
+            exc_y = 20
+
+            serf.blit(img, img_rect)
+            serf.blit(self.func[2].image, (exc_x, exc_y))
+            self.screen.blit(serf, (x, y))
+            text_g.draw_many_lines(310, 150, text_g.mess_dont_many, 30)
+
+            self.control_you_dont_have_many(Mouse_x, Mouse_y)
+
+    def return_dont_have_many(self):
+        return self.you_dont_have_many
+
+
+
+
+
+
 
 
 

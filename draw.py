@@ -49,6 +49,8 @@ class Draw():
         if locations_game.shop:
 
             text_g = text_message(self.screen)
+
+            text_g = text_message(self.screen)
             if locations_game.shop_lamp:
                 text_g.draw_many_lines(290, 75, text_g.shop_mess_lamp, 20)
                 shop_game.func[4].draw()
@@ -95,6 +97,9 @@ class Draw():
                 stat_game.score_rect.y = 25
                 stat_game.score_rect.centerx = self.screen_rect.centerx
                 stat_game.draw()
+                if shop_game.return_dont_have_many:
+                    Mouse_x, Mouse_y = pygame.mouse.get_pos()
+                    shop_game.draw_you_dont_have_many(Mouse_x, Mouse_y, text_g)
 
         elif locations_game.menu:
             menu_game.anim()

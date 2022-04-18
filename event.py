@@ -112,10 +112,10 @@ class Event():
                         y = shop_game.herous[i].rect.y
                         cost = shop_game.herous[i].cost
                         if Mouse_x >= x and Mouse_x <= x + SHOP_HERO_W and Mouse_y >= y and Mouse_y <= y + SHOP_HERO_H:
-                            if stat_game.point_now >= cost and not shop_game.herous[i].buy:
+                            if shop_game.you_have_many(stat_game, cost, shop_game, i, "hero"):
                                 shop_game.herous[i].buy = True
                                 shop_game.herous[i].image = pygame.image.load(
-                                    'Img/Shop/Hero/Hero_buy' + str(i) + '.png')
+                                    'Img/Shop/Hero/Hero' + str(i) + '.png')
                                 stat_game.point_now -= cost
                                 stat_game.image_score(COUNT[0], COUNT[1])
                                 with open('Save_data/buy_herous.txt', 'r') as file_1:
@@ -132,7 +132,7 @@ class Event():
                         y = shop_game.skills[i].rect.y
                         cost = shop_game.skills[i].cost
                         if Mouse_x >= x and Mouse_x <= x + SHOP_SKILL_W and Mouse_y >= y and Mouse_y <= y + SHOP_SKILL_H:
-                            if stat_game.point_now >= cost and shop_game.skills[i].count < 5:
+                            if shop_game.you_have_many(stat_game, cost, shop_game, i, "skills"):
                                 stat_game.point_now -= cost
                                 stat_game.image_score(COUNT[0], COUNT[1])
                                 shop_game.skills[i].count += 1

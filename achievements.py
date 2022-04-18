@@ -46,10 +46,6 @@ class achievements():
         self.count_demon = []
         self.forses = []
 
-        self.demons_moon_info = ["1", "2", "3", "4", "5"]
-        self.count_demon_info = ["1", "2", "3", "4", "5"]
-        self.forses_info = ["1", "2", "3", "4", "5"]
-
         for num_moon in range(MAX_MOON_DEMON):
             one_achiv_game = One_achiv(screen)
             with open('Save_data/moon_demon', 'r') as f:
@@ -62,33 +58,36 @@ class achievements():
             one_achiv_game.rect.x = ((WIDTH - SHOP_HERO_W * MAX_HERO) // (MAX_HERO + 1)) * (num_moon + 1) + (
                 num_moon) * SHOP_HERO_W
             one_achiv_game.rect.y = (HEIGHT - SHOP_HERO_H - 2 * SHOP_SKILL_H) // 3 + 25
-            one_achiv_game.info = self.demons_moon_info[num_moon]
             self.demons_moon.append(one_achiv_game)
 
         for num_ach_count_demon in range(MAX_COUNT_DEMON):
             ach_count_demon = One_achiv(screen)
             with open('Save_data/ach_count_demon.txt', 'r') as f:
                 ach_count_demon.achieved = int((f.read())[num_ach_count_demon])
-            ach_count_demon.image = pygame.image.load(
-                'Img/Achievements/Count_demon/count_demon_b' + str(num_ach_count_demon) + '.png')
+            if ach_count_demon.achieved:
+                ach_count_demon.image = pygame.image.load('Img/Achievements/Count_demon/count_demon' + str(num_ach_count_demon) + '.png')
+            else:
+                ach_count_demon.image = pygame.image.load(
+                    'Img/Achievements/Count_demon/count_demon_b' + str(num_ach_count_demon) + '.png')
             ach_count_demon.rect = ach_count_demon.image.get_rect()
             ach_count_demon.rect.x = ((WIDTH - 75 * MAX_COUNT_DEMON) // (MAX_COUNT_DEMON + 1)) * (
                         num_ach_count_demon + 1) + (
                                          num_ach_count_demon) * 75
             ach_count_demon.rect.y = self.demons_moon[0].rect.bottom + 75 + 20
-            ach_count_demon.info = self.count_demon_info[num_ach_count_demon]
             self.count_demon.append(ach_count_demon)
 
         for num_forse in range(MAX_FORSE):
             count_forse = One_achiv(screen)
             with open('Save_data/forse.txt', 'r') as f:
                 count_forse.achieved = int((f.read())[num_forse])
-            count_forse.image = pygame.image.load('Img/Achievements/Forse/forse' + str(num_forse) + '.png')
+            if not count_forse.achieved:
+                count_forse.image = pygame.image.load('Img/Achievements/Forse/forse_b' + str(num_forse) + '.png')
+            else:
+                count_forse.image = pygame.image.load('Img/Achievements/Forse/forse' + str(num_forse) + '.png')
             count_forse.rect = count_forse.image.get_rect()
             count_forse.rect.x = ((WIDTH - 75 * MAX_FORSE) // (MAX_FORSE + 1)) * (num_forse + 1) + (
                 num_forse) * 75
             count_forse.rect.y = self.demons_moon[0].rect.bottom + 10
-            count_forse.info = self.forses_info[num_forse]
             self.forses.append(count_forse)
 
 
@@ -96,6 +95,30 @@ class achievements():
         self.func[0].draw()
 
     def control(self, shop_game, locations_game):
-        if shop_game.points_in_click() >= 10:
-            locations_game.demon_6_moon = True
-            locations_game.first_list = False
+
+        # Контроль количества кликов за один раз
+        if shop_game.points_in_click() >= 1000 and not self.forses[4].achieved:
+            self.forses[4].achieved = True
+            self.forses[4].image = pygame.image.load(
+                'Img/Achievements/Forse/forse' + str(4) + '.png')
+        elif shop_game.points_in_click() >= 500 and not self.forses[3].achieved:
+            self.forses[3].achieved = True
+            self.forses[3].image = pygame.image.load(
+                'Img/Achievements/Forse/forse' + str(3) + '.png')
+        elif shop_game.points_in_click() >= 250 and not self.forses[2].achieved:
+            self.forses[2].achieved = True
+            self.forses[2].image = pygame.image.load(
+                'Img/Achievements/Forse/forse' + str(2) + '.png')
+        elif shop_game.points_in_click() >= 50 and not self.forses[1].achieved:
+            self.forses[1].achieved = True
+            self.forses[1].image = pygame.image.load(
+                'Img/Achievements/Forse/forse' + str(1) + '.png')
+        elif shop_game.points_in_click() >= 5 and not self.forses[0].achieved:
+            self.forses[0].achieved = True
+            self.forses[0].image = pygame.image.load(
+                'Img/Achievements/Forse/forse' + str(0) + '.png')
+            #locations_game.demon_6_moon = True
+            #locations_game.first_list = False
+
+        # Контроль количества убитых демонов
+

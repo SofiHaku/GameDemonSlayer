@@ -72,6 +72,7 @@ class text_message():
                                  '44',
                                  '55'
                                  ]
+        self.mess_dont_many = "У вас \nнедостаточно \nденег!"
 
     def draw_many_lines(self, x, y, text, size):
         lines = text.split("\n")
