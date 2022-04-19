@@ -64,7 +64,7 @@ def run():
         elif locations_game.achiv:
             control_game.in_achiv(achiv, stat_game, locations_game, ill_butt)
         else:
-            control_game.control(stat_game, shop_game, hero_game, demon_classic, locations_game, ill_butt)
+            control_game.control(stat_game, shop_game, hero_game, demon_classic, locations_game, ill_butt, achiv)
 
         draw_game.all(shop_game, hero_game, stat_game, demon_classic, lab_game, locations_game, demon_6_moon, points,
                       hero_mini, ill_butt, achiv, menu_game)

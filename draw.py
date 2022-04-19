@@ -109,18 +109,20 @@ class Draw():
             if locations_game.achiv_demons:
                 for i in range(len(locations_game.achiv_info_demons)):
                     if locations_game.achiv_info_demons[i]:
-                        text_g.draw_many_lines(20, 0, text_g.mess_demon[i][0], 40)
-                        #achiv.count_demon.
+                        text_g.draw_many_lines(400, 75, text_g.mess_demon[i][0], 70)
+                        achiv.demons_moon[i].draw_info()
                 shop_game.func[4].draw()
             elif locations_game.achiv_count_demons:
                 for i in range(len(locations_game.achiv_info_count_demons)):
                     if locations_game.achiv_info_count_demons[i]:
-                        text_g.draw_many_lines(20, 0, text_g.mess_count_demons[i], 40)
+                        text_g.draw_many_lines(290, 75, text_g.mess_count_demons[i], 20)
+                        achiv.count_demon[i].draw_info()
                 shop_game.func[4].draw()
             elif locations_game.achiv_forse:
                 for i in range(len(locations_game.achiv_info_forse)):
                     if locations_game.achiv_info_forse[i]:
-                        text_g.draw_many_lines(20, 0, text_g.mess_forse[i], 40)
+                        text_g.draw_many_lines(290, 75, text_g.mess_forse[i], 20)
+                        achiv.forses[i].draw_info()
                 shop_game.func[4].draw()
             else:
                 achiv.func[1].draw()

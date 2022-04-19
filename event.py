@@ -12,7 +12,7 @@ class Event():
     def control_achiv(self, achiv, shop_game, locations_game):
         achiv.control(shop_game, locations_game)
 
-    def control(self, stat_game, shop_game, hero_game, demon_game, locations_game, ill_butt):
+    def control(self, stat_game, shop_game, hero_game, demon_game, locations_game, ill_butt, achiv):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -24,6 +24,9 @@ class Event():
                     stat_game.image_score(COUNT[0], COUNT[1])
                     damage = shop_game.points_in_click()
                     demon_game.update_count_life(damage)
+                    achiv.add_click()
+                    if demon_game.die():
+                        achiv.add_demon()
 
             Mouse_x, Mouse_y = pygame.mouse.get_pos()
             if Mouse_x >= SHOP[0] and Mouse_x <= SHOP[0] + SHOP_WH \
