@@ -93,6 +93,10 @@ class Draw():
                     Mouse_x, Mouse_y = pygame.mouse.get_pos()
                     shop_game.draw_you_dont_have_many(Mouse_x, Mouse_y, text_g)
 
+            if achiv.return_have_new_achiv():
+                Mouse_x, Mouse_y = pygame.mouse.get_pos()
+                achiv.draw_new_achiv(Mouse_x, Mouse_y, text_g)
+
         elif locations_game.menu:
             menu_game.anim()
 
@@ -105,6 +109,10 @@ class Draw():
             demon_6_moon.draw()
 
         elif locations_game.achiv:
+
+            if achiv.return_have_new_achiv():
+                Mouse_x, Mouse_y = pygame.mouse.get_pos()
+                achiv.draw_new_achiv(Mouse_x, Mouse_y, text_g)
 
             if locations_game.achiv_demons:
                 for i in range(len(locations_game.achiv_info_demons)):
@@ -146,9 +154,6 @@ class Draw():
                     if ill_butt.forse[i]:
                         ill_butt.button(achiv.forses[i].rect.x, achiv.forses[i].rect.y, 75, 75)
 
-            if achiv.return_have_new_achiv():
-                Mouse_x, Mouse_y = pygame.mouse.get_pos()
-                achiv.draw_new_achiv(Mouse_x, Mouse_y, text_g)
         else:
             hero_game.draw()
             stat_game.score_rect.x = 100

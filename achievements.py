@@ -269,8 +269,8 @@ class achievements():
             elif self.have_new_achiv.name == "count_demon":
                 text_g.draw_many_lines(270, 85, text_g.mess_count_demons[self.have_new_achiv.index], 20)
 
-
             self.control_exc_new_achiv(Mouse_x, Mouse_y)
+            pygame.display.update()
 
     def return_have_new_achiv(self):
         return self.have_new_achiv.achieved
