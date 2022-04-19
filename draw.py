@@ -22,6 +22,7 @@ class Draw():
     def all(self, shop_game, hero_game, stat_game, demon_classic, lab_game,
             locations_game, demon_6_moon, points, hero_mini, ill_butt, achiv, menu_game):
 
+        text_g = text_message(self.screen)
         self.screen.fill((255, 255, 255))
         if locations_game.first_list:
             self.back = pygame.image.load('Img/Background.png')
@@ -88,7 +89,7 @@ class Draw():
                 stat_game.score_rect.y = 25
                 stat_game.score_rect.centerx = self.screen_rect.centerx
                 stat_game.draw()
-                if shop_game.return_dont_have_many:
+                if shop_game.return_dont_have_many():
                     Mouse_x, Mouse_y = pygame.mouse.get_pos()
                     shop_game.draw_you_dont_have_many(Mouse_x, Mouse_y, text_g)
 
@@ -105,7 +106,6 @@ class Draw():
 
         elif locations_game.achiv:
 
-            text_g = text_message(self.screen)
             if locations_game.achiv_demons:
                 for i in range(len(locations_game.achiv_info_demons)):
                     if locations_game.achiv_info_demons[i]:
@@ -145,6 +145,10 @@ class Draw():
                     achiv.forses[i].draw()
                     if ill_butt.forse[i]:
                         ill_butt.button(achiv.forses[i].rect.x, achiv.forses[i].rect.y, 75, 75)
+
+            if achiv.return_have_new_achiv():
+                Mouse_x, Mouse_y = pygame.mouse.get_pos()
+                achiv.draw_new_achiv(Mouse_x, Mouse_y, text_g)
         else:
             hero_game.draw()
             stat_game.score_rect.x = 100
@@ -152,6 +156,7 @@ class Draw():
             stat_game.draw()
             shop_game.func[1].draw()
             achiv.draw()
+
 
             if ill_butt.to_shop:
                 ill_butt.button(SHOP[0], SHOP[1], SHOP_WH, SHOP_WH)
@@ -171,6 +176,10 @@ class Draw():
                 demon_classic.create()
                 demon_classic.draw()
                 demon_classic.draw_streak_of_life()
+
+            if achiv.return_have_new_achiv():
+                Mouse_x, Mouse_y = pygame.mouse.get_pos()
+                achiv.draw_new_achiv(Mouse_x, Mouse_y, text_g)
 
         if lab_game.bool:
             lab_game.walls_draw(self.screen)

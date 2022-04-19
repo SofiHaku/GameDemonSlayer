@@ -13,10 +13,22 @@ class One_achiv():
         self.image_info = None
         self.info_rect = None
 
+        # to copy
+        self.name = None
+        self.index = None
+
     def draw(self):
         self.screen.blit(self.image, self.rect)
     def draw_info(self):
         self.screen.blit(self.image_info, (50, 80))
+    def copy(self, name, index):
+        new_achiv = One_achiv(self.screen)
+        new_achiv.image = self.image
+        new_achiv.rect = self.rect
+        new_achiv.achieved = True
+        new_achiv.name = name
+        new_achiv.index = index
+        return new_achiv
 
 class Functional():
     def __init__(self, screen):
@@ -142,6 +154,8 @@ class achievements():
         with open('Save_data/count_click.txt', 'r') as f:
             self.count_click = int(f.read())
 
+        self.have_new_achiv = One_achiv(screen)
+
 
     def draw(self):
         self.func[0].draw()
@@ -150,79 +164,56 @@ class achievements():
 
         # Контроль количества кликов за один раз
         points_in_click = shop_game.points_in_click()
-        if points_in_click >= 1000 and not self.forses[4].achieved:
-            self.forses[4].achieved = True
-            self.forses[4].image = pygame.image.load(
-                'Img/Achievements/Forse/forse' + str(4) + '.png')
-            self.forses[4].image_info = pygame.image.load(
-                'Img/Achievements/Forse/forse_info' + str(4) + '.png')
-        elif points_in_click >= 500 and not self.forses[3].achieved:
-            self.forses[3].achieved = True
-            self.forses[3].image = pygame.image.load(
-                'Img/Achievements/Forse/forse' + str(3) + '.png')
-            self.forses[3].image_info = pygame.image.load(
-                'Img/Achievements/Forse/forse_info' + str(3) + '.png')
-        elif points_in_click >= 250 and not self.forses[2].achieved:
-            self.forses[2].achieved = True
-            self.forses[2].image = pygame.image.load(
-                'Img/Achievements/Forse/forse' + str(2) + '.png')
-            self.forses[2].image_info = pygame.image.load(
-                'Img/Achievements/Forse/forse_info' + str(2) + '.png')
-        elif points_in_click >= 50 and not self.forses[1].achieved:
-            self.forses[1].achieved = True
-            self.forses[1].image = pygame.image.load(
-                'Img/Achievements/Forse/forse' + str(1) + '.png')
-            self.forses[1].image_info = pygame.image.load(
-                'Img/Achievements/Forse/forse_info' + str(1) + '.png')
-        elif points_in_click >= 5 and not self.forses[0].achieved:
-            self.forses[0].achieved = True
-            self.forses[0].image = pygame.image.load(
-                'Img/Achievements/Forse/forse' + str(0) + '.png')
-            self.forses[0].image_info = pygame.image.load(
-                'Img/Achievements/Forse/forse_info' + str(0) + '.png')
+        for i in range(4, -1, -1):
+            if points_in_click >= i*25 + 5 and not self.forses[i].achieved:
+                print("True")
+                self.forses[i].achieved = True
+                self.forses[i].image = pygame.image.load(
+                    'Img/Achievements/Forse/forse' + str(i) + '.png')
+                self.forses[i].image_info = pygame.image.load(
+                    'Img/Achievements/Forse/forse_info' + str(i) + '.png')
+
+                self.have_new_achiv = self.forses[i].copy("forse", i)
+
+                with open('Save_data/forse.txt', 'r') as file:
+                    new_forse = list(file.read())
+                    new_forse[i] = "1"
+                    with open('Save_data/forse.txt', 'w') as file_1:
+                        file_1.write("".join(new_forse))
+                break
 
         # Контроль количества убитых демонов
-        if self.count_achiv_demon >= 50 and not self.count_demon[4].achieved:
-            self.count_demon[4].achieved = True
-            self.count_demon[4].image = pygame.image.load(
-                'Img/Achievements/Count_demon/count_demon' + str(4) + '.png')
-            self.count_demon[4].image_info = pygame.image.load(
-                'Img/Achievements/Count_demon/count_demon_info' + str(4) + '.png')
-        elif self.count_achiv_demon >= 25 and not self.count_demon[3].achieved:
-            self.count_demon[3].achieved = True
-            self.count_demon[3].image = pygame.image.load(
-                'Img/Achievements/Count_demon/count_demon' + str(3) + '.png')
-            self.count_demon[3].image_info = pygame.image.load(
-                'Img/Achievements/Count_demon/count_demon_info' + str(3) + '.png')
-        elif self.count_achiv_demon >= 10 and not self.count_demon[2].achieved:
-            self.count_demon[2].achieved = True
-            self.count_demon[2].image = pygame.image.load(
-                'Img/Achievements/Count_demon/count_demon' + str(2) + '.png')
-            self.count_demon[2].image_info = pygame.image.load(
-                'Img/Achievements/Count_demon/count_demon_info' + str(2) + '.png')
-        elif self.count_achiv_demon >= 5 and not self.count_demon[1].achieved:
-            self.count_demon[1].achieved = True
-            self.count_demon[1].image = pygame.image.load(
-                'Img/Achievements/Count_demon/count_demon' + str(1) + '.png')
-            self.count_demon[1].image_info = pygame.image.load(
-                'Img/Achievements/Count_demon/count_demon_info' + str(1) + '.png')
-        elif self.count_achiv_demon >= 1 and not self.count_demon[0].achieved:
-            self.count_demon[0].achieved = True
-            self.count_demon[0].image = pygame.image.load(
-                'Img/Achievements/Count_demon/count_demon' + str(0) + '.png')
-            self.count_demon[0].image_info = pygame.image.load(
-                'Img/Achievements/Count_demon/count_demon_info' + str(0) + '.png')
+        for i in range(4, -1, -1):
+            if self.count_achiv_demon >= i*5 + 1 and not self.count_demon[i].achieved:
+                self.count_demon[i].achieved = True
+                self.count_demon[i].image = pygame.image.load(
+                    'Img/Achievements/Count_demon/count_demon' + str(i) + '.png')
+                self.count_demon[i].image_info = pygame.image.load(
+                    'Img/Achievements/Count_demon/count_demon_info' + str(i) + '.png')
+
+                self.have_new_achiv = self.forses[i].copy("count_demon", i)
+
+                with open('Save_data/ach_count_demon.txt', 'r') as file:
+                    new_count = list(file.read())
+                    new_count[i] = "1"
+                    with open('Save_data/ach_count_demon.txt', 'w') as file_1:
+                        file_1.write("".join(new_count))
+                break
+
 
         # Контроль особых достижений количества убитых демонов
         if self.count_click >= 1000:
-            locations_game.demon_1_moon = True
-            locations_game.first_list = False
+            pass
+            #locations_game.demon_1_moon = True
+            #locations_game.first_list = False
         elif self.count_click >= 999:
-            locations_game.demon_3_moon = True
-            locations_game.first_list = False
+            pass
+            #locations_game.demon_3_moon = True
+            #locations_game.first_list = False
         elif self.count_click >= 50:
-            locations_game.demon_6_moon = True
-            locations_game.first_list = False
+            pass
+            #locations_game.demon_6_moon = True
+            #locations_game.first_list = False
 
     def draw_general_state(self):
         for i in range(len(self.general_states) - 1, -1, -1):
@@ -249,4 +240,38 @@ class achievements():
         self.count_click += 1
         with open('Save_data/count_click.txt', 'w') as file:
             file.write(str(self.count_click))
+
+    def control_exc_new_achiv(self, Mouse_x, Mouse_y):
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if Mouse_x >= 500 + 25 and Mouse_x <= 500 + 25 + 30 and Mouse_y >= 50 + 20 and Mouse_y <= 50 + 20 + 30:
+                    self.have_new_achiv.achieved = False
+
+    def draw_new_achiv(self, Mouse_x, Mouse_y, text_g):
+        if self.have_new_achiv.achieved:
+            serf = pygame.Surface((550, 300))
+            serf.fill((255, 255, 255))
+            x = 25
+            y = 50
+            img = pygame.image.load("Img/Achievements/State/new_state.png")
+            img_rect = img.get_rect()
+            img_rect.x = 0
+            img_rect.y = 30
+
+            exc_x = 500
+            exc_y = 20
+
+            serf.blit(img, img_rect)
+            serf.blit(self.func[2].image, (exc_x, exc_y))
+            self.screen.blit(serf, (x, y))
+            if self.have_new_achiv.name == "forse":
+                text_g.draw_many_lines(270, 55, text_g.mess_forse[self.have_new_achiv.index], 25)
+            elif self.have_new_achiv.name == "count_demon":
+                text_g.draw_many_lines(270, 85, text_g.mess_count_demons[self.have_new_achiv.index], 20)
+
+
+            self.control_exc_new_achiv(Mouse_x, Mouse_y)
+
+    def return_have_new_achiv(self):
+        return self.have_new_achiv.achieved
 
