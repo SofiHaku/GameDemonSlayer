@@ -182,7 +182,7 @@ class Event():
                             locations_game.shop_info_skills = now_skills.copy()
 
 
-    def demon_6_moon(self, in_lab_game, hero_mini, wall, lab_game, demon_6_moon):
+    def demon_6_moon(self, in_lab_game, hero_mini, wall, lab_game, demon_6_moon, meeting_game, points, hero_game, screen, make_many_game):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -206,7 +206,8 @@ class Event():
                     hero_mini.move_to_left = False
 
         in_lab_game.corner_hero(hero_mini, wall)
-        demon_6_moon.movement()
+        #demon_6_moon.movement()
+        meeting_game.with_demon(demon_6_moon, points, hero_game, screen, wall, make_many_game)
         demon_6_moon.update()
 
     def in_achiv(self, achiv, stat_game, locations_game, ill_butt):

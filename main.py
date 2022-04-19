@@ -59,11 +59,11 @@ def run():
         elif locations_game.demon_6_moon_start:
             demon_6_moon_start_game.control(locations_game)
         elif locations_game.demon_6_moon:
-            control_game.demon_6_moon(in_lab_game, hero_mini, wall, lab_game, demon_6_moon)
+            control_game.demon_6_moon(in_lab_game, hero_mini, wall, lab_game, demon_6_moon, meeting_game, points, hero_game, screen, make_many_game)
             hero_mini.update()
             in_lab_game.corner_demon(demon_6_moon, wall)
             meeting_game.eat_points(hero_mini, points)
-            #meeting_game.with_demon(demon_6_moon, points, hero_game, screen, wall, make_many_game)
+            meeting_game.with_demon(demon_6_moon, points, hero_mini, screen, wall, make_many_game)
             demon_6_moon.update()
         elif locations_game.achiv:
             control_game.in_achiv(achiv, stat_game, locations_game, ill_butt)
