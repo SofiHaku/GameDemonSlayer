@@ -195,7 +195,7 @@ class Shop():
     def what_gero_buy(self):
         for i in range(len(self.herous) - 1, -1, -1):
             if self.herous[i].is_selected:
-                return i + 1d
+                return i + 1
         return 0
 
 

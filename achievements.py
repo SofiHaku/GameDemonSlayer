@@ -160,7 +160,7 @@ class achievements():
     def draw(self):
         self.func[0].draw()
 
-    def control(self, shop_game, locations_game):
+    def control(self, shop_game, locations_game, demon_6_moon_start_game):
 
         # Контроль количества кликов за один раз
         points_in_click = shop_game.points_in_click()
@@ -202,18 +202,17 @@ class achievements():
 
 
         # Контроль особых достижений количества убитых демонов
-        if self.count_click >= 1000:
-            pass
+        #if self.count_click >= 1000:
+            #pass
             #locations_game.demon_1_moon = True
             #locations_game.first_list = False
-        elif self.count_click >= 999:
-            pass
+        #elif self.count_click >= 999:
+            #pass
             #locations_game.demon_3_moon = True
             #locations_game.first_list = False
-        elif self.count_click >= 50:
-            pass
-            #locations_game.demon_6_moon = True
-            #locations_game.first_list = False
+        if self.count_click >= 50 and not demon_6_moon_start_game.use():
+            locations_game.demon_6_moon_start = True
+            locations_game.first_list = False
 
     def draw_general_state(self):
         for i in range(len(self.general_states) - 1, -1, -1):

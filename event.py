@@ -9,8 +9,8 @@ class Event():
     def __init__(self):
         pass
 
-    def control_achiv(self, achiv, shop_game, locations_game):
-        achiv.control(shop_game, locations_game)
+    def control_achiv(self, achiv, shop_game, locations_game, demon_6_moon_start_game):
+        achiv.control(shop_game, locations_game, demon_6_moon_start_game)
 
     def control(self, stat_game, shop_game, hero_game, demon_game, locations_game, ill_butt, achiv):
         for event in pygame.event.get():

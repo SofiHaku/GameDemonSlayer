@@ -20,7 +20,7 @@ class Draw():
         self.state_rect.centerx = 100
 
     def all(self, shop_game, hero_game, stat_game, demon_classic, lab_game,
-            locations_game, demon_6_moon, points, hero_mini, ill_butt, achiv, menu_game):
+            locations_game, demon_6_moon, points, hero_mini, ill_butt, achiv, menu_game, demon_6_moon_start_game):
 
         text_g = text_message(self.screen)
         self.screen.fill((255, 255, 255))
@@ -99,6 +99,9 @@ class Draw():
 
         elif locations_game.menu:
             menu_game.anim()
+
+        elif locations_game.demon_6_moon_start:
+            demon_6_moon_start_game.draw(text_g)
 
         elif locations_game.demon_6_moon:
             self.screen.blit(self.tan, self.tan_rect)

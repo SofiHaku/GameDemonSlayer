@@ -18,6 +18,7 @@ class now_locations():
         self.achiv_info_count_demons = [0, 0, 0, 0, 0]
         self.achiv_info_forse = [0, 0, 0, 0, 0]
 
+        self.demon_6_moon_start = False
         self.demon_6_moon = False
         self.demon_3_moon = False
         self.demon_1_moon = False
