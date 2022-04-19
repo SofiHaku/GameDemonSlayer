@@ -23,7 +23,7 @@ def run():
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
     control_game = Event()
-    hero_game = Hero(screen, "Img/Hero/Tang.png")
+    hero_game = Hero(screen, "Img/Hero/Hero0.png")
     hero_mini = Hero(screen, "Img/Demon_6_moon/Mini_t.png")
 
     hero_mini.rect.x = 180 + 21 * 18 + 2

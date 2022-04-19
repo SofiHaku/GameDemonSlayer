@@ -155,7 +155,7 @@ class Draw():
                         ill_butt.button(achiv.forses[i].rect.x, achiv.forses[i].rect.y, 75, 75)
 
         else:
-            hero_game.draw()
+            hero_game.draw(shop_game.what_gero_buy())
             stat_game.score_rect.x = 100
             stat_game.score_rect.y = 160
             stat_game.draw()

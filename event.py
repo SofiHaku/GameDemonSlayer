@@ -121,6 +121,9 @@ class Event():
                                     'Img/Shop/Hero/Hero' + str(i) + '.png')
                                 stat_game.point_now -= cost
                                 stat_game.image_score(COUNT[0], COUNT[1])
+                                shop_game.herous[i].is_selected = True
+                                for j in range(2, i, -1):
+                                    shop_game.herous[j].is_selected = False
                                 with open('Save_data/buy_herous.txt', 'r') as file_1:
                                     new_buy_herous = list(file_1.read())
                                     new_buy_herous[i] = '1'
@@ -128,6 +131,10 @@ class Event():
                                         file_2.write("".join(new_buy_herous))
                                 with open('Save_data/points.txt', 'w') as file:
                                     file.write(str(stat_game.point_now))
+                            elif shop_game.you_buy(i):
+                                shop_game.herous[i].is_selected = True
+                                for j in range(2, i, -1):
+                                    shop_game.herous[j].is_selected = False
                             break
 
                     for i in range(MAX_SKILLS):

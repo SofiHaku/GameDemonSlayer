@@ -10,6 +10,7 @@ class Improve():
         self.cost = None
         self.count = 0
         self.plus_points = None
+        self.is_selected = False
 
     def draw(self):
         self.screen.blit(self.image, self.rect)
@@ -158,6 +159,9 @@ class Shop():
                 self.you_dont_have_many = True
             return False
 
+    def you_buy(self, index):
+        return self.herous[index].buy
+
     def control_you_dont_have_many(self, Mouse_x, Mouse_y):
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
@@ -187,6 +191,13 @@ class Shop():
 
     def return_dont_have_many(self):
         return self.you_dont_have_many
+
+    def what_gero_buy(self):
+        for i in range(len(self.herous) - 1, -1, -1):
+            if self.herous[i].is_selected:
+                return i + 1d
+        return 0
+
 
 
 

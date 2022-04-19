@@ -274,4 +274,3 @@ class achievements():
 
     def return_have_new_achiv(self):
         return self.have_new_achiv.achieved
-
