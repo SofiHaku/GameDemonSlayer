@@ -12,6 +12,7 @@ class Stat():
 
         self.font = pygame.font.SysFont("Verdana", 20)
         self.image_score(COUNT[0], COUNT[1])
+        self.point_in_mini_game = 0
 
     def image_score(self, width, height):
         """Преобразование текста счета в графическое изображение"""

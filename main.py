@@ -37,7 +37,7 @@ def run():
     lab_game = lab(screen)
     locations_game = now_locations()
     in_lab_game = in_lab()
-    wall = lab_game.return_wall()
+    wall_mass = lab_game.return_wall()
     demon_6_moon = Demon_6_moon(screen)
     meeting_game = meeting()
     make_many_game = make_many(screen)
@@ -47,7 +47,7 @@ def run():
     demon_6_moon_start_game = demon_6_moon_start(screen)
 
     points = Group()
-    make_many_game.point(wall, points)
+    make_many_game.point(wall_mass, points)
 
     while True:
         clock.tick(60)
@@ -59,11 +59,11 @@ def run():
         elif locations_game.demon_6_moon_start:
             demon_6_moon_start_game.control(locations_game)
         elif locations_game.demon_6_moon:
-            control_game.demon_6_moon(in_lab_game, hero_mini, wall, lab_game, demon_6_moon, meeting_game, points, hero_game, screen, make_many_game)
+            control_game.demon_6_moon(in_lab_game, hero_mini, wall_mass, lab_game, demon_6_moon, meeting_game, points, hero_game, screen, make_many_game)
             hero_mini.update()
-            in_lab_game.corner_demon(demon_6_moon, wall)
-            meeting_game.eat_points(hero_mini, points)
-            meeting_game.with_demon(demon_6_moon, points, hero_mini, screen, wall, make_many_game)
+            in_lab_game.corner_demon(demon_6_moon, wall_mass)
+            meeting_game.eat_points(hero_mini, points, stat_game, locations_game)
+            meeting_game.with_demon(demon_6_moon, points, hero_mini, screen, wall_mass, make_many_game, stat_game)
             demon_6_moon.update()
         elif locations_game.achiv:
             control_game.in_achiv(achiv, stat_game, locations_game, ill_butt)
