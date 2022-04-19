@@ -6,7 +6,7 @@ class Hero():
         self.screen = screen
         self.screen_rect = screen.get_rect()
 
-        self.images = ["Img/Hero/Hero0.png", "Img/Hero/Hero1.png", "Img/Hero/Hero2.png", "Img/Hero/Hero3.png"]
+        self.images = ["Img/Hero/Hero0.png", "Img/Hero/Hero1.png", "Img/Hero/Hero2.png", "Img/Hero/Hero3.png", "Img/Demon_6_moon/Mini_t.png"]
         self.image = pygame.image.load(name_img)
         self.rect = self.image.get_rect()
         self.rect.y = 185

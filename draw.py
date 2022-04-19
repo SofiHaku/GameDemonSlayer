@@ -9,6 +9,9 @@ class Draw():
         self.screen = screen
         self.screen_rect = self.screen.get_rect()
 
+        self.image = pygame.image.load('Img/Demon_6_moon/Tangiro.png')
+        self.image_rect = self.screen.get_rect()
+
         '''self.back = pygame.image.load('Img/Background.png')
         self.back_rect = self.back.get_rect()
         self.back_rect.centery = self.screen_rect.centery
@@ -104,11 +107,11 @@ class Draw():
             demon_6_moon_start_game.draw(text_g)
 
         elif locations_game.demon_6_moon:
-            self.screen.blit(self.tan, self.tan_rect)
+            self.screen.blit(self.image, self.image_rect)
             lab_game.walls_draw()
             for point in points:
                 point.draw()
-            hero_mini.draw()
+            hero_mini.draw(-1)
             demon_6_moon.draw()
 
         elif locations_game.achiv:
