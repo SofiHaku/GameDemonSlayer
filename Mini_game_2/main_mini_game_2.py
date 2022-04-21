@@ -10,6 +10,7 @@ class main_mini_game_2():
         self.draw = draw(screen)
 
     def run(self):
-        self.control.events()
+        self.hero.update()
+        self.control.events(self.hero)
         self.draw.all(self.hero)
         self.draw.anim()
