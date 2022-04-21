@@ -16,6 +16,7 @@ from illumination import illumination
 from achievements import achievements
 from menu import menu
 from start_and_end_of_6_demon import demon_6_moon_start
+from Mini_game_2.main_mini_game_2 import main_mini_game_2
 
 def run():
 
@@ -45,14 +46,17 @@ def run():
     achiv = achievements(screen)
     menu_game = menu(screen)
     demon_6_moon_start_game = demon_6_moon_start(screen)
+    mini_game_2_n = main_mini_game_2(screen)
 
     points = Group()
     make_many_game.point(wall_mass, points)
 
     while True:
         clock.tick(60)
-        control_game.control_achiv(achiv, shop_game, locations_game, demon_6_moon_start_game)
-        if locations_game.menu:
+        #control_game.control_achiv(achiv, shop_game, locations_game, demon_6_moon_start_game)
+        if locations_game.demon_3_moon:
+            mini_game_2_n.run()
+        elif locations_game.menu:
             control_game.in_menu(locations_game, menu_game)
         elif locations_game.shop:
             control_game.in_shop(shop_game, stat_game, locations_game, ill_butt)
@@ -70,8 +74,8 @@ def run():
         else:
             control_game.control(stat_game, shop_game, hero_game, demon_classic, locations_game, ill_butt, achiv)
 
-        draw_game.all(shop_game, hero_game, stat_game, demon_classic, lab_game, locations_game, demon_6_moon, points,
-                      hero_mini, ill_butt, achiv, menu_game, demon_6_moon_start_game)
+        #draw_game.all(shop_game, hero_game, stat_game, demon_classic, lab_game, locations_game, demon_6_moon, points,
+                      #hero_mini, ill_butt, achiv, menu_game, demon_6_moon_start_game)
         hero_game.update()
         demon_classic.move()
 run()

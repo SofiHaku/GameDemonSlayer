@@ -41,7 +41,9 @@ class Draw():
         pygame.draw.rect(self.screen, (255, 255, 255), (self.screen_rect.x, self.screen_rect.bottom - 10, WIDTH, 10))
         pygame.draw.rect(self.screen, (255, 255, 255), (self.screen_rect.right - 10, self.screen_rect.y, 10, HEIGHT))
 
-        if locations_game.shop:
+        if locations_game.demon_3_moon:
+            pass
+        elif locations_game.shop:
 
             text_g = text_message(self.screen)
 
