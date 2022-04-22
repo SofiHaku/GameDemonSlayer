@@ -53,9 +53,9 @@ def run():
 
     while True:
         clock.tick(60)
-        #control_game.control_achiv(achiv, shop_game, locations_game, demon_6_moon_start_game)
+        control_game.control_achiv(achiv, shop_game, locations_game, demon_6_moon_start_game)
         if locations_game.demon_3_moon:
-            mini_game_2_n.run()
+            mini_game_2_n.run(locations_game)
         elif locations_game.menu:
             control_game.in_menu(locations_game, menu_game)
         elif locations_game.shop:
@@ -74,8 +74,8 @@ def run():
         else:
             control_game.control(stat_game, shop_game, hero_game, demon_classic, locations_game, ill_butt, achiv)
 
-        #draw_game.all(shop_game, hero_game, stat_game, demon_classic, lab_game, locations_game, demon_6_moon, points,
-                      #hero_mini, ill_butt, achiv, menu_game, demon_6_moon_start_game)
+        draw_game.all(shop_game, hero_game, stat_game, demon_classic, lab_game, locations_game, demon_6_moon, points,
+                      hero_mini, ill_butt, achiv, menu_game, demon_6_moon_start_game)
         hero_game.update()
         demon_classic.move()
 run()

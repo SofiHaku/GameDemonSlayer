@@ -26,20 +26,13 @@ class Draw():
             locations_game, demon_6_moon, points, hero_mini, ill_butt, achiv, menu_game, demon_6_moon_start_game):
 
         text_g = text_message(self.screen)
-        self.screen.fill((255, 255, 255))
-        if locations_game.first_list:
-            self.back = pygame.image.load('Img/Background.png')
-            self.back_rect = self.back.get_rect()
-            self.back_rect = self.back.get_rect()
-            self.back_rect.centery = self.screen_rect.centery
-            self.back_rect.left = SETTING
-            self.screen.blit(self.back, self.back_rect)
+        #self.screen.fill((255, 255, 255))
 
         # Рисуем коемочку главного экрана
-        pygame.draw.rect(self.screen, (255, 255, 255), (self.screen_rect.x, self.screen_rect.y, WIDTH // 3, HEIGHT))
-        pygame.draw.rect(self.screen, (255, 255, 255), (self.screen_rect.x, self.screen_rect.y, WIDTH, 10))
-        pygame.draw.rect(self.screen, (255, 255, 255), (self.screen_rect.x, self.screen_rect.bottom - 10, WIDTH, 10))
-        pygame.draw.rect(self.screen, (255, 255, 255), (self.screen_rect.right - 10, self.screen_rect.y, 10, HEIGHT))
+        #pygame.draw.rect(self.screen, (255, 255, 255), (self.screen_rect.x, self.screen_rect.y, WIDTH // 3, HEIGHT))
+        #pygame.draw.rect(self.screen, (255, 255, 255), (self.screen_rect.x, self.screen_rect.y, WIDTH, 10))
+        #pygame.draw.rect(self.screen, (255, 255, 255), (self.screen_rect.x, self.screen_rect.bottom - 10, WIDTH, 10))
+        #pygame.draw.rect(self.screen, (255, 255, 255), (self.screen_rect.right - 10, self.screen_rect.y, 10, HEIGHT))
 
         if locations_game.demon_3_moon:
             pass
@@ -163,6 +156,13 @@ class Draw():
                         ill_butt.button(achiv.forses[i].rect.x, achiv.forses[i].rect.y, 75, 75)
 
         else:
+            self.back = pygame.image.load('Img/Background.png')
+            self.back_rect = self.back.get_rect()
+            self.back_rect = self.back.get_rect()
+            self.back_rect.centery = self.screen_rect.centery
+            self.back_rect.left = SETTING
+            self.screen.blit(self.back, self.back_rect)
+
             hero_game.draw(shop_game.what_gero_buy())
             stat_game.score_rect.x = 100
             stat_game.score_rect.y = 160
@@ -196,4 +196,4 @@ class Draw():
 
         if lab_game.bool:
             lab_game.walls_draw(self.screen)
-        pygame.display.flip()
+        #pygame.display.flip()

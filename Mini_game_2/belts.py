@@ -1,5 +1,6 @@
 import pygame
 import random
+from settings import *
 
 class belt():
     def __init__(self):
@@ -11,7 +12,7 @@ class many_belts():
     def __init__(self, screen):
         self.screen = screen
         self.belt_list = []
-        self.belt_height = [270, 260, 300]
+        self.belt_height = [200, 250, 300, 350]
 
     def create_belt(self):
         random_belt_pos = random.choice(self.belt_height)
@@ -20,7 +21,7 @@ class many_belts():
         bottom_belt.image_rect.y = random_belt_pos
 
         top_belt = belt()
-        top_belt.image_rect.y = 200 - random_belt_pos
+        top_belt.image_rect.bottom = random_belt_pos - 150
         self.belt_list.append(bottom_belt)
         self.belt_list.append(top_belt)
 
@@ -29,11 +30,14 @@ class many_belts():
             belt.image_rect.centerx -= 3
 
     def draw_belts(self):
-        self.screen.blit(self.belt_list[0].image, self.belt_list[0].image_rect)
         for belt in self.belt_list:
             self.screen.blit(belt.image, belt.image_rect)
 
-    def remove_belts(self):
+    def remove_belts(self, hero):
         for belt in self.belt_list:
-            if belt.image_rect.x <= 40:
+            if belt.image_rect.right <= WIDTH // 4.5:
                 self.belt_list.remove(belt)
+                hero.count_belt += 0.5
+
+    def list_emply(self):
+        self.belt_list = []

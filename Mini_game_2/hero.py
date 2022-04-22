@@ -10,6 +10,7 @@ class hero():
         self.image_rect.x = 200
         self.gravity = 0.2
         self.speed_down = 0
+        self.count_belt = 0
 
     def draw(self):
         self.screen.blit(self.image, self.image_rect)
