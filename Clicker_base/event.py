@@ -191,7 +191,7 @@ class Event():
                 ill_butt.exc = 0
 
             ill_butt.demon = ill_butt.demon_standart[-1]
-            for i in range(MAX_MOON_DEMON):
+            for i in range(2):
                 x = achiv.demons_moon[i].rect.x
                 y = achiv.demons_moon[i].rect.y
                 if Mouse_x >= x and Mouse_x <= x + SHOP_HERO_W and Mouse_y >= y and Mouse_y <= y + SHOP_HERO_H:

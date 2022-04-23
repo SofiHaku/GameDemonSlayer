@@ -110,7 +110,11 @@ class Draw():
         if locations_game.achiv_demons:
             for i in range(len(locations_game.achiv_info_demons)):
                 if locations_game.achiv_info_demons[i]:
-                    self.text_g.draw_many_lines(400, 75, self.text_g.mess_demon[i][0], 70)
+                    if i == 0:
+                        self.text_g.draw_many_lines(330, 75, self.text_g.mess_demon[i][locations_game.use_demon_6_moon], 20)
+                    else:
+                        self.text_g.draw_many_lines(330, 75, self.text_g.mess_demon[i][locations_game.use_demon_3_moon],
+                                                    20)
                     achiv.demons_moon[i].draw_info()
             shop_game.func[4].draw()
         elif locations_game.achiv_count_demons:
@@ -132,7 +136,7 @@ class Draw():
             if ill_butt.exc:
                 ill_butt.button(EXC[0], EXC[1], EXC_WH, EXC_WH)
 
-            for i in range(MAX_MOON_DEMON):
+            for i in range(2):
                 achiv.demons_moon[i].draw()
                 if ill_butt.demon[i]:
                     ill_butt.button(achiv.demons_moon[i].rect.x, achiv.demons_moon[i].rect.y, 125, 125)

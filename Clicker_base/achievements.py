@@ -90,17 +90,18 @@ class achievements():
         self.forses = []
         self.general_states = []
 
-        for num_moon in range(MAX_MOON_DEMON):
+        for num_moon in range(2):
             one_achiv_game = One_achiv(screen)
-            with open('Save_data/moon_demon', 'r') as f:
+            with open('Save_data/use_demon', 'r') as f:
                 one_achiv_game.achieved = int((f.read())[num_moon])
             if not one_achiv_game.achieved:
                 one_achiv_game.image = pygame.image.load('Img/Achievements/Demons/Hero' + str(num_moon) + '.png')
                 one_achiv_game.image_info = pygame.image.load('Img/Achievements/Demons/Hero_info.png')
             else:
-                one_achiv_game.image = pygame.image.load('Img/Achievements/Demons/Hero_die' + str(num_moon) + '.png')
+                one_achiv_game.image = pygame.image.load('Img/Achievements/Demons/Hero_a' + str(num_moon) + '.png')
+                one_achiv_game.image_info = pygame.image.load('Img/Achievements/Demons/Hero_a_info' + str(num_moon) + '.png')
             one_achiv_game.rect = one_achiv_game.image.get_rect()
-            one_achiv_game.rect.x = ((WIDTH - SHOP_HERO_W * MAX_HERO) // (MAX_HERO + 1)) * (num_moon + 1) + (
+            one_achiv_game.rect.x = ((WIDTH - SHOP_HERO_W * 2) // (2 + 1)) * (num_moon + 1) + (
                 num_moon) * SHOP_HERO_W
             one_achiv_game.rect.y = (HEIGHT - SHOP_HERO_H - 2 * SHOP_SKILL_H) // 3 + 25
             self.demons_moon.append(one_achiv_game)
