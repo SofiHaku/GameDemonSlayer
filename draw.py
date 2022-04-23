@@ -9,9 +9,6 @@ class Draw():
         self.screen = screen
         self.screen_rect = self.screen.get_rect()
 
-        self.image = pygame.image.load('Img/Demon_6_moon/Tangiro.png')
-        self.image_rect = self.screen.get_rect()
-
         '''self.back = pygame.image.load('Img/Background.png')
         self.back_rect = self.back.get_rect()
         self.back_rect.centery = self.screen_rect.centery
@@ -26,7 +23,7 @@ class Draw():
             locations_game, demon_6_moon, points, hero_mini, ill_butt, achiv, menu_game, demon_6_moon_start_game):
 
         text_g = text_message(self.screen)
-        #self.screen.fill((255, 255, 255))
+        self.screen.fill((255, 255, 255))
 
         # Рисуем коемочку главного экрана
         #pygame.draw.rect(self.screen, (255, 255, 255), (self.screen_rect.x, self.screen_rect.y, WIDTH // 3, HEIGHT))
@@ -34,9 +31,7 @@ class Draw():
         #pygame.draw.rect(self.screen, (255, 255, 255), (self.screen_rect.x, self.screen_rect.bottom - 10, WIDTH, 10))
         #pygame.draw.rect(self.screen, (255, 255, 255), (self.screen_rect.right - 10, self.screen_rect.y, 10, HEIGHT))
 
-        if locations_game.demon_3_moon:
-            pass
-        elif locations_game.shop:
+        if locations_game.shop:
 
             text_g = text_message(self.screen)
 
@@ -95,19 +90,11 @@ class Draw():
                 Mouse_x, Mouse_y = pygame.mouse.get_pos()
                 achiv.draw_new_achiv(Mouse_x, Mouse_y, text_g)
 
-        elif locations_game.menu:
-            menu_game.anim()
+        #elif locations_game.menu:
+            #menu_game.anim()
 
-        elif locations_game.demon_6_moon_start:
-            demon_6_moon_start_game.draw(text_g)
-
-        elif locations_game.demon_6_moon:
-            self.screen.blit(self.image, self.image_rect)
-            lab_game.walls_draw()
-            for point in points:
-                point.draw()
-            hero_mini.draw(-1)
-            demon_6_moon.draw()
+        #elif locations_game.demon_6_moon_start:
+            #demon_6_moon_start_game.draw(text_g)
 
         elif locations_game.achiv:
 
@@ -196,4 +183,4 @@ class Draw():
 
         if lab_game.bool:
             lab_game.walls_draw(self.screen)
-        #pygame.display.flip()
+        pygame.display.flip()

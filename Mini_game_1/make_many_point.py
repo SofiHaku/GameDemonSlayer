@@ -1,5 +1,5 @@
 import pygame
-from points import Point
+from Mini_game_1.points import Point
 class make_many():
     def __init__(self, screen):
         self.screen = screen

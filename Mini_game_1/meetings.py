@@ -9,7 +9,7 @@ class meeting():
         if pygame.sprite.spritecollide(hero_game, points, True):
             stat_game.point_in_mini_game += 1
             print (stat_game.point_in_mini_game)
-            if stat_game.point_in_mini_game == 189:
+            if stat_game.point_in_mini_game == 189: #189
                 locations_game.demon_6_moon = False
                 locations_game.first_list = True
 
