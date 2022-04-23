@@ -7,9 +7,12 @@ class meeting():
     def eat_points(self, hero_game, points, stat_game, locations_game):
         if pygame.sprite.spritecollide(hero_game, points, True):
             stat_game.point_in_mini_game += 1
-            if stat_game.point_in_mini_game == 189:  #189
+            if stat_game.point_in_mini_game == 188:  #189
                 locations_game.demon_6_moon = False
                 locations_game.first_list = True
+                locations_game.use_demon_6_moon = True
+                with open('Save_data/use_demon', 'w') as file:
+                    file.write("10")
 
     def with_demon(self, demon_6_moon, points, hero_mini, screen, wall_mass, make_many_object_game, stat_game):
 

@@ -1,6 +1,6 @@
 class now_locations():
     def __init__(self):
-        self.first_list = True
+        self.first_list = False
         self.shop = False
         self.achiv = False
         self.menu = True
@@ -19,6 +19,13 @@ class now_locations():
         self.achiv_info_forse = [0, 0, 0, 0, 0]
 
         self.demon_6_moon_start = False
-        self.demon_6_moon = True
+        self.demon_6_moon = False
+        self.demon_6_moon_end = False
+        self.demon_3_moon_start = False
         self.demon_3_moon = False
-        self.demon_1_moon = False
+        self.demon_3_moon_end = False
+
+        with open('Save_data/use_demon', 'r') as file:
+            use = list(file.read())
+            self.use_demon_6_moon = int(use[0])
+            self.use_demon_3_moon = int(use[1])

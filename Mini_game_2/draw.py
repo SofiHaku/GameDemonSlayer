@@ -19,6 +19,11 @@ class draw():
         self.image_road2_rect.y = HEIGHT - 30
         self.image_road2_rect.right = self.image_road1_rect.left
 
+        self.image_tap = pygame.image.load("Img/Mini_game_2/tap_to_play.png")
+        self.image_tap_rect = self.image_road1.get_rect()
+        self.image_tap_rect.y = 185
+        self.image_tap_rect.x = 250
+
     def anim(self):
         self.image_road1_rect.left += 1
         self.image_road2_rect.left += 1
@@ -37,4 +42,10 @@ class draw():
         pygame.draw.rect(self.screen, (255, 255, 255), (self.screen_rect.right - WIDTH // 4.5, self.screen_rect.y,  WIDTH // 4.5, HEIGHT))
 
         hero.draw()
+
+    def draw(self):
+        self.screen.blit(self.image_tap, self.image_tap_rect)
+
+    def flip(self):
         pygame.display.flip()
+

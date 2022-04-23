@@ -98,7 +98,7 @@ class achievements():
                 one_achiv_game.image = pygame.image.load('Img/Achievements/Demons/Hero' + str(num_moon) + '.png')
                 one_achiv_game.image_info = pygame.image.load('Img/Achievements/Demons/Hero_info.png')
             else:
-                one_achiv_game.image = pygame.image.load('mg/Achievements/Demons/Hero_die' + str(num_moon) + '.png')
+                one_achiv_game.image = pygame.image.load('Img/Achievements/Demons/Hero_die' + str(num_moon) + '.png')
             one_achiv_game.rect = one_achiv_game.image.get_rect()
             one_achiv_game.rect.x = ((WIDTH - SHOP_HERO_W * MAX_HERO) // (MAX_HERO + 1)) * (num_moon + 1) + (
                 num_moon) * SHOP_HERO_W
@@ -202,16 +202,15 @@ class achievements():
 
 
         # Контроль особых достижений количества убитых демонов
-        #if self.count_click >= 1000:
-            #pass
-            #locations_game.demon_1_moon = True
-            #locations_game.first_list = False
-        #elif self.count_click >= 999:
-            #pass
-            #locations_game.demon_3_moon = True
-            #locations_game.first_list = False
-        if self.count_click >= 50 and not demon_6_moon_start_game.use():
+        if self.count_click >= 500 and not locations_game.use_demon_3_moon:
+            locations_game.demon_3_moon_start = True
+            locations_game.demon_3_moon = True
+            locations_game.demon_3_moon_end = True
+            locations_game.first_list = False
+        if self.count_click >= 250 and not locations_game.use_demon_6_moon:
             locations_game.demon_6_moon_start = True
+            locations_game.demon_6_moon = True
+            locations_game.demon_6_moon_end = True
             locations_game.first_list = False
 
     def draw_general_state(self):

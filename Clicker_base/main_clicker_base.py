@@ -4,7 +4,7 @@ from Clicker_base.Shop import Shop
 from Clicker_base.draw import Draw
 from Clicker_base.Demon import Demon_ordinary
 from Clicker_base.illumination import illumination
-from achievements import achievements
+from Clicker_base.achievements import achievements
 
 class main_clicker_base():
     def __init__(self, screen, stat_game):
@@ -18,7 +18,7 @@ class main_clicker_base():
         self.control_game = Event()
 
     def run(self, locations_game, demon_6_moon_start_game):
-        self.control_game.control_achiv(self.achiv, self.shop_game, locations_game, demon_6_moon_start_game)
+        self.achiv.control(self.shop_game, locations_game, demon_6_moon_start_game)
         if locations_game.shop:
             self.control_game.in_shop(self.shop_game, self.stat_game, locations_game, self.ill_butt)
             self.draw_game.shop(self.shop_game, self.stat_game, locations_game, self.ill_butt, self.achiv)
