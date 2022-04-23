@@ -20,5 +20,5 @@ class now_locations():
 
         self.demon_6_moon_start = False
         self.demon_6_moon = True
-        self.demon_3_moon = True
+        self.demon_3_moon = False
         self.demon_1_moon = False

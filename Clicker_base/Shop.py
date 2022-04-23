@@ -60,7 +60,7 @@ class Shop():
                 hero_shop_game.buy = int((f.read())[num_hero])
             hero_shop_game.image = pygame.image.load('Img/Shop/Hero/Hero' + str(num_hero) + '.png')
             hero_shop_game.rect = hero_shop_game.image.get_rect()
-            hero_shop_game.rect.x = ((WIDTH - SHOP_HERO_W * MAX_HERO)//(MAX_HERO+1)) * (num_hero + 1) + (num_hero) * SHOP_HERO_W
+            hero_shop_game.rect.x = ((WIDTH - SHOP_HERO_W * MAX_HERO)//(MAX_HERO+ 1)) * (num_hero + 1) + (num_hero) * SHOP_HERO_W
             hero_shop_game.rect.y = (HEIGHT - SHOP_HERO_H - 2 * SHOP_SKILL_H)//3 + 25
             hero_shop_game.cost = cost_hero[num_hero]
             self.herous.append(hero_shop_game)
@@ -85,8 +85,8 @@ class Shop():
             skill_game.rect.y = self.herous[0].rect.bottom + (SHOP_SKILL_H + 15) * (num_skill // MAX_SKILLS_SET) + 25
             skill_game.cost = cost_skills[num_skill]
 
-            with open('Save_data/count_skills.txt', 'r') as f:
-                skill_game.count = int((f.read())[num_skill])
+            '''with open('Save_data/count_skills.txt', 'r') as f:
+                skill_game.count = int((f.read())[num_skill])'''
 
             skill_game.plus_points = plus_points_d[num_skill]
             self.skills.append(skill_game)
@@ -120,7 +120,7 @@ class Shop():
     def points_in_click(self):
         points = 1
         for i in range(MAX_SKILLS):
-            points += self.skills[i].count * self.skills[i].plus_points
+            points += self.skills[i].buy * self.skills[i].plus_points
         for i in range(MAX_HERO):
             points *= (self.herous[i].buy + 1)
         return points
@@ -153,9 +153,9 @@ class Shop():
                 self.you_dont_have_many = True
             return False
         elif name == "skills":
-            if stat_game.point_now >= cost and shop_game.skills[index].count < 5:
+            if stat_game.point_now >= cost and shop_game.skills[index].buy < 5:
                 return True
-            if shop_game.skills[index].count < 5:
+            if shop_game.skills[index].buy < 5:
                 self.you_dont_have_many = True
             return False
 

@@ -145,16 +145,15 @@ class Event():
                             if shop_game.you_have_many(stat_game, cost, shop_game, i, "skills"):
                                 stat_game.point_now -= cost
                                 stat_game.image_score(COUNT[0], COUNT[1])
-                                shop_game.skills[i].count += 1
+                                shop_game.skills[i].buy += 1
 
-                                with open('Save_data/count_skills.txt', 'r') as file:
-                                    new_count = list(file.read())
-                                    new_count[i] = str(shop_game.skills[i].count)
+                                with open('Save_data/buy_skills.txt', 'r') as file:
+                                    new_buy = list(file.read())
+                                    new_buy[i] = str(shop_game.skills[i].buy)
                                     with open('Save_data/buy_skills.txt', 'w') as file_1:
-                                        file_1.write("".join(new_count))
-                                    with open('Save_data/count_skills.txt', 'w') as file_2:
-                                        file_2.write("".join(new_count))
-
+                                        file_1.write("".join(new_buy))
+                                    '''with open('Save_data/buy_skills.txt', 'w') as file_2:
+                                        file_2.write("".join(new_buy))'''
                                 with open('Save_data/points.txt', 'w') as file:
                                     file.write(str(stat_game.point_now))
                             break

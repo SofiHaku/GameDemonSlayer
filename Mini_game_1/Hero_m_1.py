@@ -2,15 +2,14 @@ import pygame
 
 class Hero():
 
-    def __init__(self, screen, name_img):
+    def __init__(self, screen):
         self.screen = screen
         self.screen_rect = screen.get_rect()
 
-        self.images = ["Img/Hero/Hero0.png", "Img/Hero/Hero1.png", "Img/Hero/Hero2.png", "Img/Hero/Hero3.png", "Img/Demon_6_moon/Mini_t.png"]
-        self.image = pygame.image.load(name_img)
+        self.image = pygame.image.load("Img/Demon_6_moon/Mini_t.png")
         self.rect = self.image.get_rect()
-        self.rect.y = 185
-        self.rect.right = 550
+        self.rect.x = 180 + 21 * 18 + 2
+        self.rect.y = 21 * 17 + 4
 
 
         self.speed = 2
@@ -25,8 +24,7 @@ class Hero():
         self.move_to_up = False
         self.move_to_down = False
 
-    def draw(self, index):
-        self.image = pygame.image.load(self.images[index])
+    def draw(self):
         self.screen.blit(self.image, self.rect)
 
     def update(self):

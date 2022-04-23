@@ -1,4 +1,3 @@
-import pygame
 class in_lab():
     """Определяет положенеи персонажей в лабиринте"""
     def __init__(self):
@@ -11,31 +10,6 @@ class in_lab():
         name.can_move_to_up = True
         name.can_move_to_down = True
 
-        '''wall_down_b = False
-        wall_right_b = False
-        wall_left_b = False
-        wall_up_b = False
-
-        wall_down = [lab_game.all_lab[i] for i in range(len(lab_game.all_lab)) if lab_game.all_lab[i].y > name.rect_m.y]
-        if pygame.Rect.collidelist(name.rect_m, wall_down) != -1:
-            wall_down_b = True
-
-        wall_up = [lab_game.all_lab[i] for i in range(len(lab_game.all_lab)) if
-                     lab_game.all_lab[i].y < name.rect_m.y]
-        if pygame.Rect.collidelist(name.rect_m, wall_up) != -1:
-            wall_up_b = True
-
-        wall_left = [lab_game.all_lab[i] for i in range(len(lab_game.all_lab)) if
-                     lab_game.all_lab[i].x > name.rect_m.x]
-        if pygame.Rect.collidelist(name.rect_m, wall_left) != -1:
-            wall_left_b = True
-
-        wall_right = [lab_game.all_lab[i] for i in range(len(lab_game.all_lab)) if
-                     lab_game.all_lab[i].x < name.rect_m.x]
-        if pygame.Rect.collidelist(name.rect_m, wall_right) != -1:
-            wall_right_b = True
-
-        print(wall_up_b)'''
         if wall[(name.rect.left - 180) // 20 + 1][name.rect.centery // 19] == 1:
             name.can_move_to_right = False
         if wall[(name.rect.right - 180) // 20 - 1][name.rect.centery // 19] == 1:

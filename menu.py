@@ -79,3 +79,8 @@ class menu():
                 sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 locations_game.menu = False
+
+    def run(self, locations_game):
+        self.control(locations_game)
+        self.anim()
+

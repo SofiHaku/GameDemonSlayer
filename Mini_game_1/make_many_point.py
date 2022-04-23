@@ -1,4 +1,3 @@
-import pygame
 from Mini_game_1.points import Point
 class make_many():
     def __init__(self, screen):

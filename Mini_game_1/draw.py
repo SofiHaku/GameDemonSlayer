@@ -12,6 +12,6 @@ class draw():
         lab_game.walls_draw()
         for point in points:
             point.draw()
-        hero_mini.draw(-1)
+        hero_mini.draw()
         demon_6_moon.draw()
         pygame.display.flip()

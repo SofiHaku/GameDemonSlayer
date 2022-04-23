@@ -5,9 +5,7 @@ class Demon_n():
     def __init__(self):
         pass
 
-    def demon_6_moon(self, in_lab_game, hero_mini, wall, lab_game, demon_6_moon, meeting_game, points, hero_game,
-                     screen,
-                     make_many_game):
+    def demon_6_moon(self, in_lab_game, hero_mini, wall):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -31,6 +29,3 @@ class Demon_n():
                     hero_mini.move_to_left = False
 
         in_lab_game.corner_hero(hero_mini, wall)
-        # demon_6_moon.movement()
-        # meeting_game.with_demon(demon_6_moon, points, hero_mini, screen, wall, make_many_game)
-        demon_6_moon.update()

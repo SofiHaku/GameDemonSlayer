@@ -35,11 +35,6 @@ class lab():
                [1, 3, 0, 4, 0, 3, 1, 1, 1, 2, 1, 1, 1, 3, 0, 0, 1, 3, 0, 3, 1],
                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
 
-        '''for i in range(len(self.wall)):
-            for j in range(len(self.wall[i])):
-                if self.wall[i][j] == 1:
-                    one_path_of_lab = pygame.Rect((180 + i * 20, j * 19, 20, 19))
-                    self.all_lab.append(one_path_of_lab)'''
 
     def return_wall(self):
         """Передаем массив для использования в других функциях"""
