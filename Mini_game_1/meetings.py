@@ -7,7 +7,7 @@ class meeting():
     def eat_points(self, hero_game, points, stat_game, locations_game):
         if pygame.sprite.spritecollide(hero_game, points, True):
             stat_game.point_in_mini_game += 1
-            if stat_game.point_in_mini_game == 6:  #189
+            if stat_game.point_in_mini_game == 180:  #189
                 locations_game.demon_6_moon = False
                 locations_game.first_list = True
                 locations_game.use_demon_6_moon = True

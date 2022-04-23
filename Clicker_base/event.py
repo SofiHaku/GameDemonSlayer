@@ -51,6 +51,9 @@ class Event():
                         locations_game.first_list = False
 
     def in_shop(self, shop_game, stat_game, locations_game, ill_butt):
+        s_catch = pygame.mixer.Sound('Music/покупка.ogg')
+        click = pygame.mixer.Sound('Music/меч.ogg')
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -93,12 +96,14 @@ class Event():
                             and not locations_game.shop_skills and not locations_game.shop_hero and not locations_game.shop_lamp:
                         locations_game.shop = False
                         locations_game.first_list = True
+                        click.play()
 
                     if Mouse_x >= LAMP[0] and Mouse_x <= LAMP[0] + LAMP_WH \
                             and Mouse_y >= LAMP[1] and Mouse_y <= LAMP[1] + LAMP_WH:
                         locations_game.shop_skills = 0
                         locations_game.shop_hero = 0
                         locations_game.shop_lamp = 1
+                        click.play()
 
                     if Mouse_x >= EXC_INFO[0] and Mouse_x <= EXC_INFO[0] + EXC_INFO_WH \
                             and Mouse_y >= EXC_INFO[1] and Mouse_y <= EXC_INFO[1] + EXC_INFO_WH \
@@ -106,6 +111,7 @@ class Event():
                         locations_game.shop_skills = 0
                         locations_game.shop_hero = 0
                         locations_game.shop_lamp = 0
+                        click.play()
 
                     for i in range(MAX_HERO):
                         x = shop_game.herous[i].rect.x
@@ -113,6 +119,7 @@ class Event():
                         cost = shop_game.herous[i].cost
                         if Mouse_x >= x and Mouse_x <= x + SHOP_HERO_W and Mouse_y >= y and Mouse_y <= y + SHOP_HERO_H:
                             if shop_game.you_have_many(stat_game, cost, shop_game, i, "hero"):
+                                s_catch.play()
                                 shop_game.herous[i].buy = True
                                 shop_game.herous[i].image = pygame.image.load(
                                     'Img/Shop/Hero/Hero' + str(i) + '.png')
@@ -129,10 +136,12 @@ class Event():
                                 with open('Save_data/points.txt', 'w') as file:
                                     file.write(str(stat_game.point_now))
                             elif shop_game.you_buy(i):
+                                click.play()
                                 shop_game.herous[i].is_selected = True
                                 for j in range(2, i, -1):
                                     shop_game.herous[j].is_selected = False
-                            break
+                            else:
+                                click.play()
 
                     for i in range(MAX_SKILLS):
                         x = shop_game.skills[i].rect.x
@@ -140,6 +149,7 @@ class Event():
                         cost = shop_game.skills[i].cost
                         if Mouse_x >= x and Mouse_x <= x + SHOP_SKILL_W and Mouse_y >= y and Mouse_y <= y + SHOP_SKILL_H:
                             if shop_game.you_have_many(stat_game, cost, shop_game, i, "skills"):
+                                s_catch.play()
                                 stat_game.point_now -= cost
                                 stat_game.image_score(COUNT[0], COUNT[1])
                                 shop_game.skills[i].buy += 1
@@ -153,7 +163,9 @@ class Event():
                                         file_2.write("".join(new_buy))'''
                                 with open('Save_data/points.txt', 'w') as file:
                                     file.write(str(stat_game.point_now))
-                            break
+                            else:
+                                click.play()
+
                 elif pressed[2]:
                     for i in range(MAX_HERO):
                         x = shop_game.herous[i].rect.x
@@ -165,6 +177,7 @@ class Event():
                             now_hero = [0, 0, 0]
                             now_hero[i] = 1
                             locations_game.shop_info_hero = now_hero.copy()
+                            click.play()
 
                     for i in range(MAX_SKILLS):
                         x = shop_game.skills[i].rect.x
@@ -176,8 +189,10 @@ class Event():
                             now_skills = [0, 0, 0, 0, 0, 0, 0, 0]
                             now_skills[i] = 1
                             locations_game.shop_info_skills = now_skills.copy()
+                            click.play()
 
     def in_achiv(self, achiv, stat_game, locations_game, ill_butt):
+        click = pygame.mixer.Sound('Music/меч.ogg')
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -201,6 +216,7 @@ class Event():
                         locations_game.achiv_demons = 1
                         locations_game.achiv_info_demons = [0, 0, 0].copy()
                         locations_game.achiv_info_demons[i] = 1
+                        click.play()
 
 
             ill_butt.count_demon = ill_butt.count_demon_standart[-1]
@@ -214,6 +230,7 @@ class Event():
                         locations_game.achiv_count_demons = 1
                         locations_game.achiv_info_count_demons = [0, 0, 0, 0, 0].copy()
                         locations_game.achiv_info_count_demons[i] = 1
+                        click.play()
 
             ill_butt.forse = ill_butt.forse_standart[-1]
             for i in range(MAX_FORSE):
@@ -226,6 +243,7 @@ class Event():
                         locations_game.achiv_forse = 1
                         locations_game.achiv_info_forse = [0, 0, 0, 0, 0].copy()
                         locations_game.achiv_info_forse[i] = 1
+                        click.play()
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if Mouse_x >= EXC[0] and Mouse_x <= EXC[0] + EXC_WH \
@@ -233,6 +251,7 @@ class Event():
                         not locations_game.achiv_demons and not locations_game.achiv_count_demons and not locations_game.achiv_forse:
                     locations_game.achiv = False
                     locations_game.first_list = True
+                    click.play()
 
                 if Mouse_x >= EXC_INFO[0] and Mouse_x <= EXC_INFO[0] + EXC_INFO_WH \
                         and Mouse_y >= EXC_INFO[1] and Mouse_y <= EXC_INFO[1] + EXC_INFO_WH \
@@ -240,6 +259,7 @@ class Event():
                     locations_game.achiv_demons = 0
                     locations_game.achiv_count_demons = 0
                     locations_game.achiv_forse = 0
+                    click.play()
 
     def in_menu(self, locations_game, menu_game):
         menu_game.control(locations_game)

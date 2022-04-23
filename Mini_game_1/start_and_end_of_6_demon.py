@@ -38,6 +38,8 @@ class demon_6_moon_start():
                         locations_game.demon_6_moon_start = False
                         locations_game.demon_6_moon = True
                         self.text_out_use = True
+                        pygame.mixer.music.load("Music/фон_битва_с_демонами.mp3")
+                        pygame.mixer.music.play(-1)
                         with open('Save_data/use_start_6_demon.txt', 'w') as file:
                             file.write("".join("1"))
                     else:
@@ -74,6 +76,8 @@ class demon_6_moon_end():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     locations_game.demon_6_moon_end = False
+                    pygame.mixer.music.load("Music/фон.mp3")
+                    pygame.mixer.music.play(-1)
 
 
 
