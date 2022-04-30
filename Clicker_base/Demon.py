@@ -1,19 +1,21 @@
 import pygame
 import random
-from settings import *
+from Globals import Globals
 from Demon_b import Demon
 
 class Demon_ordinary(Demon):
-    """Класс демонов, летающих на главном экране"""
+    '''Класс демонов, летающих на главном экране'''
     def __init__(self, screen):
+        '''Класс-ребенок'''
         super().__init__(screen)
+        self.globals = Globals()
 
         # Атрибуты изображения демона
         self.image = pygame.image.load('Img/Demons/demon_classic_1.png')
         self.rect = self.image.get_rect()
         self.rect.centery = self.screen_rect.centery
-        self.rect.left = SETTING + 30
-        self.count_life = DEMON_W - 8
+        self.rect.left = self.globals.SETTING + 30
+        self.count_life = self.globals.DEMON_W - 8
 
         # Массив изображений демона
         self.image_set = ["demon_classic_1.png", "demon_classic_2.png", "demon_classic_3.png"]
@@ -32,7 +34,7 @@ class Demon_ordinary(Demon):
             else:
                 self.move_to_up = False
         else:
-            if (self.rect.bottom + 20) < HEIGHT - 10 :
+            if (self.rect.bottom + 20) < self.globals.HEIGHT - 10 :
                 self.rect.centery += self.speed
             else:
                  self.move_to_up = True
@@ -45,7 +47,7 @@ class Demon_ordinary(Demon):
         """Создание нового демона"""
         self.image = pygame.image.load('Img/Demons/' + self.image_set[random.randint(0,2)])
         self.rect.centery = self.screen_rect.centery
-        self.count_life = DEMON_W - 8
+        self.count_life = self.globals.DEMON_W - 8
         self.move_to_up = True
         self.move_to_down = False
 
@@ -57,5 +59,5 @@ class Demon_ordinary(Demon):
 
     def draw_streak_of_life(self):
         """Вывод полокски жизни на экран"""
-        pygame.draw.rect(self.screen, (255, 255, 255), (self.rect.x, self.rect.y - 20, DEMON_W, 20))
+        pygame.draw.rect(self.screen, (255, 255, 255), (self.rect.x, self.rect.y - 20, self.globals.DEMON_W, 20))
         pygame.draw.rect(self.screen, (221, 44, 0), (self.rect.x + 4, self.rect.y - 20 + 4, self.count_life, 12))

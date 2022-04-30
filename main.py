@@ -1,5 +1,5 @@
 import pygame
-from settings import *
+from Globals import Globals
 from Clicker_base.statistics import Stat
 from locations import now_locations
 from menu import menu
@@ -12,9 +12,10 @@ from Clicker_base.main_clicker_base import main_clicker_base
 def run():
     pygame.mixer.pre_init(44100, -16, 1, 512)
     pygame.init()
+    globals = Globals()
     pygame.mixer.music.load("Music/фон.mp3")
     clock = pygame.time.Clock()
-    screen = pygame.display.set_mode((WIDTH, HEIGHT))
+    screen = pygame.display.set_mode((globals.WIDTH, globals.HEIGHT))
     text_g = text_message(screen)
 
     stat_game = Stat(screen)

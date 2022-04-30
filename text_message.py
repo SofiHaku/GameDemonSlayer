@@ -1,5 +1,5 @@
 import pygame
-from settings import *
+from Globals import Globals
 
 class text_message():
     def __init__(self, screen):
@@ -104,6 +104,6 @@ class text_message():
         lines = text.split("\n")
         self.font = pygame.font.SysFont("Verdana", size)
         for i, l in enumerate(lines):
-            self.screen.blit(self.font.render(l, True, TEXT_COLOR, (255, 255, 255)), (x, y + (size + 5) * i))
+            self.screen.blit(self.font.render(l, True, (0, 0, 0), (255, 255, 255)), (x, y + (size + 5) * i))
 
 

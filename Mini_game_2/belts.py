@@ -1,6 +1,6 @@
 import pygame
 import random
-from settings import *
+from Globals import Globals
 
 class belt():
     def __init__(self):
@@ -10,6 +10,7 @@ class belt():
 
 class many_belts():
     def __init__(self, screen):
+        self.globals = Globals()
         self.screen = screen
         self.belt_list = []
         self.belt_height = [200, 250, 300, 350]
@@ -35,7 +36,7 @@ class many_belts():
 
     def remove_belts(self, hero):
         for belt in self.belt_list:
-            if belt.image_rect.right <= WIDTH // 4.5:
+            if belt.image_rect.right <= self.globals.WIDTH // 4.5:
                 self.belt_list.remove(belt)
                 hero.count_belt += 0.5
 

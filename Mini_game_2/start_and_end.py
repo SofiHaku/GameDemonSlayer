@@ -37,8 +37,8 @@ class demon_3_moon_start():
                         locations_game.demon_3_moon_start = False
                         locations_game.demon_3_moon = True
                         self.text_out_use = True
-                        pygame.mixer.music.load("Music/фон_битка_с_демонами.mp3")
-                        pygame.mixer.music.play(-1)
+                        pygame.mixer.music.load("Music/фон_битва_с_демонами.mp3")
+                        pygame.mixer.music.plяay(-1)
                     else:
                         self.text_out_s_2 = True
                         for i in range(len(self.text_out_s_1)):

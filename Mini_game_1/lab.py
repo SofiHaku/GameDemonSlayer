@@ -1,4 +1,4 @@
-from settings import *
+from Globals import Globals
 import pygame
 
 class lab():

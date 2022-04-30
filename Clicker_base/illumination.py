@@ -1,6 +1,7 @@
 import pygame
 
 class illumination():
+    '''Класс, отвечающий за подстветку кнопок'''
     def __init__(self, screen):
         self.hero = [0, 0, 0]
         self.hero_standart = [[1, 0, 0], [0, 1, 0], [0, 0, 1], [0, 0, 0]]
@@ -25,6 +26,7 @@ class illumination():
                                      [0, 0, 0, 1, 0], [0, 0, 0, 0, 1], [0, 0, 0, 0, 0]]
 
     def button(self, x, y, wight, height):
+        '''Подстветка передаваемой кнопки'''
         surf = pygame.Surface((wight, height))
         pygame.draw.rect(surf, (255, 255, 0), (0, 0, wight, height))
         surf.set_alpha(50)

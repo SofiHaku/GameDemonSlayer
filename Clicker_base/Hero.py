@@ -1,7 +1,7 @@
 import pygame
 
 class Hero():
-
+    '''Класс, главного героя, изображенного на главном экране'''
     def __init__(self, screen, name_img):
         self.screen = screen
         self.screen_rect = screen.get_rect()
@@ -13,6 +13,7 @@ class Hero():
         self.rect.right = 550
 
     def draw(self, index):
+        '''Вывод главного героя на экран'''
         self.image = pygame.image.load(self.images[index])
         self.screen.blit(self.image, self.rect)
 

@@ -8,7 +8,6 @@ from Mini_game_1.Hero_m_1 import Hero
 from Mini_game_1.Demon import Demon_6_moon
 from pygame.sprite import Group
 from Mini_game_1.start_and_end_of_6_demon import demon_6_moon_start, demon_6_moon_end
-import pygame
 
 class main_mini_game_1():
     def __init__(self, screen):

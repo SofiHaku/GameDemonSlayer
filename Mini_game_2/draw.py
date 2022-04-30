@@ -1,8 +1,9 @@
 import pygame
-from settings import *
+from Globals import Globals
 
 class draw():
     def __init__(self, screen):
+        self.globals  = Globals()
         self.screen = screen
         self.screen_rect = self.screen.get_rect()
         self.image_back = pygame.image.load("Img/Mini_game_2/back2.png")
@@ -11,12 +12,12 @@ class draw():
 
         self.image_road1 = pygame.image.load("Img/Mini_game_2/road.png")
         self.image_road1_rect = self.image_road1.get_rect()
-        self.image_road1_rect.y = HEIGHT - 30
-        self.image_road1_rect.x = WIDTH // 4.5
+        self.image_road1_rect.y = self.globals.HEIGHT - 30
+        self.image_road1_rect.x = self.globals.WIDTH // 4.5
 
         self.image_road2 = pygame.image.load("Img/Mini_game_2/road.png")
         self.image_road2_rect = self.image_road2.get_rect()
-        self.image_road2_rect.y = HEIGHT - 30
+        self.image_road2_rect.y = self.globals.HEIGHT - 30
         self.image_road2_rect.right = self.image_road1_rect.left
 
         self.image_tap = pygame.image.load("Img/Mini_game_2/tap_to_play.png")
@@ -27,9 +28,9 @@ class draw():
     def anim(self):
         self.image_road1_rect.left += 1
         self.image_road2_rect.left += 1
-        if self.image_road1_rect.left >= self.screen_rect.right - WIDTH // 4.5:
+        if self.image_road1_rect.left >= self.screen_rect.right - self.globals.WIDTH // 4.5:
             self.image_road1_rect.right = self.image_road2_rect.left
-        elif self.image_road2_rect.left >= self.screen_rect.right - WIDTH // 4.5:
+        elif self.image_road2_rect.left >= self.screen_rect.right - self.globals.WIDTH // 4.5:
             self.image_road2_rect.right = self.image_road1_rect.left
 
     def all(self, hero, many_belts):
@@ -38,8 +39,8 @@ class draw():
         self.screen.blit(self.image_road1, self.image_road1_rect)
         self.screen.blit(self.image_road2, self.image_road2_rect)
 
-        pygame.draw.rect(self.screen, (255, 255, 255), (self.screen_rect.x, self.screen_rect.y, WIDTH // 4.5, HEIGHT))
-        pygame.draw.rect(self.screen, (255, 255, 255), (self.screen_rect.right - WIDTH // 4.5, self.screen_rect.y,  WIDTH // 4.5, HEIGHT))
+        pygame.draw.rect(self.screen, (255, 255, 255), (self.screen_rect.x, self.screen_rect.y, self.globals.WIDTH // 4.5, self.globals.HEIGHT))
+        pygame.draw.rect(self.screen, (255, 255, 255), (self.screen_rect.right - self.globals.WIDTH // 4.5, self.screen_rect.y,  self.globals.WIDTH // 4.5, self.globals.HEIGHT))
 
         hero.draw()
 
