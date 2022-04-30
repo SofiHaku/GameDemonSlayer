@@ -2,6 +2,7 @@ import pygame
 from Globals import Globals
 
 class draw():
+    '''Класс, отвечающий за вывод всех изображений во время 2 мини-игры'''
     def __init__(self, screen):
         self.globals  = Globals()
         self.screen = screen
@@ -26,6 +27,7 @@ class draw():
         self.image_tap_rect.x = 250
 
     def anim(self):
+        '''Анимация дороги'''
         self.image_road1_rect.left += 1
         self.image_road2_rect.left += 1
         if self.image_road1_rect.left >= self.screen_rect.right - self.globals.WIDTH // 4.5:
@@ -34,19 +36,24 @@ class draw():
             self.image_road2_rect.right = self.image_road1_rect.left
 
     def all(self, hero, many_belts):
+        '''Вывод всех изображений во время 2 мини-игры'''
         self.screen.blit(self.image_back, self.image_back_rect)
         many_belts.draw_belts()
         self.screen.blit(self.image_road1, self.image_road1_rect)
         self.screen.blit(self.image_road2, self.image_road2_rect)
 
-        pygame.draw.rect(self.screen, (255, 255, 255), (self.screen_rect.x, self.screen_rect.y, self.globals.WIDTH // 4.5, self.globals.HEIGHT))
-        pygame.draw.rect(self.screen, (255, 255, 255), (self.screen_rect.right - self.globals.WIDTH // 4.5, self.screen_rect.y,  self.globals.WIDTH // 4.5, self.globals.HEIGHT))
-
+        pygame.draw.rect(self.screen, (255, 255, 255), (self.screen_rect.x, self.screen_rect.y,
+                                                        self.globals.WIDTH // 4.5, self.globals.HEIGHT))
+        pygame.draw.rect(self.screen, (255, 255, 255), (self.screen_rect.right - self.globals.WIDTH // 4.5,
+                                                        self.screen_rect.y,  self.globals.WIDTH // 4.5, self.globals.HEIGHT))
         hero.draw()
 
     def draw(self):
+        '''Вывод надписи "нажмите, чтобы играть"'''
         self.screen.blit(self.image_tap, self.image_tap_rect)
 
     def flip(self):
+        '''Переворачивает экран:техническая часть pygame
+        Необходима, чтобы не писать дополнительные условия'''
         pygame.display.flip()
 

@@ -1,6 +1,7 @@
 import pygame
 
 class hero():
+    '''Главный герой во время 2 мини-игры'''
     def __init__(self, screen):
         self.screen = screen
         self.screen_rect = self.screen.get_rect()
@@ -13,9 +14,11 @@ class hero():
         self.count_belt = 0
 
     def draw(self):
+        '''Вывод игрока на экран'''
         self.screen.blit(self.image, self.image_rect)
 
     def update(self):
+        '''Обновление положения игрока'''
         self.speed_down += self.gravity
         self.image_rect.y += self.speed_down
 
