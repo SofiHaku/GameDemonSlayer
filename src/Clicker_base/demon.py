@@ -1,7 +1,7 @@
 import pygame
 import random
-from src.Globals import Globals
-from src.Demon_b import Demon
+from src.demon_b import Demon
+from src.globals import Globals
 
 class Demon_ordinary(Demon):
     '''Класс демонов, летающих на главном экране'''

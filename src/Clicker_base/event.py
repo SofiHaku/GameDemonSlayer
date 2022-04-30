@@ -1,6 +1,6 @@
 import pygame
 import sys
-from src.Globals import Globals
+from src.globals import Globals
 
 class Event():
 
@@ -23,7 +23,7 @@ class Event():
         '''Обработка нажатия пробела'''
         if event.key == pygame.K_SPACE:
             stat_game.point_now += shop_game.points_in_click()
-            with open('Save_data/points.txt', 'w') as f:
+            with open('save_data/points.txt', 'w') as f:
                 f.write(str(stat_game.point_now))
             stat_game.image_score(self.globals.COUNT[0], self.globals.COUNT[1])
             damage = shop_game.points_in_click()
@@ -62,8 +62,8 @@ class Event():
 
     def in_shop(self, shop_game, stat_game, locations_game, ill_butt):
         '''Контроль событий в магазине'''
-        s_catch = pygame.mixer.Sound('Music/shopping_sound.ogg')
-        click = pygame.mixer.Sound('Music/sound_of_sword.ogg')
+        s_catch = pygame.mixer.Sound('music/shopping_sound.ogg')
+        click = pygame.mixer.Sound('music/sound_of_sword.ogg')
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -163,12 +163,12 @@ class Event():
                     stat_game.point_now -= cost
                     stat_game.image_score(self.globals.COUNT[0], self.globals.COUNT[1])
                     shop_game.skills[i].buy += 1
-                    with open('Save_data/buy_skills.txt', 'r') as file:
+                    with open('save_data/buy_skills.txt', 'r') as file:
                         new_buy = list(file.read())
                         new_buy[i] = str(shop_game.skills[i].buy)
-                        with open('Save_data/buy_skills.txt', 'w') as file_1:
+                        with open('save_data/buy_skills.txt', 'w') as file_1:
                             file_1.write("".join(new_buy))
-                    with open('Save_data/points.txt', 'w') as file:
+                    with open('save_data/points.txt', 'w') as file:
                         file.write(str(stat_game.point_now))
                 else:
                     click.play()
@@ -184,12 +184,12 @@ class Event():
         shop_game.herous[i].is_selected = True
         for j in range(2, i, -1):
             shop_game.herous[j].is_selected = False
-        with open('Save_data/buy_herous.txt', 'r') as file_1:
+        with open('save_data/buy_herous.txt', 'r') as file_1:
             new_buy_herous = list(file_1.read())
             new_buy_herous[i] = '1'
-            with open('Save_data/buy_herous.txt', 'w') as file_2:
+            with open('save_data/buy_herous.txt', 'w') as file_2:
                 file_2.write("".join(new_buy_herous))
-        with open('Save_data/points.txt', 'w') as file:
+        with open('save_data/points.txt', 'w') as file:
             file.write(str(stat_game.point_now))
 
     def buy_hero_neg(self, click, shop_game, i):
@@ -229,7 +229,7 @@ class Event():
 
     def in_achiv(self, achiv, stat_game, locations_game, ill_butt):
         '''Контроль событий на странице достижений'''
-        click = pygame.mixer.Sound('Music/sound_of_sword.ogg')
+        click = pygame.mixer.Sound('music/sound_of_sword.ogg')
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()

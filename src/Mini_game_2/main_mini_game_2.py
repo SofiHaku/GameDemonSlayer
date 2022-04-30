@@ -1,9 +1,9 @@
-from src.Mini_game_2.hero import hero
-from src.Mini_game_2.events import control
-from src.Mini_game_2.draw import draw
+from src.globals import Globals
 from src.Mini_game_2.belts import many_belts
+from src.Mini_game_2.draw import draw
+from src.Mini_game_2.events import control
+from src.Mini_game_2.hero import hero
 from src.Mini_game_2.start_and_end import demon_3_moon_start, demon_3_moon_end
-from src.Globals import Globals
 
 class main_mini_game_2():
     '''Класс, полностью контролирующий 2 мини-игру'''
@@ -35,7 +35,7 @@ class main_mini_game_2():
             self.draw.anim()
             if self.hero.count_belt >= self.globals.MAX_BELT:
                 locations_game.demon_3_moon, locations_game.use_demon_3_moon = False, True
-                with open('Save_data/use_demon', 'w') as file:
+                with open('save_data/use_demon', 'w') as file:
                     file.write("11")
 
     def run_start(self, locations_game, text_g):

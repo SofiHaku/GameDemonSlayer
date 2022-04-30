@@ -1,6 +1,6 @@
 import pygame
 import pygame.font
-from src.Globals import Globals
+from src.globals import Globals
 from src.text_message import text_message
 
 class Draw():

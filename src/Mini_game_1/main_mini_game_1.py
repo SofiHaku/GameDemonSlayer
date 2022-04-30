@@ -1,14 +1,14 @@
-from src.Mini_game_1.lab import lab
-from src.Mini_game_1.in_lab import in_lab
-from src.Mini_game_1.control import control
-from src.Mini_game_1.meetings import meeting
-from src.Mini_game_1.make_many_point import make_many
-from src.Mini_game_1.draw import draw
-from src.Mini_game_1.Hero_m_1 import Hero
-from src.Mini_game_1.Demon import Demon_6_moon
 from pygame.sprite import Group
+from src.globals import Globals
+from src.Mini_game_1.demon import Demon_6_moon
+from src.Mini_game_1.draw import draw
+from src.Mini_game_1.control import control
+from src.Mini_game_1.hero_m_1 import Hero
+from src.Mini_game_1.in_lab import in_lab
+from src.Mini_game_1.lab import lab
+from src.Mini_game_1.make_many_point import make_many
+from src.Mini_game_1.meetings import meeting
 from src.Mini_game_1.start_and_end_of_6_demon import demon_6_moon_start, demon_6_moon_end
-from src.Globals import Globals
 
 class main_mini_game_1():
     '''Класс, полностью контролирующий 1 мини-игру'''

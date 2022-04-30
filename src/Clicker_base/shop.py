@@ -1,5 +1,5 @@
 import pygame
-from src.Globals import Globals
+from src.globals import Globals
 
 class Improve():
     '''Класс улучшений (скилл)'''
@@ -77,7 +77,7 @@ class Shop():
         '''Создание героев в магазине'''
         for num_hero in range(self.globals.MAX_HERO):
             hero_shop_game = Improve(self.screen)
-            with open('Save_data/buy_herous.txt', 'r') as f:
+            with open('save_data/buy_herous.txt', 'r') as f:
                 hero_shop_game.buy = int((f.read())[num_hero])
             hero_shop_game.image = pygame.image.load('assets/Shop/Hero/Hero' + str(num_hero) + '.png')
             hero_shop_game.rect = hero_shop_game.image.get_rect()
@@ -100,7 +100,7 @@ class Shop():
         '''Создание скиллов в магазине'''
         for num_skill in range(self.globals.MAX_SKILLS):
             skill_game = Improve(self.screen)
-            with open('Save_data/buy_skills.txt', 'r') as f:
+            with open('save_data/buy_skills.txt', 'r') as f:
                 skill_game.buy = int((f.read())[num_skill])
             skill_game.image = pygame.image.load('assets/Shop/Skills/skill' + str(num_skill) + '.png')
             skill_game.rect = skill_game.image.get_rect()

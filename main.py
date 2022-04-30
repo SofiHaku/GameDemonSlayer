@@ -1,4 +1,4 @@
-from src.Game import Game
+from src.game import Game
 
 game = Game()
 game.run()

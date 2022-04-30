@@ -1,11 +1,11 @@
-from src.Clicker_base.event import Event
-from src.Clicker_base.Hero import Hero
-from src.Clicker_base.Shop import Shop
-from src.Clicker_base.draw import Draw
-from src.Clicker_base.Demon import Demon_ordinary
-from src.Clicker_base.illumination import illumination
 from src.Clicker_base.achievements import achievements
-from src.Globals import Globals
+from src.Clicker_base.demon import Demon_ordinary
+from src.Clicker_base.draw import Draw
+from src.Clicker_base.event import Event
+from src.Clicker_base.hero import Hero
+from src.Clicker_base.illumination import illumination
+from src.Clicker_base.shop import Shop
+from src.globals import Globals
 
 class main_clicker_base():
     '''Управление текущими событиями кликера'''

@@ -12,7 +12,7 @@ class demon_6_moon_start():
         self.general_image_rect.x = globals.WIN_X
         self.text_out_s_1 = [1, 0, 0]
         self.text_out_s_2 = False
-        with open('Save_data/use_start_6_demon.txt', 'r') as file:
+        with open('save_data/use_start_6_demon.txt', 'r') as file:
             self.text_out_use = int(file.read())
 
     def draw(self, text_g, globals):
@@ -39,9 +39,9 @@ class demon_6_moon_start():
                     if self.text_out_s_2:
                         locations_game.demon_6_moon_start, locations_game.demon_6_moon = False, True
                         self.text_out_use = True
-                        pygame.mixer.music.load("Music/background_demon.mp3")
+                        pygame.mixer.music.load("music/background_demon.mp3")
                         pygame.mixer.music.play(-1)
-                        with open('Save_data/use_start_6_demon.txt', 'w') as file:
+                        with open('save_data/use_start_6_demon.txt', 'w') as file:
                             file.write("".join("1"))
                     else:
                         self.text_out_s_2 = True
@@ -80,7 +80,7 @@ class demon_6_moon_end():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     locations_game.demon_6_moon_end = False
-                    pygame.mixer.music.load("Music/background.mp3")
+                    pygame.mixer.music.load("music/background.mp3")
                     pygame.mixer.music.play(-1)
 
 

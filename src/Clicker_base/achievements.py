@@ -1,5 +1,5 @@
 import pygame
-from src.Globals import Globals
+from src.globals import Globals
 
 class One_achiv():
     '''Класс одного достижения'''
@@ -119,7 +119,7 @@ class achievements():
         for num_state in range(self.globals.MAX_STATE):
             one_state = General_state(self.screen, "assets/Achievements/State/state" +
                                       str(num_state + 1) + ".png", self.general_states_data[num_state], self.globals)
-            with open('Save_data/forse.txt', 'r') as f:
+            with open('save_data/forse.txt', 'r') as f:
                 one_state.achieved = int((f.read())[num_state])
             self.general_states.append(one_state)
 
@@ -127,7 +127,7 @@ class achievements():
         '''Создание достижений (добавление объектов в массив) за победу над демоном-луной'''
         for num_moon in range(self.globals.MAX_MOON_DEMON):
             one_achiv_game = One_achiv(self.screen)
-            with open('Save_data/use_demon', 'r') as f:
+            with open('save_data/use_demon', 'r') as f:
                 one_achiv_game.achieved = int((f.read())[num_moon])
             if not one_achiv_game.achieved:
                 one_achiv_game.image = pygame.image.load('assets/Achievements/Demons/Hero' + str(num_moon) + '.png')
@@ -145,7 +145,7 @@ class achievements():
         '''Создание достижений (добавление объектов в массив) за количество убитых демонов'''
         for num_ach_count_demon in range(self.globals.MAX_COUNT_DEMON):
             ach_count_demon = One_achiv(self.screen)
-            with open('Save_data/ach_count_demon.txt', 'r') as f:
+            with open('save_data/ach_count_demon.txt', 'r') as f:
                 ach_count_demon.achieved = int((f.read())[num_ach_count_demon])
             if ach_count_demon.achieved:
                 ach_count_demon.image = pygame.image.load('assets/Achievements/Count_demon/count_demon' + str(num_ach_count_demon) + '.png')
@@ -166,7 +166,7 @@ class achievements():
         '''Создание достижений (добавление объектов в массив) за силу клика'''
         for num_forse in range(self.globals.MAX_FORSE):
             count_forse = One_achiv(self.screen)
-            with open('Save_data/forse.txt', 'r') as f:
+            with open('save_data/forse.txt', 'r') as f:
                 count_forse.achieved = int((f.read())[num_forse])
             if not count_forse.achieved:
                 count_forse.image = pygame.image.load('assets/Achievements/Forse/forse_b' + str(num_forse) + '.png')
@@ -183,10 +183,10 @@ class achievements():
 
     def read_state_from_file(self):
         '''Обновление информации о достижении'''
-        with open('Save_data/count_achiv_demon.txt', 'r') as f:
+        with open('save_data/count_achiv_demon.txt', 'r') as f:
             self.count_achiv_demon = int(f.read())
 
-        with open('Save_data/count_click.txt', 'r') as f:
+        with open('save_data/count_click.txt', 'r') as f:
             self.count_click = int(f.read())
 
     def draw(self):
@@ -212,10 +212,10 @@ class achievements():
 
                 self.have_new_achiv = self.forses[i].copy("forse", i)
 
-                with open('Save_data/forse.txt', 'r') as file:
+                with open('save_data/forse.txt', 'r') as file:
                     new_forse = list(file.read())
                     new_forse[i] = "1"
-                    with open('Save_data/forse.txt', 'w') as file_1:
+                    with open('save_data/forse.txt', 'w') as file_1:
                         file_1.write("".join(new_forse))
                 break
 
@@ -231,10 +231,10 @@ class achievements():
 
                 self.have_new_achiv = self.forses[i].copy("count_demon", i)
 
-                with open('Save_data/ach_count_demon.txt', 'r') as file:
+                with open('save_data/ach_count_demon.txt', 'r') as file:
                     new_count = list(file.read())
                     new_count[i] = "1"
-                    with open('Save_data/ach_count_demon.txt', 'w') as file_1:
+                    with open('save_data/ach_count_demon.txt', 'w') as file_1:
                         file_1.write("".join(new_count))
                 break
 
@@ -272,13 +272,13 @@ class achievements():
     def add_demon(self):
         '''Контроль убитых демонов: подсчитываем и сохраняем информацию'''
         self.count_achiv_demon += 1
-        with open('Save_data/count_achiv_demon.txt', 'w') as file:
+        with open('save_data/count_achiv_demon.txt', 'w') as file:
             file.write(str(self.count_achiv_demon))
 
     def add_click(self):
         '''Контроль количества кликов за раз: подсчитываем и сохраняем информацию'''
         self.count_click += 1
-        with open('Save_data/count_click.txt', 'w') as file:
+        with open('save_data/count_click.txt', 'w') as file:
             file.write(str(self.count_click))
 
     def control_exc_new_achiv(self, Mouse_x, Mouse_y):

@@ -1,5 +1,5 @@
 import pygame
-from src.Globals import Globals
+from src.globals import Globals
 
 class draw():
     '''Класс, отвечающий за вывод всех изображений во время 2 мини-игры'''

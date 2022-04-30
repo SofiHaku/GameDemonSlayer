@@ -26,7 +26,7 @@ class now_locations():
         self.demon_3_moon = False
         self.demon_3_moon_end = False
 
-        with open('Save_data/use_demon', 'r') as file:
+        with open('save_data/use_demon', 'r') as file:
             use = list(file.read())
             self.use_demon_6_moon = int(use[0])
             self.use_demon_3_moon = int(use[1])

@@ -1,5 +1,5 @@
 import pygame.font
-from src.Globals import Globals
+from src.globals import Globals
 
 class Stat():
     def __init__(self, screen):
@@ -7,7 +7,7 @@ class Stat():
         self.screen = screen
         self.screen_rect = screen.get_rect()
 
-        with open('Save_data/points.txt', 'r') as f:
+        with open('save_data/points.txt', 'r') as f:
             self.point_now = int(f.read())
 
         self.globals = Globals()

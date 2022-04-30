@@ -13,7 +13,7 @@ class meeting():
                 locations_game.demon_6_moon = False
                 locations_game.first_list = True
                 locations_game.use_demon_6_moon = True
-                with open('Save_data/use_demon', 'w') as file:
+                with open('save_data/use_demon', 'w') as file:
                     file.write("10")
 
     def with_demon(self, demon_6_moon, points, hero_mini, screen, wall_mass, make_many_object_game, stat_game, globals):

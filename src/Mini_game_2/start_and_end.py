@@ -39,7 +39,7 @@ class demon_3_moon_start():
                         locations_game.demon_3_moon_start = False
                         locations_game.demon_3_moon = True
                         self.text_out_use = True
-                        pygame.mixer.music.load("Music/background_demon.mp3")
+                        pygame.mixer.music.load("music/background_demon.mp3")
                         pygame.mixer.music.play(-1)
                     else:
                         self.text_out_s_2 = True
@@ -74,5 +74,5 @@ class demon_3_moon_end():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     locations_game.demon_3_moon_end = False
-                    pygame.mixer.music.load("Music/background.mp3")
+                    pygame.mixer.music.load("music/background.mp3")
                     pygame.mixer.music.play(-1)

@@ -1,7 +1,7 @@
 import pygame
 import random
 import time
-from src.Demon_b import Demon
+from src.demon_b import Demon
 
 class Demon_6_moon(Demon):
     '''Класс демона, движущего по лабиринту'''

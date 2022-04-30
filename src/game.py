@@ -1,18 +1,19 @@
 import pygame
-from src.Globals import Globals
+from src.globals import Globals
+from src.Clicker_base.main_clicker_base import main_clicker_base
 from src.Clicker_base.statistics import Stat
 from src.locations import now_locations
 from src.menu import menu
-from src.text_message import text_message
-from src.Mini_game_1.start_and_end_of_6_demon import demon_6_moon_start
-from src.Mini_game_2.main_mini_game_2 import main_mini_game_2
 from src.Mini_game_1.main_mini_game_1 import main_mini_game_1
-from src.Clicker_base.main_clicker_base import main_clicker_base
+from src.Mini_game_2.main_mini_game_2 import main_mini_game_2
+from src.Mini_game_1.start_and_end_of_6_demon import demon_6_moon_start
+from src.text_message import text_message
 
 class Game():
     '''Класс, собирающий все игры вместе'''
     def __init__(self):
         self.globals = Globals()
+        # Необходимо заранее исполнить, чтобы не было задержек в музыке
         pygame.mixer.pre_init(self.globals.MUSIC[0], self.globals.MUSIC[1], self.globals.MUSIC[2], self.globals.MUSIC[3])
         pygame.init()
         self.clock = pygame.time.Clock()
@@ -26,7 +27,7 @@ class Game():
         self.main_mini_1_n = main_mini_game_1(self.screen)
         self.mini_clicker_b = main_clicker_base(self.screen, self.stat_game)
 
-        pygame.mixer.music.load("Music/background.mp3")
+        pygame.mixer.music.load("music/background.mp3")
 
     def run(self):
         '''Бесконечный цикл игры'''

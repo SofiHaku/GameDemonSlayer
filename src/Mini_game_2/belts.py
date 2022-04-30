@@ -1,6 +1,6 @@
 import pygame
 import random
-from src.Globals import Globals
+from src.globals import Globals
 
 class belt():
     '''Класс движущих поясов, между которых будет пролетать персонаж'''
