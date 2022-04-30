@@ -1,4 +1,5 @@
 class Globals:
+    '''Класс со всеми глобальными переменными'''
     def __init__(self):
         self.WIDTH = 600
         self.HEIGHT = 400

@@ -1,4 +1,5 @@
 class now_locations():
+    '''Класс управляющий (булевые функции, которые потом использует классы control) локациями игры'''
     def __init__(self):
         self.first_list = False
         self.shop = False

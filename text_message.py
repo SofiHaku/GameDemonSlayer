@@ -1,7 +1,7 @@
 import pygame
-from Globals import Globals
 
 class text_message():
+    "Класс со всем необходимым текстов во время игры"
     def __init__(self, screen):
         self.screen = screen
         self.shop_mess_hero = ["Незуко \n" \
@@ -101,6 +101,7 @@ class text_message():
         self.win = "Вы победили!"
 
     def draw_many_lines(self, x, y, text, size):
+        "Вывод многострочного текста на экран"
         lines = text.split("\n")
         self.font = pygame.font.SysFont("Verdana", size)
         for i, l in enumerate(lines):

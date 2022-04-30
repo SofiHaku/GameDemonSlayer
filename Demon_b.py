@@ -1,5 +1,6 @@
 class Demon():
-
+    '''Базовый класс демонов, от которого произойдут два других дочерних:
+    стандартный демон и демон высшей луны'''
     def __init__(self, screen):
         self.screen = screen
         self.screen_rect = screen.get_rect()
@@ -14,4 +15,5 @@ class Demon():
 
 
     def draw(self):
+        '''Вывод на экран'''
         self.screen.blit(self.image, self.rect)
