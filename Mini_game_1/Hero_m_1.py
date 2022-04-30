@@ -2,14 +2,14 @@ import pygame
 
 class Hero():
     '''Главный герой во время 1 мини-игры'''
-    def __init__(self, screen):
+    def __init__(self, screen, globals):
         self.screen = screen
         self.screen_rect = screen.get_rect()
 
         self.image = pygame.image.load("Img/Demon_6_moon/Mini_t.png")
         self.rect = self.image.get_rect()
-        self.rect.x = 180 + 21 * 18 + 2
-        self.rect.y = 21 * 17 + 4
+        self.rect.x = globals.HERO_RECT[0]
+        self.rect.y = globals.HERO_RECT[1]
 
         self.speed = 2
 

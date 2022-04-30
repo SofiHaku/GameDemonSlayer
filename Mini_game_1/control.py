@@ -6,7 +6,7 @@ class control():
     def __init__(self):
         pass
 
-    def hero(self, in_lab_game, hero_mini, wall):
+    def hero(self, in_lab_game, hero_mini, wall, globals):
         '''Контроль движения героя'''
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -15,7 +15,7 @@ class control():
                 self.button_down(event, hero_mini)
             elif event.type == pygame.KEYUP:
                 self.button_up(event, hero_mini)
-        in_lab_game.corner_hero(hero_mini, wall)
+        in_lab_game.corner_hero(hero_mini, wall, globals)
 
     def button_down(self, event, hero_mini):
         '''Контроль движения героя при нажатии на кнопку'''

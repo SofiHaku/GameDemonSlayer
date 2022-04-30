@@ -39,17 +39,18 @@ class lab():
         """Передаем массив для использования в других функциях"""
         return self.wall
 
-    def walls_draw(self):
+    def walls_draw(self, globals):
         """Рисуем стены"""
         for i in range(len(self.wall)):
             for j in range(len(self.wall[i])):
                 if self.wall[i][j] == 1:
-                    one_path_of_lab = pygame.Rect((180 + i * 20, j * 19, 20, 19))
-                    pygame.draw.rect(self.screen, (0, 121, 107) , one_path_of_lab)
+                    one_path_of_lab = pygame.Rect((globals.WALL_X_LEFT + i * globals.MAX_WALL, j * globals.MAX_WALL_H, globals.MAX_WALL, globals.MAX_WALL_H))
+                    pygame.draw.rect(self.screen, globals.BACK_C, one_path_of_lab)
 
-                elif (i == 5 or i == 15) and (j == 3 or j == 13) or (i == 7 or i == 13) and (j == 7 or j == 11):
-                    self.rect_drum.x = 180 + i * 20
-                    self.rect_drum.y = j * 19
+                elif (i == globals.IDEX_SPEC[0][0] or i == globals.IDEX_SPEC[0][1]) and (j == globals.IDEX_SPEC[1][0] or j == globals.IDEX_SPEC[1][1]) \
+                        or (i == globals.IDEX_SPEC[2][0] or i == globals.IDEX_SPEC[2][1]) and (j == globals.IDEX_SPEC[3][0] or j == globals.IDEX_SPEC[3][1]):
+                    self.rect_drum.x = globals.WALL_X_LEFT + i * globals.MAX_WALL
+                    self.rect_drum.y = j * globals.MAX_WALL_H
                     self.screen.blit(self.image_drum, self.rect_drum)
 
 

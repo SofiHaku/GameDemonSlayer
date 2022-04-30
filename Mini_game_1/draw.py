@@ -7,11 +7,11 @@ class draw():
         self.image = pygame.image.load('Img/Demon_6_moon/Tangiro.png')
         self.image_rect = self.screen.get_rect()
 
-    def all(self, lab_game, points, hero_mini, demon_6_moon):
+    def all(self, lab_game, points, hero_mini, demon_6_moon, globals):
         '''Вывод всех изображений во время 1 мини-игры'''
-        self.screen.fill((255, 255, 255))
+        self.screen.fill(globals.B_COLOR_NEW_SURF)
         self.screen.blit(self.image, self.image_rect)
-        lab_game.walls_draw()
+        lab_game.walls_draw(globals)
         for point in points:
             point.draw()
         hero_mini.draw()

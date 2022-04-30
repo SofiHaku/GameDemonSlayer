@@ -5,16 +5,16 @@ from Demon_b import Demon
 
 class Demon_6_moon(Demon):
     '''Класс демона, движущего по лабиринту'''
-    def __init__(self, screen):
+    def __init__(self, screen, globals):
         super().__init__(screen)
 
         self.screen = screen
         self.image = pygame.image.load('Img/Demon_6_moon/demon.png')
         self.rect = self.image.get_rect()
-        self.rect.x = 200
-        self.rect.y = 19
-        self.x = 200
-        self.y = 19
+        self.rect.x = globals.RECT_DEMON[0]
+        self.rect.y = globals.RECT_DEMON[1]
+        self.x = globals.RECT_DEMON[0]
+        self.y = globals.RECT_DEMON[1]
 
         self.speed = 3
 
@@ -33,11 +33,10 @@ class Demon_6_moon(Demon):
 
         self.time_before = time.time()
         self.time_now = time.time()
-        self.place_to_move = [[180 + 5*20, 3*19], [180 + 15*20, 3*19], [180 + 5*20, 13*19], [180 + 15*20, 13*19],
-                              [180 + 7*20, 7*19], [180 + 13*20, 7*19], [180 + 7*20, 11*19], [180 + 13*20, 11*19]]
+        self.place_to_move = globals.PLACE_TO_MOVE
 
 
-    def movement(self):
+    '''def movement(self):
         """функция, которая переносит демона в контрольные точки"""
         self.time_now = time.time()
         if (self.time_now - self.time_before) > 10:
@@ -46,7 +45,7 @@ class Demon_6_moon(Demon):
             self.y = self.place_to_move[random_ind][1]
             self.rect.x = self.place_to_move[random_ind][0]
             self.rect.y = self.place_to_move[random_ind][1]
-            self.time_before = time.time()
+            self.time_before = time.time()'''
 
     def update(self):
         """функция обновляет объект и изменяет его местоположение"""

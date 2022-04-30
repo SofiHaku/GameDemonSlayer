@@ -21,7 +21,7 @@ class Game():
         self.stat_game = Stat(self.screen)
         self.locations_game = now_locations()
         self.menu_game = menu(self.screen)
-        self.demon_6_moon_start_game = demon_6_moon_start(self.screen)
+        self.demon_6_moon_start_game = demon_6_moon_start(self.screen, self.globals)
         self.mini_game_2_n = main_mini_game_2(self.screen)
         self.main_mini_1_n = main_mini_game_1(self.screen)
         self.mini_clicker_b = main_clicker_base(self.screen, self.stat_game)

@@ -108,6 +108,7 @@ class Globals:
         self.TEXT_SIZE = 20
         self.TEXT_SIZE_2 = 15
         self.TEXT_SIZE_3 = 30
+        self.TEXT_SIZE_4 = 40
 
         # Цвет текста
         self.TEXT_COLOR = (0, 0, 0)
@@ -119,9 +120,36 @@ class Globals:
         self.TEXT_LINES_T3_XY = [330, 75]
         self.TEXT_LINES_T4_XY = [310, 150]
         self.TEXT_LINES_T5_XY = [100, 160]
+        self.TEXT_LINES_T5_XY = [30, 150]
+        self.TEXT_LINES_T6_X_DIFF = [30, 90]
+        self.TEXT_LINES_T7_XY = [150, 280]
 
         self.MONEY_Y = 25
         self.SCORE_RECT = [100, 160]
         self.FRAME_S = 10
         self.HERO_XY_FL = [185, 550]
         self.GLOW_F = 50
+
+
+        # Первая мини-игра
+
+        # Координаты
+        self.RECT_DEMON = [200, 19]
+        self.PLACE_TO_MOVE = [[180 + 5 * 20, 3 * 19], [180 + 15 * 20, 3 * 19], [180 + 5 * 20, 13 * 19],
+                              [180 + 15 * 20, 13 * 19],
+                              [180 + 7 * 20, 7 * 19], [180 + 13 * 20, 7 * 19], [180 + 7 * 20, 11 * 19],
+                              [180 + 13 * 20, 11 * 19]]
+        self.HERO_RECT = [180 + 21 * 18 + 2, 21 * 17 + 4]
+        self.WIN_X = 360
+
+        # Размеры
+        self.WALL_X_LEFT = 180
+        self.MAX_WALL = 20
+        self.MAX_WALL_H = 19
+        self.WALL_CENTER_DEL = 15
+
+        # Цвет
+        self.BACK_C = (0, 121, 107)
+        self.IDEX_SPEC = [[5, 15], [3, 13], [7, 13], [7, 11]]
+
+        self.MAX_ALM = 180
