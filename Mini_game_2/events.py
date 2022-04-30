@@ -16,7 +16,7 @@ class control():
                 if event.key == pygame.K_SPACE:
                     self.play_now = True
 
-    def events(self, hero, belt_many):
+    def events(self, hero, belt_many, globals):
         '''Контроль событий во время самый игры'''
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -24,8 +24,8 @@ class control():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     hero.speed_down = 0
-                    hero.image_rect.y -= 30
-        if self.count % 80 == 0:
+                    hero.image_rect.y -= globals.FORSE_JUMP
+        if self.count % globals.FREQUENCY == 0:
             belt_many.create_belt()
         self.count += 1
 

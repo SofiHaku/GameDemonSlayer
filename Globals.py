@@ -123,6 +123,7 @@ class Globals:
         self.TEXT_LINES_T5_XY = [30, 150]
         self.TEXT_LINES_T6_X_DIFF = [30, 90]
         self.TEXT_LINES_T7_XY = [150, 280]
+        self.TEXT_LINES_T8_XY = [280, 150]
 
         self.MONEY_Y = 25
         self.SCORE_RECT = [100, 160]
@@ -153,3 +154,20 @@ class Globals:
         self.IDEX_SPEC = [[5, 15], [3, 13], [7, 13], [7, 11]]
 
         self.MAX_ALM = 180
+
+        # Вторая мини-игра
+        # Координаты
+
+        self.BELT_X = 500
+        self.belt_height = [200, 250, 300, 350]
+        self.DIF_WITH_B = 150
+        self.START_X = self.WIDTH // 4.5
+        self.TAP_TO_PLAY_XY = [250, 185]
+        self.FRAME_S_M2 = 30
+
+        self.FORSE_JUMP = 30
+        self.FREQUENCY = 60
+
+        self.MAX_BELT = 10
+        self.IMG_START_2_MG = 50
+        self.HERO_X_2_MG = 200
