@@ -100,11 +100,11 @@ class text_message():
                                    "          желтых поясов!\n"]
         self.win = "Вы победили!"
 
-    def draw_many_lines(self, x, y, text, size):
+    def draw_many_lines(self, x, y, text, size, globals):
         "Вывод многострочного текста на экран"
         lines = text.split("\n")
         self.font = pygame.font.SysFont("Verdana", size)
         for i, l in enumerate(lines):
-            self.screen.blit(self.font.render(l, True, (0, 0, 0), (255, 255, 255)), (x, y + (size + 5) * i))
+            self.screen.blit(self.font.render(l, True, (0, 0, 0), globals.COLOR_BACK_TEXT), (x, y + (size + 5) * i))
 
 

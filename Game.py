@@ -12,15 +12,15 @@ from Clicker_base.main_clicker_base import main_clicker_base
 class Game():
     '''Класс, собирающий все игры вместе'''
     def __init__(self):
-        pygame.mixer.pre_init(44100, -16, 1, 512)
-        pygame.init()
         self.globals = Globals()
+        pygame.mixer.pre_init(self.globals.MUSIC[0], self.globals.MUSIC[1], self.globals.MUSIC[2], self.globals.MUSIC[3])
+        pygame.init()
         self.clock = pygame.time.Clock()
         self.screen = pygame.display.set_mode((self.globals.WIDTH, self.globals.HEIGHT))
         self.text_g = text_message(self.screen)
         self.stat_game = Stat(self.screen)
         self.locations_game = now_locations()
-        self.menu_game = menu(self.screen)
+        self.menu_game = menu(self.screen, self.globals)
         self.demon_6_moon_start_game = demon_6_moon_start(self.screen, self.globals)
         self.mini_game_2_n = main_mini_game_2(self.screen)
         self.main_mini_1_n = main_mini_game_1(self.screen)
@@ -34,7 +34,7 @@ class Game():
         while True:
             self.clock.tick(60)
             if self.locations_game.menu:
-                self.menu_game.run(self.locations_game)
+                self.menu_game.run(self.locations_game, self.globals)
             elif self.locations_game.demon_3_moon_start:
                 self.mini_game_2_n.run_start(self.locations_game, self.text_g)
             elif self.locations_game.demon_3_moon:

@@ -171,3 +171,17 @@ class Globals:
         self.MAX_BELT = 10
         self.IMG_START_2_MG = 50
         self.HERO_X_2_MG = 200
+
+        # Меню
+        self.HERO_XY_MENU = [50, 90]
+        self.TAP_TO_PLAY_XY_MENU = [180, 270]
+        self.MAX_BIG_SURF = 15
+        self.MAX_SMALL_SURF = 24
+        self.BIG_SURF_H = 29
+
+        self.ALPHA = 120
+        self.SURF_SMALL_SIZE = 25
+        self.SURF_SMALL_SIZE_W = 30
+
+        self.SURF_BIG_MAX_Y = 406
+        self.MUSIC = [44100, -16, 1, 512]

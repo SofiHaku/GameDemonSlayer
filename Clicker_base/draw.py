@@ -43,7 +43,7 @@ class Draw():
     def draw_lamp(self, shop_game):
         '''Описание лампы-подсказки'''
         self.text_g.draw_many_lines(self.globals.TEXT_LINES_XY[0], self.globals.TEXT_LINES_XY[1],
-                                    self.text_g.shop_mess_lamp, self.globals.TEXT_SIZE)
+                                    self.text_g.shop_mess_lamp, self.globals.TEXT_SIZE, self.globals)
         shop_game.func[4].draw()
         shop_game.func[5].draw()
 
@@ -52,7 +52,7 @@ class Draw():
         for i in range(len(locations_game.shop_info_hero)):
             if locations_game.shop_info_hero[i]:
                 self.text_g.draw_many_lines(self.globals.TEXT_LINES_XY[0], self.globals.TEXT_LINES_XY[1],
-                                            self.text_g.shop_mess_hero[i], self.globals.TEXT_SIZE)
+                                            self.text_g.shop_mess_hero[i], self.globals.TEXT_SIZE, self.globals)
                 shop_game.herous_info[i].draw()
                 break
         # Выводим "крестик"
@@ -63,7 +63,7 @@ class Draw():
         for i in range(len(locations_game.shop_info_skills)):
             if locations_game.shop_info_skills[i]:
                 self.text_g.draw_many_lines(self.globals.TEXT_LINES_T2_XY[0], self.globals.TEXT_LINES_T2_XY[1],
-                                            self.text_g.shop_mess_skills[i], self.globals.TEXT_SIZE)
+                                            self.text_g.shop_mess_skills[i], self.globals.TEXT_SIZE, self.globals)
                 shop_game.skills_info[i].draw()
                 break
         # Выводим "крестик"
@@ -137,10 +137,10 @@ class Draw():
             if locations_game.achiv_info_demons[i]:
                 if i == 0:
                     self.text_g.draw_many_lines(self.globals.TEXT_LINES_T3_XY[0], self.globals.TEXT_LINES_T3_XY[1],
-                                                self.text_g.mess_demon[i][locations_game.use_demon_6_moon], self.globals.TEXT_SIZE)
+                                                self.text_g.mess_demon[i][locations_game.use_demon_6_moon], self.globals.TEXT_SIZE, self.globals)
                 else:
                     self.text_g.draw_many_lines(self.globals.TEXT_LINES_T3_XY[0], self.globals.TEXT_LINES_T3_XY[1],
-                                                self.text_g.mess_demon[i][locations_game.use_demon_3_moon], self.globals.TEXT_SIZE)
+                                                self.text_g.mess_demon[i][locations_game.use_demon_3_moon], self.globals.TEXT_SIZE, self.globals)
                 achiv.demons_moon[i].draw_info(self.globals)
         shop_game.func[4].draw()
 
@@ -149,7 +149,7 @@ class Draw():
         for i in range(len(locations_game.achiv_info_count_demons)):
             if locations_game.achiv_info_count_demons[i]:
                 self.text_g.draw_many_lines(self.globals.TEXT_LINES_XY[0], self.globals.TEXT_LINES_XY[1],
-                                            self.text_g.mess_count_demons[i], self.globals.TEXT_SIZE)
+                                            self.text_g.mess_count_demons[i], self.globals.TEXT_SIZE, self.globals)
                 achiv.count_demon[i].draw_info(self.globals)
         shop_game.func[4].draw()
 
@@ -158,7 +158,7 @@ class Draw():
         for i in range(len(locations_game.achiv_info_forse)):
             if locations_game.achiv_info_forse[i]:
                 self.text_g.draw_many_lines(self.globals.TEXT_LINES_XY[0], self.globals.TEXT_LINES_XY[1],
-                                            self.text_g.mess_forse[i], self.globals.TEXT_SIZE)
+                                            self.text_g.mess_forse[i], self.globals.TEXT_SIZE, self.globals)
                 achiv.forses[i].draw_info(self.globals)
         shop_game.func[4].draw()
 

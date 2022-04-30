@@ -307,7 +307,8 @@ class achievements():
                 text_g.draw_many_lines(self.globals.NEW_SURF_ACHIV_TEXT_FORSE_XY[0], self.globals.NEW_SURF_ACHIV_TEXT_FORSE_XY[1],
                                        text_g.mess_forse[self.have_new_achiv.index],  self.globals.NEW_SURF_TEXT_S)
             elif self.have_new_achiv.name == "count_demon":
-                text_g.draw_many_lines(self.globals.NEW_SURF_ACHIV_TEXT_C_D_XY[0], self.globals.NEW_SURF_ACHIV_TEXT_C_D_XY[1], text_g.mess_count_demons[self.have_new_achiv.index], self.globals.TEXT_SIZE)
+                text_g.draw_many_lines(self.globals.NEW_SURF_ACHIV_TEXT_C_D_XY[0], self.globals.NEW_SURF_ACHIV_TEXT_C_D_XY[1],
+                                       text_g.mess_count_demons[self.have_new_achiv.index], self.globals.TEXT_SIZE, self.globals)
             self.control_exc_new_achiv(Mouse_x, Mouse_y)
             pygame.display.update()
 
