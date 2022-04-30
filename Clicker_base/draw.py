@@ -12,8 +12,8 @@ class Draw():
 
         self.state = pygame.image.load('Img/Achievements/State/state1.png')
         self.state_rect = self.state.get_rect()
-        self.state_rect.y = self.screen_rect.y + 10 + 20
-        self.state_rect.centerx = 100
+        self.state_rect.y = self.globals.GENERAL_STATE_Y
+        self.state_rect.centerx = self.globals.GENERAL_STATE_X
         self.text_g = text_message(self.screen)
 
         self.back = pygame.image.load('Img/Background.png')
@@ -25,7 +25,7 @@ class Draw():
 
     def shop(self, shop_game, stat_game, locations_game, ill_butt, achiv):
         '''Вывод изображений в магазине'''
-        self.screen.fill((255, 255, 255))
+        self.screen.fill(self.globals.B_COLOR_NEW_SURF)
         # Проверка перехода в страницы-описания
         if locations_game.shop_lamp:
             self.draw_lamp(shop_game)
@@ -42,7 +42,8 @@ class Draw():
 
     def draw_lamp(self, shop_game):
         '''Описание лампы-подсказки'''
-        self.text_g.draw_many_lines(290, 75, self.text_g.shop_mess_lamp, 20)
+        self.text_g.draw_many_lines(self.globals.TEXT_LINES_XY[0], self.globals.TEXT_LINES_XY[1],
+                                    self.text_g.shop_mess_lamp, self.globals.TEXT_SIZE)
         shop_game.func[4].draw()
         shop_game.func[5].draw()
 
@@ -50,7 +51,8 @@ class Draw():
         '''Описание героев'''
         for i in range(len(locations_game.shop_info_hero)):
             if locations_game.shop_info_hero[i]:
-                self.text_g.draw_many_lines(290, 75, self.text_g.shop_mess_hero[i], 20)
+                self.text_g.draw_many_lines(self.globals.TEXT_LINES_XY[0], self.globals.TEXT_LINES_XY[1],
+                                            self.text_g.shop_mess_hero[i], self.globals.TEXT_SIZE)
                 shop_game.herous_info[i].draw()
                 break
         # Выводим "крестик"
@@ -60,7 +62,8 @@ class Draw():
         '''Описание скиллов'''
         for i in range(len(locations_game.shop_info_skills)):
             if locations_game.shop_info_skills[i]:
-                self.text_g.draw_many_lines(300, 95, self.text_g.shop_mess_skills[i], 20)
+                self.text_g.draw_many_lines(self.globals.TEXT_LINES_T2_XY[0], self.globals.TEXT_LINES_T2_XY[1],
+                                            self.text_g.shop_mess_skills[i], self.globals.TEXT_SIZE)
                 shop_game.skills_info[i].draw()
                 break
         # Выводим "крестик"
@@ -74,7 +77,7 @@ class Draw():
         shop_game.func[3].draw()
 
         # Вывод количества монеток на экран
-        stat_game.score_rect.y = 25
+        stat_game.score_rect.y = self.globals.MONEY_Y
         stat_game.score_rect.centerx = self.screen_rect.centerx
         stat_game.draw()
 
@@ -103,19 +106,19 @@ class Draw():
             shop_game.herous[i].draw()
             shop_game.draw_cost_hero(shop_game.herous[i].rect.right, shop_game.herous[i].rect.bottom, i)
             if ill_butt.hero[i]:
-                ill_butt.button(shop_game.herous[i].rect.x, shop_game.herous[i].rect.y, 125, 125)
+                ill_butt.button(shop_game.herous[i].rect.x, shop_game.herous[i].rect.y, self.globals.SHOP_HERO_W, self.globals.SHOP_HERO_H)
         # Подсветка "скиллов"
         for i in range(self.globals.MAX_SKILLS):
             shop_game.skills[i].draw()
             shop_game.image_count(shop_game.skills[i].buy)
             shop_game.draw_count(shop_game.max_skills_coord[i][0], shop_game.max_skills_coord[i][1], i)
             if ill_butt.skills[i]:
-                ill_butt.button(shop_game.skills[i].rect.x, shop_game.skills[i].rect.y, 85, 75)
+                ill_butt.button(shop_game.skills[i].rect.x, shop_game.skills[i].rect.y, self.globals.SHOP_SKILL_W, self.globals.SHOP_SKILL_H)
 
 
     def achiv (self, shop_game, locations_game, ill_butt, achiv):
         """Вывод достижений на экран"""
-        self.screen.fill((255, 255, 255))
+        self.screen.fill(self.globals.B_COLOR_NEW_SURF)
 
         if locations_game.achiv_demons:
             self.draw_achiv_demon(locations_game, shop_game, achiv)
@@ -133,27 +136,30 @@ class Draw():
         for i in range(len(locations_game.achiv_info_demons)):
             if locations_game.achiv_info_demons[i]:
                 if i == 0:
-                    self.text_g.draw_many_lines(330, 75, self.text_g.mess_demon[i][locations_game.use_demon_6_moon], 20)
+                    self.text_g.draw_many_lines(self.globals.TEXT_LINES_T3_XY[0], self.globals.TEXT_LINES_T3_XY[1],
+                                                self.text_g.mess_demon[i][locations_game.use_demon_6_moon], self.globals.TEXT_SIZE)
                 else:
-                    self.text_g.draw_many_lines(330, 75, self.text_g.mess_demon[i][locations_game.use_demon_3_moon],
-                                                20)
-                achiv.demons_moon[i].draw_info()
+                    self.text_g.draw_many_lines(self.globals.TEXT_LINES_T3_XY[0], self.globals.TEXT_LINES_T3_XY[1],
+                                                self.text_g.mess_demon[i][locations_game.use_demon_3_moon], self.globals.TEXT_SIZE)
+                achiv.demons_moon[i].draw_info(self.globals)
         shop_game.func[4].draw()
 
     def draw_achiv_count_demons(self, locations_game, achiv, shop_game):
         '''Вывод информации о достижениях, которые обозначают количество убитых демонов'''
         for i in range(len(locations_game.achiv_info_count_demons)):
             if locations_game.achiv_info_count_demons[i]:
-                self.text_g.draw_many_lines(290, 75, self.text_g.mess_count_demons[i], 20)
-                achiv.count_demon[i].draw_info()
+                self.text_g.draw_many_lines(self.globals.TEXT_LINES_XY[0], self.globals.TEXT_LINES_XY[1],
+                                            self.text_g.mess_count_demons[i], self.globals.TEXT_SIZE)
+                achiv.count_demon[i].draw_info(self.globals)
         shop_game.func[4].draw()
 
     def draw_schiv_forse(self, locations_game, achiv, shop_game):
         '''Вывод информации о достижениях, которые обозначают силу персонажа'''
         for i in range(len(locations_game.achiv_info_forse)):
             if locations_game.achiv_info_forse[i]:
-                self.text_g.draw_many_lines(290, 75, self.text_g.mess_forse[i], 20)
-                achiv.forses[i].draw_info()
+                self.text_g.draw_many_lines(self.globals.TEXT_LINES_XY[0], self.globals.TEXT_LINES_XY[1],
+                                            self.text_g.mess_forse[i], self.globals.TEXT_SIZE)
+                achiv.forses[i].draw_info(self.globals)
         shop_game.func[4].draw()
 
     def draw_list_achiv(self, achiv, ill_butt):
@@ -167,23 +173,23 @@ class Draw():
         for i in range(2):
             achiv.demons_moon[i].draw()
             if ill_butt.demon[i]:
-                ill_butt.button(achiv.demons_moon[i].rect.x, achiv.demons_moon[i].rect.y, 125, 125)
+                ill_butt.button(achiv.demons_moon[i].rect.x, achiv.demons_moon[i].rect.y, self.globals.ACHIV_HERO_HW, self.globals.ACHIV_HERO_HW)
         for i in range(self.globals.MAX_COUNT_DEMON):
             achiv.count_demon[i].draw()
             if ill_butt.count_demon[i]:
-                ill_butt.button(achiv.count_demon[i].rect.x, achiv.count_demon[i].rect.y, 75, 75)
+                ill_butt.button(achiv.count_demon[i].rect.x, achiv.count_demon[i].rect.y, self.globals.ACHIV_COUNT_DEMON_HW, self.globals.ACHIV_COUNT_DEMON_HW)
         for i in range(self.globals.MAX_FORSE):
             achiv.forses[i].draw()
             if ill_butt.forse[i]:
-                ill_butt.button(achiv.forses[i].rect.x, achiv.forses[i].rect.y, 75, 75)
+                ill_butt.button(achiv.forses[i].rect.x, achiv.forses[i].rect.y, self.globals.ACHIV_FORSE_HW, self.globals.ACHIV_FORSE_HW)
 
     def first_sl(self, shop_game, hero_game, stat_game, demon_classic, ill_butt, achiv):
         '''Вывод изображений в первой странице'''
         self.screen.blit(self.back, self.back_rect)
         self.draw_frame()
 
-        stat_game.score_rect.x = 100
-        stat_game.score_rect.y = 160
+        stat_game.score_rect.x = self.globals.SCORE_RECT[0]
+        stat_game.score_rect.y = self.globals.SCORE_RECT[1]
         hero_game.draw(shop_game.what_gero_buy())
 
         stat_game.draw()
@@ -199,13 +205,13 @@ class Draw():
 
     def draw_frame(self):
         '''Вывод рамки'''
-        pygame.draw.rect(self.screen, (255, 255, 255),
+        pygame.draw.rect(self.screen, self.globals.B_COLOR_NEW_SURF,
                          (self.screen_rect.x, self.screen_rect.y, self.globals.WIDTH // 3, self.globals.HEIGHT))
-        pygame.draw.rect(self.screen, (255, 255, 255), (self.screen_rect.x, self.screen_rect.y, self.globals.WIDTH, 10))
-        pygame.draw.rect(self.screen, (255, 255, 255),
-                         (self.screen_rect.x, self.screen_rect.bottom - 10, self.globals.WIDTH, 10))
-        pygame.draw.rect(self.screen, (255, 255, 255),
-                         (self.screen_rect.right - 10, self.screen_rect.y, 10, self.globals.HEIGHT))
+        pygame.draw.rect(self.screen, self.globals.B_COLOR_NEW_SURF, (self.screen_rect.x, self.screen_rect.y, self.globals.WIDTH, self.globals.FRAME_S))
+        pygame.draw.rect(self.screen, self.globals.B_COLOR_NEW_SURF,
+                         (self.screen_rect.x, self.screen_rect.bottom - self.globals.FRAME_S, self.globals.WIDTH, self.globals.FRAME_S))
+        pygame.draw.rect(self.screen, self.globals.B_COLOR_NEW_SURF,
+                         (self.screen_rect.right - self.globals.FRAME_S, self.screen_rect.y, self.globals.FRAME_S, self.globals.HEIGHT))
 
     def draw_demon_in_fl(self, demon_classic):
         '''Изображение демона на главном экране'''

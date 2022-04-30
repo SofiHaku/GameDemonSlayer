@@ -40,16 +40,12 @@ class Shop():
 
         self.you_dont_have_many = False
 
-        self.font = pygame.font.SysFont("Verdana", 15)
-        self.max_skills_img = self.font.render('/5', True, (0, 0, 0), (255, 255, 255))
+        self.font = pygame.font.SysFont("Verdana",  self.globals.TEXT_SIZE_2)
+        self.max_skills_img = self.font.render('/5', True, self.globals.TEXT_COLOR, self.globals.COLOR_BACK_TEXT)
         self.max_skills_img_rect = self.max_skills_img.get_rect()
 
         self.name_funcion = {'Background_Shop': [0, 0], 'Shop': self.globals.SHOP, 'Exc': self.globals.EXC,
-                             'lamp': self.globals.LAMP, 'Exc_info': self.globals.EXC_INFO, 'lamp_info': [15, 80]}
-        cost_hero = [200, 500, 1000]
-        cost_skills = [100, 150, 200, 250, 300, 350, 450, 500]
-        plus_points_d = [1, 2, 4, 8, 16, 32, 64, 128]
-
+                             'lamp': self.globals.LAMP, 'Exc_info': self.globals.EXC_INFO, 'lamp_info': self.globals.LAMP_INFO_XY}
         self.func = []
         self.herous = []
         self.herous_info = []
@@ -61,11 +57,11 @@ class Shop():
         self.skills_cost_img = []
 
         self.make_func_in_shop()
-        self.make_hero_in_shop(cost_hero)
+        self.make_hero_in_shop(self.globals.cost_hero)
         self.make_hero_info_in_shop()
-        self.make_skills_in_shop(cost_skills, plus_points_d)
+        self.make_skills_in_shop(self.globals.cost_skills, self.globals.plus_points_d)
         self.make_skills_info_in_shop()
-        self.make_cost_obj(cost_skills, cost_hero)
+        self.make_cost_obj(self.globals.cost_skills, self.globals.cost_hero)
 
     def make_func_in_shop(self):
         '''Создание функицональных объектов на экране (переход между локациями)'''
@@ -86,7 +82,7 @@ class Shop():
             hero_shop_game.image = pygame.image.load('Img/Shop/Hero/Hero' + str(num_hero) + '.png')
             hero_shop_game.rect = hero_shop_game.image.get_rect()
             hero_shop_game.rect.x = ((self.globals.WIDTH - self.globals.SHOP_HERO_W * self.globals.MAX_HERO)//(self.globals.MAX_HERO+ 1)) * (num_hero + 1) + (num_hero) * self.globals.SHOP_HERO_W
-            hero_shop_game.rect.y = (self.globals.HEIGHT - self.globals.SHOP_HERO_H - 2 * self.globals.SHOP_SKILL_H)//3 + 25
+            hero_shop_game.rect.y = (self.globals.HEIGHT - self.globals.SHOP_HERO_H - 2 * self.globals.SHOP_SKILL_H)//3 + self.globals.HERO_INFO_XY[1]//3
             hero_shop_game.cost = cost_hero[num_hero]
             self.herous.append(hero_shop_game)
 
@@ -96,8 +92,8 @@ class Shop():
             hero_info_game = Improve(self.screen)
             hero_info_game.image = pygame.image.load('Img/Shop/Hero_info/Hero' + str(num_hero) + '.png')
             hero_info_game.rect = hero_info_game.image.get_rect()
-            hero_info_game.rect.x = 25
-            hero_info_game.rect.y = 75
+            hero_info_game.rect.x = self.globals.HERO_INFO_XY[0]
+            hero_info_game.rect.y = self.globals.HERO_INFO_XY[1]
             self.herous_info.append(hero_info_game)
 
     def make_skills_in_shop(self, cost_skills, plus_points_d):
@@ -108,9 +104,12 @@ class Shop():
                 skill_game.buy = int((f.read())[num_skill])
             skill_game.image = pygame.image.load('Img/Shop/Skills/skill' + str(num_skill) + '.png')
             skill_game.rect = skill_game.image.get_rect()
-            skill_game.rect.x = ((self.globals.WIDTH - self.globals.SHOP_SKILL_W * self.globals.MAX_SKILLS_SET)//(self.globals.MAX_SKILLS_SET+1)) * (num_skill % self.globals.MAX_SKILLS_SET + 1) + (num_skill % self.globals.MAX_SKILLS_SET) * self.globals.SHOP_SKILL_W + (self.globals.SHOP_SKILL_W + 52) * (num_skill // self.globals.MAX_SKILLS_SET)
-            # 25 и 15 соответсвенно расстояния между (героями и скилами) и (скилами между собой)
-            skill_game.rect.y = self.herous[0].rect.bottom + (self.globals.SHOP_SKILL_H + 15) * (num_skill // self.globals.MAX_SKILLS_SET) + 25
+            skill_game.rect.x = ((self.globals.WIDTH - self.globals.SHOP_SKILL_W * self.globals.MAX_SKILLS_SET)//
+                                 (self.globals.MAX_SKILLS_SET+1)) * (num_skill % self.globals.MAX_SKILLS_SET + 1) + \
+                                (num_skill % self.globals.MAX_SKILLS_SET) * self.globals.SHOP_SKILL_W + \
+                                (self.globals.SHOP_SKILL_W + self.globals.DIFF_SKILL_X) * (num_skill // self.globals.MAX_SKILLS_SET)
+            skill_game.rect.y = self.herous[0].rect.bottom + (self.globals.SHOP_SKILL_H + self.globals.DIFF_SKILL_Y) * \
+                                (num_skill // self.globals.MAX_SKILLS_SET) + self.globals.SKILL_INFO_XY[0]
             skill_game.cost = cost_skills[num_skill]
             skill_game.plus_points = plus_points_d[num_skill]
             self.skills.append(skill_game)
@@ -122,18 +121,18 @@ class Shop():
             skills_info_game = Improve(self.screen)
             skills_info_game.image = pygame.image.load('Img/Shop/Skills_info/skill' + str(num_hero) + '.png')
             skills_info_game.rect = skills_info_game.image.get_rect()
-            skills_info_game.rect.x = 25
-            skills_info_game.rect.y = 95
+            skills_info_game.rect.x = self.globals.SKILL_INFO_XY[0]
+            skills_info_game.rect.y = self.globals.SKILL_INFO_XY[1]
             self.skills_info.append(skills_info_game)
 
     def make_cost_obj(self, cost_skills, cost_hero):
         '''Создание стоимоcти объектов'''
         for cost in cost_skills:
-            cost_img = self.font.render(str(cost), True, (0, 0, 0), (255, 255, 255))
+            cost_img = self.font.render(str(cost), True, self.globals.TEXT_COLOR, self.globals.COLOR_BACK_TEXT)
             self.skills_cost_img.append([cost_img, cost_img.get_rect()])
 
         for cost in cost_hero:
-            cost_img = self.font.render(str(cost), True, (0, 0, 0), (255, 255, 255))
+            cost_img = self.font.render(str(cost), True, self.globals.TEXT_COLOR, self.globals.COLOR_BACK_TEXT)
             self.herous_cost_img.append([cost_img, cost_img.get_rect()])
 
     def points_in_click(self):
@@ -147,7 +146,7 @@ class Shop():
 
     def image_count(self, count):
         '''Создание изображний количества объектов'''
-        self.skills_img = self.font.render(str(count), True, (0, 0, 0), (255, 255, 255))
+        self.skills_img = self.font.render(str(count), True, self.globals.TEXT_COLOR, self.globals.COLOR_BACK_TEXT)
         self.skills_img_rect = self.skills_img.get_rect()
 
     def draw_count(self, x, y, number_skills):
@@ -191,24 +190,25 @@ class Shop():
         '''Контроль отсутсвия денег для перехода на другую локацию'''
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if Mouse_x >= 500 and Mouse_x <= 530 and Mouse_y >= 70 and Mouse_y <= 110:
+                if Mouse_x >= self.globals.EXC_DONT_MONEY[0] and Mouse_x <= self.globals.EXC_DONT_MONEY[0] + self.globals.EXC_WH\
+                        and Mouse_y >= self.globals.EXC_DONT_MONEY[1] and Mouse_y <= self.globals.EXC_DONT_MONEY[1] + self.globals.EXC_WH:
                     self.you_dont_have_many = False
 
     def draw_you_dont_have_many(self, Mouse_x, Mouse_y, text_g):
         '''Вывод окошка об осутсвии денег'''
         if self.you_dont_have_many:
-            serf = pygame.Surface((500, 300))
-            serf.fill((255, 255, 255))
-            x, y = 50, 50
+            serf = pygame.Surface(self.globals.DONT_MONET_SURF_S)
+            serf.fill(self.globals.B_COLOR_NEW_SURF)
+            x, y = self.globals.SURF_DONT_MONEY[0], self.globals.SURF_DONT_MONEY[1]
             img = pygame.image.load("Img/Shop/zenic.png")
             img_rect = img.get_rect()
-            img_rect.x, img_rect.y = 20, 30
-            exc_x, exc_y = 450, 20
+            img_rect.x, img_rect.y = self.globals.IMG_DONT_MONEY[0], self.globals.IMG_DONT_MONEY[1]
+            exc_x, exc_y = self.globals.EXC_DONT_MONEY[0], self.globals.EXC_DONT_MONEY[1]
 
             serf.blit(img, img_rect)
             serf.blit(self.func[2].image, (exc_x, exc_y))
             self.screen.blit(serf, (x, y))
-            text_g.draw_many_lines(310, 150, text_g.mess_dont_many, 30)
+            text_g.draw_many_lines(self.globals.TEXT_LINES_T4_XY[0], self.globals.TEXT_LINES_T4_XY[1], text_g.mess_dont_many, self.globals.TEXT_SIZE_3)
 
             self.control_you_dont_have_many(Mouse_x, Mouse_y)
 

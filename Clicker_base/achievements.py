@@ -22,9 +22,9 @@ class One_achiv():
     def draw(self):
         '''Вывод достижения на экран'''
         self.screen.blit(self.image, self.rect)
-    def draw_info(self):
+    def draw_info(self, globals):
         '''Вывод информации о достижении на экран'''
-        self.screen.blit(self.image_info, (50, 80))
+        self.screen.blit(self.image_info, globals.INFO_ACHIV_XY)
     def copy(self, name, index):
         '''Функция для замены недостигнутого достижения на полученное'''
         new_achiv = One_achiv(self.screen)
@@ -51,18 +51,18 @@ class Functional():
 
 class General_state():
     '''Класс основного статуса (изображение и текст в левом верхнем углу на главном экране)'''
-    def __init__(self, screen, image, info):
+    def __init__(self, screen, image, info, globals):
         self.screen = screen
         self.screen_rect = screen.get_rect()
         self.image = pygame.image.load(image)
         self.rect = self.image.get_rect()
 
-        self.rect.y = self.screen_rect.y + 10 + 20
-        self.rect.centerx = 100
+        self.rect.y = globals.GENERAL_STATE_Y
+        self.rect.centerx = globals.GENERAL_STATE_X
         self.achieved = False
         self.info = info
-        self.font = pygame.font.SysFont("Verdana", 20)
-        self.info_img = self.font.render(self.info, True, (0, 0, 0), (255, 255, 255))
+        self.font = pygame.font.SysFont("Verdana", globals.TEXT_SIZE)
+        self.info_img = self.font.render(self.info, True, globals.TEXT_COLOR, globals.COLOR_BACK_TEXT)
         self.info_img_rect = self.info_img.get_rect()
         self.info_img_rect.top = self.rect.bottom
         self.info_img_rect.centerx = self.rect.centerx
@@ -118,14 +118,14 @@ class achievements():
         '''Создание основных достижений (для вывода на главном экране)'''
         for num_state in range(self.globals.MAX_STATE):
             one_state = General_state(self.screen, "Img/Achievements/State/state" +
-                                      str(num_state + 1) + ".png", self.general_states_data[num_state])
+                                      str(num_state + 1) + ".png", self.general_states_data[num_state], self.globals)
             with open('Save_data/forse.txt', 'r') as f:
                 one_state.achieved = int((f.read())[num_state])
             self.general_states.append(one_state)
 
     def make_achiv_moon(self):
         '''Создание достижений (добавление объектов в массив) за победу над демоном-луной'''
-        for num_moon in range(2):
+        for num_moon in range(self.globals.MAX_MOON_DEMON):
             one_achiv_game = One_achiv(self.screen)
             with open('Save_data/use_demon', 'r') as f:
                 one_achiv_game.achieved = int((f.read())[num_moon])
@@ -157,10 +157,9 @@ class achievements():
                 ach_count_demon.image_info = pygame.image.load(
                     'Img/Achievements/Count_demon/count_demon_b_info' + str(num_ach_count_demon) + '.png')
             ach_count_demon.rect = ach_count_demon.image.get_rect()
-            ach_count_demon.rect.x = ((self.globals.WIDTH - 75 * self.globals.MAX_COUNT_DEMON) // (self.globals.MAX_COUNT_DEMON + 1)) * (
-                        num_ach_count_demon + 1) + (
-                                         num_ach_count_demon) * 75
-            ach_count_demon.rect.y = self.demons_moon[0].rect.bottom + 75 + 20
+            ach_count_demon.rect.x = ((self.globals.WIDTH - self.globals.ACHIV_S  * self.globals.MAX_COUNT_DEMON) //
+                                      (self.globals.MAX_COUNT_DEMON + 1)) * (num_ach_count_demon + 1) + (num_ach_count_demon) * self.globals.ACHIV_S
+            ach_count_demon.rect.y = self.demons_moon[0].rect.bottom + self.globals.ACHIV_S  + self.globals.ACHIV_COUNT_DEMON_Y
             self.count_demon.append(ach_count_demon)
 
     def make_achiv_forse(self):
@@ -177,9 +176,9 @@ class achievements():
                 count_forse.image_info = pygame.image.load(
                     'Img/Achievements/Forse/forse_info' + str(num_forse) + '.png')
             count_forse.rect = count_forse.image.get_rect()
-            count_forse.rect.x = ((self.globals.WIDTH - 75 * self.globals.MAX_FORSE) // (self.globals.MAX_FORSE + 1)) * (num_forse + 1) + (
-                num_forse) * 75
-            count_forse.rect.y = self.demons_moon[0].rect.bottom + 10
+            count_forse.rect.x = ((self.globals.WIDTH - self.globals.ACHIV_S * self.globals.MAX_FORSE) // (self.globals.MAX_FORSE + 1)) * (num_forse + 1) + (
+                num_forse) * self.globals.ACHIV_S
+            count_forse.rect.y = self.demons_moon[0].rect.bottom + self.globals.ACHIV_FORSE_Y
             self.forses.append(count_forse)
 
     def read_state_from_file(self):
@@ -203,9 +202,8 @@ class achievements():
     def control_click(self, shop_game):
         '''Контроль количества кликов за один раз'''
         points_in_click = shop_game.points_in_click()
-        for i in range(4, -1, -1):
-            if points_in_click >= i*25 + 5 and not self.forses[i].achieved:
-                print("True")
+        for i in range(self.globals.MAX_FORSE - 1, -1, -1):
+            if points_in_click >= i*self.globals.DIFF_ACHIV_POINTS_IN_CLICK + self.globals.FIRST_ACHIV_POINTS_IN_CLICK  and not self.forses[i].achieved:
                 self.forses[i].achieved = True
                 self.forses[i].image = pygame.image.load(
                     'Img/Achievements/Forse/forse' + str(i) + '.png')
@@ -223,8 +221,8 @@ class achievements():
 
     def control_die_demon(self):
         '''Контроль количества убитых демонов'''
-        for i in range(4, -1, -1):
-            if self.count_achiv_demon >= i*5 + 1 and not self.count_demon[i].achieved:
+        for i in range(self.globals.MAX_COUNT_DEMON - 1, -1, -1):
+            if self.count_achiv_demon >= i * self.globals.DIFF_ACHIV_COUNT_DEMON + 1 and not self.count_demon[i].achieved:
                 self.count_demon[i].achieved = True
                 self.count_demon[i].image = pygame.image.load(
                     'Img/Achievements/Count_demon/count_demon' + str(i) + '.png')
@@ -242,12 +240,12 @@ class achievements():
 
     def control_special(self, locations_game):
         '''Контроль особых достижений количества убитых демонов'''
-        if self.count_click >= 500 and not locations_game.use_demon_3_moon:
+        if self.count_click >= self.globals.SECOND_SPECIAL_ACHIV and not locations_game.use_demon_3_moon:
             locations_game.demon_3_moon_start = True
             locations_game.demon_3_moon = True
             locations_game.demon_3_moon_end = True
             locations_game.first_list = False
-        if self.count_click >= 250 and not locations_game.use_demon_6_moon:
+        if self.count_click >= self.globals.FIRST_SPECIAL_ACHIV and not locations_game.use_demon_6_moon:
             locations_game.demon_6_moon_start = True
             locations_game.demon_6_moon = True
             locations_game.demon_6_moon_end = True
@@ -264,11 +262,11 @@ class achievements():
 
     def special_achiv(self, index_demon):
         '''Используется при победе над особыми демонами: замена их статуса на достигнутый'''
-        if index_demon == 6:
+        if index_demon == self.globals.INDEX_DEMON_MOON_1_MG:
             self.demons_moon[0].achieved = True
-        elif index_demon == 3:
+        elif index_demon == self.globals.INDEX_DEMON_MOON_2_MG:
             self.demons_moon[1].achieved = True
-        elif index_demon == 1:
+        elif index_demon == self.globals.INDEX_DEMON_MOON_3_MG:
             self.demons_moon[2].achieved = True
 
     def add_demon(self):
@@ -288,27 +286,28 @@ class achievements():
         Отвечает за выход из вылезающего окошка'''
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if Mouse_x >= 500 + 25 and Mouse_x <= 500 + 25 + 30 and Mouse_y >= 50 + 20 and Mouse_y <= 50 + 20 + 30:
+                if Mouse_x >= self.globals.EXC_NEW_ACHIV_XY[0] and Mouse_x <= self.globals.EXC_NEW_ACHIV_XY[0] + self.globals.EXC_WH \
+                        and Mouse_y >= self.globals.EXC_NEW_ACHIV_XY[1] and Mouse_y <= self.globals.EXC_NEW_ACHIV_XY[1] + self.globals.EXC_WH:
                     self.have_new_achiv.achieved = False
 
     def draw_new_achiv(self, Mouse_x, Mouse_y, text_g):
         '''Вывод окошка о новом достижении на экран'''
         if self.have_new_achiv.achieved:
-            serf = pygame.Surface((550, 300))
-            serf.fill((255, 255, 255))
-            x, y = 25, 50
+            serf = pygame.Surface(self.globals.NEW_SURF_ACHIV_SIZE)
+            serf.fill(self.globals.B_COLOR_NEW_SURF)
+            x, y = self.globals.NEW_SURF_ACHIV_XY[0], self.globals.NEW_SURF_ACHIV_XY[1]
             img = pygame.image.load("Img/Achievements/State/new_state.png")
             img_rect = img.get_rect()
-            img_rect.x, img_rect.y = 0, 30
-            exc_x, exc_y = 500, 20
-
+            img_rect.x, img_rect.y = self.globals.NEW_SURF_ACHIV_IMG_XY[0], self.globals.NEW_SURF_ACHIV_IMG_XY[1]
+            exc_x, exc_y = self.globals.NEW_SURF_ACHIV_EXC_XY[0], self.globals.NEW_SURF_ACHIV_EXC_XY[1]
             serf.blit(img, img_rect)
             serf.blit(self.func[2].image, (exc_x, exc_y))
             self.screen.blit(serf, (x, y))
             if self.have_new_achiv.name == "forse":
-                text_g.draw_many_lines(270, 55, text_g.mess_forse[self.have_new_achiv.index], 25)
+                text_g.draw_many_lines(self.globals.NEW_SURF_ACHIV_TEXT_FORSE_XY[0], self.globals.NEW_SURF_ACHIV_TEXT_FORSE_XY[1],
+                                       text_g.mess_forse[self.have_new_achiv.index],  self.globals.NEW_SURF_TEXT_S)
             elif self.have_new_achiv.name == "count_demon":
-                text_g.draw_many_lines(270, 85, text_g.mess_count_demons[self.have_new_achiv.index], 20)
+                text_g.draw_many_lines(self.globals.NEW_SURF_ACHIV_TEXT_C_D_XY[0], self.globals.NEW_SURF_ACHIV_TEXT_C_D_XY[1], text_g.mess_count_demons[self.have_new_achiv.index], self.globals.TEXT_SIZE)
             self.control_exc_new_achiv(Mouse_x, Mouse_y)
             pygame.display.update()
 

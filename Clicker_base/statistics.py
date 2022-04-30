@@ -12,16 +12,16 @@ class Stat():
 
         self.globals = Globals()
 
-        self.font = pygame.font.SysFont("Verdana", 20)
+        self.font = pygame.font.SysFont("Verdana", self.globals.TEXT_SIZE)
         self.image_score(self.globals.COUNT[0], self.globals.COUNT[1])
         self.point_in_mini_game = 0
 
     def image_score(self, width, height):
         """Преобразование текста счета в графическое изображение"""
-        self.score_img = self.font.render(str(self.point_now), True, self.globals.TEXT_COLOR, (255, 255, 255))
+        self.score_img = self.font.render(str(self.point_now), True, self.globals.TEXT_COLOR, self.globals.COLOR_BACK_TEXT)
         self.score_rect = self.score_img.get_rect()
-        self.score_rect.x = 100
-        self.score_rect.y = 160
+        self.score_rect.x = self.globals.TEXT_LINES_T5_XY[0]
+        self.score_rect.y = self.globals.TEXT_LINES_T5_XY[1]
 
     def draw(self):
         """Вывод счета на экран"""

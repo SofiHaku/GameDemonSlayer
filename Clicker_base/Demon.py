@@ -14,8 +14,8 @@ class Demon_ordinary(Demon):
         self.image = pygame.image.load('Img/Demons/demon_classic_1.png')
         self.rect = self.image.get_rect()
         self.rect.centery = self.screen_rect.centery
-        self.rect.left = self.globals.SETTING + 30
-        self.count_life = self.globals.DEMON_W - 8
+        self.rect.left = self.globals.DEMON_CL_L
+        self.count_life = self.globals.DEMON_LIFE
 
         # Массив изображений демона
         self.image_set = ["demon_classic_1.png", "demon_classic_2.png", "demon_classic_3.png"]
@@ -29,12 +29,12 @@ class Demon_ordinary(Demon):
     def move(self):
         """Движение демона"""
         if self.move_to_up:
-            if (self.rect.top - 20) > 10:
+            if (self.rect.top - self.globals.MOVE_DEMON_SIZE_TO_END) > 0:
                 self.rect.centery -= self.speed
             else:
                 self.move_to_up = False
         else:
-            if (self.rect.bottom + 20) < self.globals.HEIGHT - 10 :
+            if (self.rect.bottom + self.globals.MOVE_DEMON_SIZE_TO_END) < self.globals.HEIGHT:
                 self.rect.centery += self.speed
             else:
                  self.move_to_up = True
@@ -47,7 +47,7 @@ class Demon_ordinary(Demon):
         """Создание нового демона"""
         self.image = pygame.image.load('Img/Demons/' + self.image_set[random.randint(0,2)])
         self.rect.centery = self.screen_rect.centery
-        self.count_life = self.globals.DEMON_W - 8
+        self.count_life = self.globals.DEMON_LIFE
         self.move_to_up = True
         self.move_to_down = False
 
@@ -59,5 +59,8 @@ class Demon_ordinary(Demon):
 
     def draw_streak_of_life(self):
         """Вывод полокски жизни на экран"""
-        pygame.draw.rect(self.screen, (255, 255, 255), (self.rect.x, self.rect.y - 20, self.globals.DEMON_W, 20))
-        pygame.draw.rect(self.screen, (221, 44, 0), (self.rect.x + 4, self.rect.y - 20 + 4, self.count_life, 12))
+        pygame.draw.rect(self.screen, self.globals.COLOR_STEAK_BL, (self.rect.x, self.rect.y - self.globals.DEMON_STEAK_LIFE_S,
+                                                        self.globals.DEMON_W, self.globals.DEMON_STEAK_LIFE_S))
+        pygame.draw.rect(self.screen, self.globals.COLOR_STEAK_SL, (self.rect.x + self.globals.DIFF_SMALL_AND_BIG_DEMON_STEAK_LIFE,
+                                                     self.rect.y - self.globals.DEMON_STEAK_LIFE_S + self.globals.DIFF_SMALL_AND_BIG_DEMON_STEAK_LIFE,
+                                                     self.count_life, self.globals.DEMON_STEAK_LIFE_S - 2 * self.globals.DIFF_SMALL_AND_BIG_DEMON_STEAK_LIFE))

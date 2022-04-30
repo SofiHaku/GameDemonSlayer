@@ -5,16 +5,18 @@ from Clicker_base.draw import Draw
 from Clicker_base.Demon import Demon_ordinary
 from Clicker_base.illumination import illumination
 from Clicker_base.achievements import achievements
+from Globals import Globals
 
 class main_clicker_base():
     '''Управление текущими событиями кликера'''
     def __init__(self, screen, stat_game):
-        self.hero_game = Hero(screen, "Img/Hero/Hero0.png")
+        self.globals = Globals()
+        self.hero_game = Hero(screen, "Img/Hero/Hero0.png", self.globals)
         self.stat_game = stat_game
         self.shop_game = Shop(screen)
         self.draw_game = Draw(screen)
         self.demon_classic = Demon_ordinary(screen)
-        self.ill_butt = illumination(screen)
+        self.ill_butt = illumination(screen, self.globals)
         self.achiv = achievements(screen)
         self.control_game = Event()
 
