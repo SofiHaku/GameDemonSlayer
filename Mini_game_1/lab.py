@@ -1,4 +1,3 @@
-from Globals import Globals
 import pygame
 
 class lab():

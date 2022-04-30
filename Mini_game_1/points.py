@@ -1,7 +1,7 @@
 import pygame
 
 class Point(pygame.sprite.Sprite):
-    """Объекты, которые будет есть pacman"""
+    """Объекты, которые будет собирать герой"""
     def __init__(self, screen):
         pygame.sprite.Sprite.__init__(self)
         self.screen = screen
@@ -12,4 +12,5 @@ class Point(pygame.sprite.Sprite):
         self.rect.bottomright = self.screen_rect.bottomright
 
     def draw(self):
+        '''Вывод алмазиков на экран'''
         self.screen.blit(self.image, self.rect)

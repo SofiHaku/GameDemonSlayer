@@ -1,9 +1,11 @@
 from Mini_game_1.points import Point
 class make_many():
+    '''Класс создания многих объектов'''
     def __init__(self, screen):
         self.screen = screen
 
     def point(self, wall_mass, points):
+        '''Создание алмазиков во всех пустых ячейках лабиринта'''
         for i in range(len(wall_mass)):
             for j in range(len( wall_mass[i])):
                 if   wall_mass[i][j] != 1 and not (

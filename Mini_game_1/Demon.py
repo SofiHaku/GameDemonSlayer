@@ -4,7 +4,7 @@ import time
 from Demon_b import Demon
 
 class Demon_6_moon(Demon):
-
+    '''Класс демона, движущего по лабиринту'''
     def __init__(self, screen):
         super().__init__(screen)
 
@@ -38,6 +38,7 @@ class Demon_6_moon(Demon):
 
 
     def movement(self):
+        """функция, которая переносит демона в контрольные точки"""
         self.time_now = time.time()
         if (self.time_now - self.time_before) > 10:
             random_ind = random.randint(0, 7)
@@ -49,8 +50,14 @@ class Demon_6_moon(Demon):
 
     def update(self):
         """функция обновляет объект и изменяет его местоположение"""
-        #Движение по прямой линии
 
+        if not self.moving_straight():
+            if not self.moving_in_3_angle():
+                self.moving_in_2_angle()
+
+    def moving_straight(self):
+        '''Движение демона по прямой линии'''
+        res = True
         if self.move[0]:
             self.x -= self.speed
             self.rect.x = self.x
@@ -67,79 +74,125 @@ class Demon_6_moon(Demon):
             self.y += self.speed
             self.rect.y = self.y
             self.move_before = self.mass_d.copy()
+        else:
+            res = False
+        return res
 
-        #В углах
-        elif self.can_move[0] and self.can_move[1] and self.can_move[3]:
-            if self.move_before[0]:
-                if random.randint(0, 1):
-                    self.move = self.mass_d.copy()
-            elif self.move_before[1]:
-                if random.randint(0, 1):
-                    self.move = self.mass_d.copy()
-            else:
-                if random.randint(0, 1):
-                    self.move = self.mass_l.copy()
-                else:
-                    self.move = self.mass_r.copy()
+    def moving_in_3_angle(self):
+        '''Движение демона в угле, где есть 3 возможных пути'''
+        res = True
+        if self.can_move[0] and self.can_move[1] and self.can_move[3]:
+            self.angle_013()
         elif self.can_move[1] and self.can_move[2] and self.can_move[3]:
-            if self.move_before[2]:
-                if random.randint(0, 1):
-                    self.move = self.mass_r.copy()
-            elif self.move_before[3]:
-                if random.randint(0, 1):
-                    self.move = self.mass_r.copy()
-            else:
-                if random.randint(0, 1):
-                    self.move = self.mass_u.copy()
-                else:
-                    self.move = self.mass_d.copy()
+            self.angle_123()
         elif self.can_move[0] and self.can_move[1] and self.can_move[2]:
-            if self.move_before[0]:
-                if random.randint(0, 1):
-                    self.move = self.mass_u.copy()
-            elif self.move_before[1]:
-                if random.randint(0, 1):
-                    self.move = self.mass_u.copy()
-            else:
-                if random.randint(0, 1):
-                    self.move = self.mass_l.copy()
-                else:
-                    self.move = self.mass_r.copy()
+            self.angle_012()
         elif self.can_move[0] and self.can_move[2] and self.can_move[3]:
-            if self.move_before[2]:
-                if random.randint(0, 1):
-                    self.move = self.mass_l.copy()
-            elif self.move_before[3]:
-                if random.randint(0, 1):
-                    self.move = self.mass_l.copy()
-            else:
-                if random.randint(0, 1):
-                    self.move = self.mass_u.copy()
-                else:
-                    self.move = self.mass_d.copy()
+            self.angle_023()
+        else:
+            res = False
+        return res
 
-        elif self.can_move[1] and self.can_move[3]:
-            if self.move_before[2]:
-                self.move = self.mass_r.copy()
-            else:
+    def angle_013(self):
+        '''Движение демона в угле, где он может повернуть налево, направо и вниз'''
+        if self.move_before[0]:
+            if random.randint(0, 1):
                 self.move = self.mass_d.copy()
-        elif self.can_move[1] and self.can_move[2]:
-            if self.move_before[3]:
-                self.move = self.mass_r.copy()
-            else:
-                self.move = self.mass_u.copy()
-        elif self.can_move[0] and self.can_move[2]:
-            if self.move_before[3]:
-                self.move = self.mass_l.copy()
-            else:
-                self.move = self.mass_u.copy()
-        elif self.can_move[0] and self.can_move[3]:
-            if self.move_before[2]:
-                self.move = self.mass_l.copy()
-            else:
+        elif self.move_before[1]:
+            if random.randint(0, 1):
                 self.move = self.mass_d.copy()
         else:
-            if self.move_before[0]:
-                self.move = self.mass_r.copy()
-            else:
+            if random.randint(0, 1):
                 self.move = self.mass_l.copy()
+            else:
+                self.move = self.mass_r.copy()
+
+    def angle_123(self):
+        '''Движение демона в угле, где он может повернуть направо, вверх и вниз'''
+        if self.move_before[2]:
+            if random.randint(0, 1):
+                self.move = self.mass_r.copy()
+        elif self.move_before[3]:
+            if random.randint(0, 1):
+                self.move = self.mass_r.copy()
+        else:
+            if random.randint(0, 1):
+                self.move = self.mass_u.copy()
+            else:
+                self.move = self.mass_d.copy()
+
+    def angle_012(self):
+        '''Движение демона в угле, где он может повернуть направо, налево и вверх'''
+        if self.move_before[0]:
+            if random.randint(0, 1):
+                self.move = self.mass_u.copy()
+        elif self.move_before[1]:
+            if random.randint(0, 1):
+                self.move = self.mass_u.copy()
+        else:
+            if random.randint(0, 1):
+                self.move = self.mass_l.copy()
+            else:
+                self.move = self.mass_r.copy()
+
+    def angle_023(self):
+        '''Движение демона в угле, где он может повернуть налево, вверх и вниз'''
+        if self.move_before[2]:
+            if random.randint(0, 1):
+                self.move = self.mass_l.copy()
+        elif self.move_before[3]:
+            if random.randint(0, 1):
+                self.move = self.mass_l.copy()
+        else:
+            if random.randint(0, 1):
+                self.move = self.mass_u.copy()
+            else:
+                self.move = self.mass_d.copy()
+
+    def moving_in_2_angle(self):
+        '''Движение демона в угле, где есть 2 возможных пути'''
+        if self.can_move[1] and self.can_move[3]:
+            self.angle_13()
+        elif self.can_move[1] and self.can_move[2]:
+            self.angle_12()
+        elif self.can_move[0] and self.can_move[2]:
+            self.angle_02()
+        elif self.can_move[0] and self.can_move[3]:
+            self.angle_03()
+        else:
+            self.angle_23()
+
+    def angle_13(self):
+        '''Движение демона в угле, где он может повернуть направо и вниз'''
+        if self.move_before[2]:
+            self.move = self.mass_r.copy()
+        else:
+            self.move = self.mass_d.copy()
+
+    def angle_12(self):
+        '''Движение демона в угле, где он может повернуть направо и вверх'''
+        if self.move_before[3]:
+            self.move = self.mass_r.copy()
+        else:
+            self.move = self.mass_u.copy()
+
+    def angle_02(self):
+        '''Движение демона в угле, где он может повернуть налево и вверх'''
+        if self.move_before[3]:
+            self.move = self.mass_l.copy()
+        else:
+            self.move = self.mass_u.copy()
+
+    def angle_03(self):
+        '''Движение демона в угле, где он может повернуть налево и вниз'''
+        if self.move_before[2]:
+            self.move = self.mass_l.copy()
+        else:
+            self.move = self.mass_d.copy()
+
+    def angle_23(self):
+        '''Движение демона в угле, где он может повернуть вверх и вниз'''
+        if self.move_before[0]:
+            self.move = self.mass_r.copy()
+        else:
+            self.move = self.mass_l.copy()
