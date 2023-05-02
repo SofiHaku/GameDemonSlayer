@@ -208,7 +208,7 @@ class Shop():
             serf.blit(img, img_rect)
             serf.blit(self.func[2].image, (exc_x, exc_y))
             self.screen.blit(serf, (x, y))
-            text_g.draw_many_lines(self.globals.TEXT_LINES_T4_XY[0], self.globals.TEXT_LINES_T4_XY[1], text_g.mess_dont_many, self.globals.TEXT_SIZE_3)
+            #text_g.draw_many_lines(self.globals.TEXT_LINES_T4_XY[0], self.globals.TEXT_LINES_T4_XY[1], text_g.mess_dont_many, self.globals.TEXT_SIZE_3)
 
             self.control_you_dont_have_many(Mouse_x, Mouse_y)
 
